@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
 # Roguelike_JetBrains
-=======
-# Roguelike_JetBrains_Practice
->>>>>>> Stashed changes
 
 __OUR TEAM__
 
