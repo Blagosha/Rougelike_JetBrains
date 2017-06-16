@@ -1,4 +1,4 @@
-# Roguelike_JetBrains_Practice
+# Roguelike_JetBrains
 
 __OUR TEAM__
 
