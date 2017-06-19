@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Rougelike.iml" filepath="$PROJECT_DIR$/Rougelike.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Rougelike_JetBrains.iml" filepath="$PROJECT_DIR$/Rougelike_JetBrains.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
