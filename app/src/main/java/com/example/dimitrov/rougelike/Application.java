@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class Application extends AppCompatActivity {
-    private final String tag = "Blagoi";
+    public static final String tagBlagoi = "Blagoi";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,6 @@ public class Application extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Application.this, Game.class);
-                Log.d(tag, "start_game_activity started");
                 startActivity(intent);
             }
         };
@@ -50,23 +49,23 @@ public class Application extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(tag, "Main onPause");
+        Log.d(tagBlagoi, "Application_activity onPause");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(tag, "Main onResume");
+        Log.d(tagBlagoi, "Application_activity onResume");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(tag, "Main onStop");
+        Log.d(tagBlagoi, "Application_activity onStop");
     }
 
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(tag, "Main onDestroy");
+        Log.d(tagBlagoi, "Application_activity onDestroy");
     }
 }
