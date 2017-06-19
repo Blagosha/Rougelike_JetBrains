@@ -5,7 +5,8 @@ import java.util.Collections;
 import java.util.Random;
 
 public class Stage {
-    int sideSize, cntRooms, cellSideSize;
+    int sideSize, cntRooms;
+    public static int cellSideSize;
     private static final int mxCntRooms = 100;
     int[][] stagePlan = new int[sideSize][sideSize]; // Общий массив этажа
     ArrayList<Junction> junctions = new ArrayList<>(); // массив переходов
