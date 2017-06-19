@@ -1,18 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.dimitrov.rougelike.Start_Page">
 
-    <TextView
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Start Game"
+        android:layout_above="@+id/how_to_play_btn"
+        android:id="@+id/start_game_btn"
+        android:layout_alignLeft="@+id/how_to_play_btn"
+        android:layout_alignStart="@+id/how_to_play_btn"
+        android:layout_alignRight="@+id/how_to_play_btn"
+        android:layout_alignEnd="@+id/how_to_play_btn" />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/how_to_play_btn"
+        android:text="How to Play"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/how_to_play_btn"
+        android:id="@+id/about_us_btn"
+        android:text="About us"
+        android:layout_alignLeft="@+id/how_to_play_btn"
+        android:layout_alignStart="@+id/how_to_play_btn"
+        android:layout_alignRight="@+id/how_to_play_btn"
+        android:layout_alignEnd="@+id/how_to_play_btn" />
+
+</RelativeLayout>

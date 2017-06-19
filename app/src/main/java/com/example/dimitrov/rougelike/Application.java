@@ -1,34 +1,72 @@
 package com.example.dimitrov.rougelike;
 
-public class Application {
-    private boolean running = false;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
-    private void init() {
+public class Application extends AppCompatActivity {
+    private final String tag = "Blagoi";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_start__page);
+
+        Button start_game_button = (Button) findViewById(R.id.start_game_btn);
+        final View.OnClickListener start_game_listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Application.this, Game.class);
+                Log.d(tag, "start_game_activity started");
+                startActivity(intent);
+            }
+        };
+        start_game_button.setOnClickListener(start_game_listener);
+
+        Button how_to_play_button = (Button) findViewById(R.id.how_to_play_btn);
+        final View.OnClickListener how_to_play_listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Application.this, How_to_play.class);
+                startActivity(intent);
+            }
+        };
+        how_to_play_button.setOnClickListener(how_to_play_listener);
+
+        Button about_us_button = (Button) findViewById(R.id.about_us_btn);
+        final View.OnClickListener about_us_listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Application.this, About_us.class);
+                startActivity(intent);
+            }
+        };
+        about_us_button.setOnClickListener(about_us_listener);
     }
 
-    private void render() {
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(tag, "Main onPause");
     }
 
-    private void update(long delta) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(tag, "Main onResume");
     }
 
-    private void run() {
-        long lastTime = System.currentTimeMillis();
-        long delta;
-
-        while(running) {
-            delta = System.currentTimeMillis() - lastTime;
-            lastTime = System.currentTimeMillis();
-            update(delta);
-            render();
-        }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(tag, "Main onStop");
     }
 
-    public static void main(String[] args) {
-        Application application = new Application();
-        application.init();
-        application.run();
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(tag, "Main onDestroy");
     }
 }
-

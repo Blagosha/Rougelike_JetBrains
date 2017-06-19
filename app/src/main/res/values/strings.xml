@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Rougelike</string>
+    <string name="title_activity_game">Game</string>
 </resources>
