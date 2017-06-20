@@ -16,14 +16,13 @@ public class Room {
         this.seflCellIndexesY = seflCellIndexesY;
         cellLeftUpperCorner = new Point(seflCellIndexesX * cellSideSize, seflCellIndexesY * cellSideSize);
 
-        int minRoomSide = 3; // минимальная длина стороны комнаты
+        int minRoomSide = 5; // минимальная длина стороны комнаты
 
         leftUpperCorner = new Point(random(cellLeftUpperCorner.x, cellLeftUpperCorner.x + cellSideSize - minRoomSide),
                 random(cellLeftUpperCorner.y, cellLeftUpperCorner.y + cellSideSize - minRoomSide));
 
         rightBottomCorner = new Point(random(leftUpperCorner.x + minRoomSide, cellLeftUpperCorner.x + cellSideSize),
                 random(leftUpperCorner.y + minRoomSide, cellLeftUpperCorner.y + cellSideSize));
-
     }
 
     int random(int mn, int mx) {
