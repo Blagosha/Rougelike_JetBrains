@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/backgroundpravila"
     tools:context="com.example.dimitrov.rougelike.How_to_play">
 
 </android.support.constraint.ConstraintLayout>
