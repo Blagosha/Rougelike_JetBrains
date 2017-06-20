@@ -1,10 +1,8 @@
-package com.example.dimitrov.rougelike;
+package com.example.dimitrov.rougelike.objects;
 
 import android.graphics.Point;
 
 import java.util.Random;
-
-import static com.example.dimitrov.rougelike.Stage.cellSideSize;
 
 public class Room {
     private int seflCellIndexesX, seflCellIndexesY; // Индексы ячейки комнаты
@@ -14,15 +12,15 @@ public class Room {
     Room(int seflCellIndexesX, int seflCellIndexesY) {
         this.seflCellIndexesX = seflCellIndexesX;
         this.seflCellIndexesY = seflCellIndexesY;
-        cellLeftUpperCorner = new Point(seflCellIndexesX * cellSideSize, seflCellIndexesY * cellSideSize);
+        cellLeftUpperCorner = new Point(seflCellIndexesX * Stage.cellSideSize, seflCellIndexesY * Stage.cellSideSize);
 
         int minRoomSide = 5; // минимальная длина стороны комнаты
 
-        leftUpperCorner = new Point(random(cellLeftUpperCorner.x, cellLeftUpperCorner.x + cellSideSize - minRoomSide),
-                random(cellLeftUpperCorner.y, cellLeftUpperCorner.y + cellSideSize - minRoomSide));
+        leftUpperCorner = new Point(random(cellLeftUpperCorner.x, cellLeftUpperCorner.x + Stage.cellSideSize - minRoomSide),
+                random(cellLeftUpperCorner.y, cellLeftUpperCorner.y + Stage.cellSideSize - minRoomSide));
 
-        rightBottomCorner = new Point(random(leftUpperCorner.x + minRoomSide, cellLeftUpperCorner.x + cellSideSize),
-                random(leftUpperCorner.y + minRoomSide, cellLeftUpperCorner.y + cellSideSize));
+        rightBottomCorner = new Point(random(leftUpperCorner.x + minRoomSide, cellLeftUpperCorner.x + Stage.cellSideSize),
+                random(leftUpperCorner.y + minRoomSide, cellLeftUpperCorner.y + Stage.cellSideSize));
     }
 
     int random(int mn, int mx) {

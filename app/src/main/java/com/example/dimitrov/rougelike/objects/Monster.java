@@ -1,4 +1,4 @@
-package com.example.dimitrov.rougelike;
+package com.example.dimitrov.rougelike.objects;
 
 /**
  * Created by Санчес on 20.06.2017.

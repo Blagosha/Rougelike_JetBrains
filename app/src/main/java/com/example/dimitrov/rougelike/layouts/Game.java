@@ -1,11 +1,12 @@
-package com.example.dimitrov.rougelike;
+package com.example.dimitrov.rougelike.layouts;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
 
-import static com.example.dimitrov.rougelike.Application.tagBlagoi;
+import com.example.dimitrov.rougelike.core.Graphics;
+import com.example.dimitrov.rougelike.R;
 
 public class Game extends AppCompatActivity {
 
@@ -15,6 +16,7 @@ public class Game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        //Applying graphics core to layout
         main_g = new Graphics(this);
         ((LinearLayout)findViewById(R.id.game_layout)).addView(main_g);
     }
@@ -22,23 +24,11 @@ public class Game extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(tagBlagoi, "Game_activity onPause");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(tagBlagoi, "Game_activity onResume");
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(tagBlagoi, "Game_activity onStop");
-    }
-
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(tagBlagoi, "Game_activity onDestroy");
-    }
 }

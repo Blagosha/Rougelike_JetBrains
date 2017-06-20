@@ -1,4 +1,4 @@
-package com.example.dimitrov.rougelike;
+package com.example.dimitrov.rougelike.objects;
 
 public class Labyrinth {
     private static final int cntStages = 5; // Количество уровней в лабиринте
