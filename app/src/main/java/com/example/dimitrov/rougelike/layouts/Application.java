@@ -17,6 +17,7 @@ public class Application extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start__page);
 
+        //Setting button actions
         Button start_game_button = (Button) findViewById(R.id.start_game_btn);
         final View.OnClickListener start_game_listener = new View.OnClickListener() {
             @Override
@@ -51,23 +52,11 @@ public class Application extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(tagBlagoi, "Application_activity onPause");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(tagBlagoi, "Application_activity onResume");
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(tagBlagoi, "Application_activity onStop");
-    }
-
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(tagBlagoi, "Application_activity onDestroy");
-    }
 }
