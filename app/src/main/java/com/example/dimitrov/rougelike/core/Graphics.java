@@ -2,10 +2,13 @@ package com.example.dimitrov.rougelike.core;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.view.View;
+
+import com.example.dimitrov.rougelike.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,6 +39,11 @@ public class Graphics extends View {
 
     public static Bitmap resizeBitmap(Bitmap b, int w, int h) {
         return scaleBitmap(b, (float) w / b.getWidth(), (float) h / b.getHeight());
+    }
+
+    public Bitmap readBitmap(int res)
+    {
+        return BitmapFactory.decodeResource(getResources(),res);
     }
 
     public static Bitmap scaleBitmap(Bitmap b, float scaleX, float scaleY) {
