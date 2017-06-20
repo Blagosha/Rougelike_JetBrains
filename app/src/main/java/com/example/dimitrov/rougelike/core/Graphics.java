@@ -22,6 +22,7 @@ public class Graphics extends View {
 
     Map<String, Bitmap> bitmaps;
     ArrayList<GraphicsUser> objects;
+    public static float scale = 1;
 
     public Graphics(Context context) {
         super(context);
