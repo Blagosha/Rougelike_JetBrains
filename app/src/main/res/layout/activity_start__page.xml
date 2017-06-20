@@ -5,15 +5,6 @@
     android:layout_height="match_parent"
     android:background="@mipmap/background">
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="10dp"
-        android:id="@+id/space"
-        android:layout_centerHorizontal="true"
-        android:layout_alignLeft="@+id/start_game_btn"
-        android:layout_alignRight="@+id/start_game_btn"
-        />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
