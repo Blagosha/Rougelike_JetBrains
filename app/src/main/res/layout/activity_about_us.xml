@@ -12,31 +12,30 @@
         android:layout_height="wrap_content"
         android:text="ABOUT US"
         android:textSize="30dp"
-        android:layout_above="@+id/textView2"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This fabulous application was made by:" />
+        android:id="@+id/tv1"
+        android:layout_marginTop="111dp"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dimitrov Blagoi
-                Daniil Pavlov
-                Nurgaliev Timur
-                Nurgaliev Artyom" />
-
-
-     If you have any ideas how to improve
-     our app, please write on our official
-     e-mail: dimitrovblagoi@gmail.com"
-        android:textSize="16dp"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="186dp"
+        android:text="@string/made_by"
+        android:id="@+id/tv2"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv3"
+        android:layout_below="@+id/tv2"
+        android:layout_centerHorizontal="true"
+        android:text="@string/dimitrov_blagoi_daniil_pavlov_nurgaliev_timur_nurgaliev_artyom"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv3"
+        android:layout_centerHorizontal="true"
+        android:text="@string/if_you_have_any_ideas"/>
 </RelativeLayout>

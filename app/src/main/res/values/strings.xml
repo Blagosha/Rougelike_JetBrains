@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Rougelike</string>
     <string name="title_activity_game">Game</string>
+    <string name="dimitrov_blagoi_daniil_pavlov_nurgaliev_timur_nurgaliev_artyom">Dimitrov Blagoi, Daniil Pavlov, Nurgaliev Timur, Nurgaliev Artyom</string>
+    <string name="if_you_have_any_ideas">Our official e-mail: dimitrovblagoi@gmail.com</string>
+    <string name="made_by">This fabulous application was made by:</string>
 </resources>
