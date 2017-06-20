@@ -6,7 +6,7 @@ import android.util.Log;
 
 import static com.example.dimitrov.rougelike.Application.tagBlagoi;
 
-public class How_to_play extends AppCompatActivity {
+public class  How_to_play extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
