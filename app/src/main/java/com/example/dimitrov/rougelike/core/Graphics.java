@@ -49,20 +49,21 @@ public class Graphics extends View {
         return bitmaps.get(name);
     }
 
-    public void drawBitmap(Canvas canvas, Bitmap bitmap, int x, int y) {
-        canvas.drawBitmap(bitmap, x, y, new Paint());
+    public void setBitmap(String name, Bitmap b)
+    {
+        if(!bitmaps.containsKey(name))
+            bitmaps.put(name,b);
     }
 
-    public void setBitmaps(GraphicsUser d) {
-        if (!bitmaps.containsKey(d.getBitmapIndex()))
-            bitmaps.put(d.getBitmapIndex(), d.getBitmap());
+    public void drawBitmap(Canvas canvas, Bitmap bitmap, int x, int y) {
+        canvas.drawBitmap(bitmap, x, y, new Paint());
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         for(int i=0;i<objects.size();i++)
         {
-            setBitmaps(objects.get(i));
+            objects.get(i).getBitmaps();
             objects.get(i).onDraw(canvas,this);
         }
     }
