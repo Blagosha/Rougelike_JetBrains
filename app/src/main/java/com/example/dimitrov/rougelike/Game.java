@@ -9,12 +9,14 @@ import static com.example.dimitrov.rougelike.Application.tagBlagoi;
 
 public class Game extends AppCompatActivity {
 
+    Graphics main_g;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        ((LinearLayout)findViewById(R.id.game_layout)).addView(new Graphics(this));
+        main_g = new Graphics(this);
+        ((LinearLayout)findViewById(R.id.game_layout)).addView(main_g);
     }
 
     @Override
