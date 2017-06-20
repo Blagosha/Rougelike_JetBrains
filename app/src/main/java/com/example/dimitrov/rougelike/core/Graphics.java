@@ -24,7 +24,7 @@ public class Graphics extends View {
     Labyrinth l;
     Map<String, Bitmap> bitmaps;
     ArrayList<GraphicsUser> objects;
-    public static float scale = 10;
+    public static float scale = 1;
 
     public Graphics(Context context) {
         super(context);

@@ -21,7 +21,8 @@ import static com.example.dimitrov.rougelike.core.Graphics.scale;
 public class Stage implements GraphicsUser{
     int sideSize, cntRooms;
     public static int cellSideSize;
-    private static final int mxCntRooms = 100;
+    private static final int mxCntRooms = 10;
+    private static final int mnCntRooms = 3;
     int[][] stagePlan; // Общий массив этажа
     ArrayList<Junction> junctions; // массив переходов
     Room[] rooms; // массив всех комнат
@@ -49,7 +50,7 @@ public class Stage implements GraphicsUser{
 
     private final void stagePlanGenereation() {
         Random random = new Random();
-        cntRooms = (random.nextInt(mxCntRooms) + 50) % mxCntRooms; // сгененрировали количество комнат
+        cntRooms = mnCntRooms + random.nextInt(mxCntRooms-mnCntRooms);// сгененрировали количество комнат
         junctions = new ArrayList<>();
         graphEdges = new ArrayList<>();
         rooms = new Room[cntRooms];
@@ -94,8 +95,7 @@ public class Stage implements GraphicsUser{
                 junctions.add(new Junction(rooms[vertex], rooms[urtex]));
             }
         } // создали минимальный остов
-        Log.e("ready","yiss1");
-        int cntGenerateRandomJunctions = (int) (junctions.size() * 0.2); // добавляем еще 20% рандомных переходов
+        /*int cntGenerateRandomJunctions = (int) (junctions.size() * 0.2); // добавляем еще 20% рандомных переходов
         int counter = 0;
         while (counter < cntGenerateRandomJunctions) {
             int ind = random.nextInt(graphEdges.size());
@@ -107,14 +107,13 @@ public class Stage implements GraphicsUser{
                 edgeUsed[ind] = true;
                 counter++;
             }
-        } // добавили еще 20% рандомных переходов
+        } */ //добавили еще 20% рандомных переходов
 
         for (int i=0;i<sideSize;i++){
             for (int j=0;j<sideSize;j++){
                 stagePlan[i][j]=0;
             }
         }//пустой мир
-        Log.e("ready","yiss2");
         for (int k=0;k<cntRooms;k++){
             Point leftUpperCorner = rooms[k].getLeftUpperCorner();
             Point rightBottomCorner = rooms[k].getRightBottomCorner();
@@ -129,7 +128,6 @@ public class Stage implements GraphicsUser{
                 }
             }
         }//комнаты
-        Log.e("ready","yiss3");
         for (Junction j:junctions){
             Point from = j.getFrom();
             Point to =j.getTo();
@@ -161,7 +159,6 @@ public class Stage implements GraphicsUser{
 
 
         }//переходы
-        Log.e("ready","yiss4");
     }
 
     @Override
