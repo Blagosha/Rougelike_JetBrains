@@ -2,25 +2,14 @@ package com.example.dimitrov.rougelike.core;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.support.annotation.NonNull;
-import android.view.DragEvent;
 import android.view.View;
 
-import com.example.dimitrov.rougelike.R;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
 
 /**
  * Created by user on 6/20/17.
@@ -29,12 +18,12 @@ import java.util.StringTokenizer;
 public class Graphics extends View {
 
     Map<String, Bitmap> bitmaps;
-    ArrayList<Drawable> objects;
+    ArrayList<GraphicsUser> objects;
 
     public Graphics(Context context) {
         super(context);
         bitmaps = new HashMap<String, Bitmap>();
-        objects = new ArrayList<Drawable>();
+        objects = new ArrayList<GraphicsUser>();
     }
 
 
@@ -64,7 +53,7 @@ public class Graphics extends View {
         canvas.drawBitmap(bitmap, x, y, new Paint());
     }
 
-    public void setBitmaps(Drawable d) {
+    public void setBitmaps(GraphicsUser d) {
         if (!bitmaps.containsKey(d.getBitmapIndex()))
             bitmaps.put(d.getBitmapIndex(), d.getBitmap());
     }
