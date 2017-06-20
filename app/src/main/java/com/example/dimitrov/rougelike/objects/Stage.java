@@ -77,6 +77,14 @@ public class Stage {
 
         }//переходы
 
+
+        /*for (int i=0;i<sideSize;i++){
+            for (int j=0;j<sideSize;j++){
+                System.out.print(stagePlan[i][j]);
+            }
+            System.out.println();
+        }*/
+
     }
 
     private final int get(int room) {

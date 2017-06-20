@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.R;
+import com.example.dimitrov.rougelike.objects.Labyrinth;
 
 public class Game extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class Game extends AppCompatActivity {
         //Applying graphics core to layout
         main_g = new Graphics(this);
         ((LinearLayout)findViewById(R.id.game_layout)).addView(main_g);
+
     }
 
     @Override
