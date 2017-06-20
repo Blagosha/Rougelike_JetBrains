@@ -1,9 +1,5 @@
 package com.example.dimitrov.rougelike.objects;
 
-/**
- * Created by Санчес on 20.06.2017.
- */
-
 public class Character{
     private int X;
     private int Y;
