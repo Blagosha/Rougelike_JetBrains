@@ -20,9 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".layouts.Game" />
-        <activity android:name=".layouts.How_to_play" />
-        <activity android:name=".layouts.About_us"></activity>
+        <activity android:name=".layouts.Game"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".layouts.How_to_play"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".layouts.About_us"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

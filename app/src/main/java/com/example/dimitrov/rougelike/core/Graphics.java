@@ -12,13 +12,18 @@ import android.view.View;
 
 import com.example.dimitrov.rougelike.R;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.StringTokenizer;
+
 /**
  * Created by user on 6/20/17.
  */
 
 public class Graphics extends View {
 
-
+    Map<String,Bitmap> bitmaps;
+    ArrayList<Drawable> objects;
     public Graphics(Context context) {
         super(context);
     }
