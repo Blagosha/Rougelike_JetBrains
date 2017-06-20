@@ -2,10 +2,13 @@ package com.example.dimitrov.rougelike.core;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.view.View;
+
+import com.example.dimitrov.rougelike.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +22,7 @@ public class Graphics extends View {
 
     Map<String, Bitmap> bitmaps;
     ArrayList<GraphicsUser> objects;
+    public static float scale = 1;
 
     public Graphics(Context context) {
         super(context);
@@ -38,6 +42,11 @@ public class Graphics extends View {
         return scaleBitmap(b, (float) w / b.getWidth(), (float) h / b.getHeight());
     }
 
+    public Bitmap readBitmap(int res)
+    {
+        return BitmapFactory.decodeResource(getResources(),res);
+    }
+
     public static Bitmap scaleBitmap(Bitmap b, float scaleX, float scaleY) {
         Matrix m = new Matrix();
         m.preScale(scaleX, scaleY);
@@ -49,20 +58,21 @@ public class Graphics extends View {
         return bitmaps.get(name);
     }
 
-    public void drawBitmap(Canvas canvas, Bitmap bitmap, int x, int y) {
-        canvas.drawBitmap(bitmap, x, y, new Paint());
+    public void setBitmap(String name, Bitmap b)
+    {
+        if(!bitmaps.containsKey(name))
+            bitmaps.put(name,b);
     }
 
-    public void setBitmaps(GraphicsUser d) {
-        if (!bitmaps.containsKey(d.getBitmapIndex()))
-            bitmaps.put(d.getBitmapIndex(), d.getBitmap());
+    public void drawBitmap(Canvas canvas, Bitmap bitmap, int x, int y) {
+        canvas.drawBitmap(bitmap, x, y, new Paint());
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         for(int i=0;i<objects.size();i++)
         {
-            setBitmaps(objects.get(i));
+            objects.get(i).getBitmaps();
             objects.get(i).onDraw(canvas,this);
         }
     }
