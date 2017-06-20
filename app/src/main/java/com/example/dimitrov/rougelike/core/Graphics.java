@@ -24,14 +24,16 @@ public class Graphics extends View {
     Labyrinth l;
     Map<String, Bitmap> bitmaps;
     ArrayList<GraphicsUser> objects;
-    public static float scale = 1;
+    public static float scale = 10;
 
     public Graphics(Context context) {
         super(context);
-        l = new Labyrinth();
-        objects.add(l);
+
         bitmaps = new HashMap<String, Bitmap>();
         objects = new ArrayList<GraphicsUser>();
+
+        l = new Labyrinth();
+        objects.add(l);
     }
 
 

@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 
 import com.example.dimitrov.rougelike.R;
@@ -21,12 +22,12 @@ public class Stage implements GraphicsUser{
     int sideSize, cntRooms;
     public static int cellSideSize;
     private static final int mxCntRooms = 100;
-    int[][] stagePlan = new int[sideSize][sideSize]; // Общий массив этажа
-    ArrayList<Junction> junctions = new ArrayList<>(); // массив переходов
-    Room[] rooms = new Room[cntRooms]; // массив всех комнат
+    int[][] stagePlan; // Общий массив этажа
+    ArrayList<Junction> junctions; // массив переходов
+    Room[] rooms; // массив всех комнат
 
-    int[] pred = new int[cntRooms]; // специальные переменные для СНМ
-    ArrayList<int[]> graphEdges = new ArrayList<>(); // ребра графа
+    int[] pred; // специальные переменные для СНМ
+    ArrayList<int[]> graphEdges; // ребра графа
 
 
     public Stage(int sideSize) {
@@ -43,15 +44,17 @@ public class Stage implements GraphicsUser{
     }
 
     private final void merge(int room1, int room2) {
-        room1 = get(room1);
-        room2 = get(room2);
-
-        pred[room2] = room1;
+        pred[get(room2)] = get(room1);
     }
 
     private final void stagePlanGenereation() {
         Random random = new Random();
         cntRooms = (random.nextInt(mxCntRooms) + 50) % mxCntRooms; // сгененрировали количество комнат
+        junctions = new ArrayList<>();
+        graphEdges = new ArrayList<>();
+        rooms = new Room[cntRooms];
+        pred = new int[cntRooms];
+        stagePlan = new int[sideSize][sideSize];
 
         boolean [][] cellUsed = new boolean[sideSize / cellSideSize][sideSize / cellSideSize];
         for (int i = 0; i < cellUsed.length; i++)
@@ -59,15 +62,13 @@ public class Stage implements GraphicsUser{
                 cellUsed[i][j] = false;
 
         int alreadyRoomsGenerated = 0;
-        while (alreadyRoomsGenerated < cntRooms-2) {
+        while (alreadyRoomsGenerated < cntRooms) {
             int x = random.nextInt(cellUsed.length);
             int y = random.nextInt(cellUsed.length);
-
             if (!cellUsed[x][y]) {
                 cellUsed[x][y] = true;
-                alreadyRoomsGenerated++;
 
-                rooms[alreadyRoomsGenerated] = new Room(x, y);
+                rooms[alreadyRoomsGenerated++] = new Room(x, y);
             }
         } // сгенерировали комнаты (по ячейкам)
 
@@ -87,14 +88,13 @@ public class Stage implements GraphicsUser{
         for (int i = 0; i < graphEdges.size(); i++) {
             int vertex = graphEdges.get(i)[0];
             int urtex = graphEdges.get(i)[1];
-
             if (get(vertex) != get(urtex)) {
                 merge(vertex, urtex);
                 edgeUsed[i] = true;
                 junctions.add(new Junction(rooms[vertex], rooms[urtex]));
             }
         } // создали минимальный остов
-
+        Log.e("ready","yiss1");
         int cntGenerateRandomJunctions = (int) (junctions.size() * 0.2); // добавляем еще 20% рандомных переходов
         int counter = 0;
         while (counter < cntGenerateRandomJunctions) {
@@ -105,6 +105,7 @@ public class Stage implements GraphicsUser{
                 int urtex = graphEdges.get(ind)[1];
                 junctions.add(new Junction(rooms[vertex], rooms[urtex]));
                 edgeUsed[ind] = true;
+                counter++;
             }
         } // добавили еще 20% рандомных переходов
 
@@ -113,7 +114,7 @@ public class Stage implements GraphicsUser{
                 stagePlan[i][j]=0;
             }
         }//пустой мир
-
+        Log.e("ready","yiss2");
         for (int k=0;k<cntRooms;k++){
             Point leftUpperCorner = rooms[k].getLeftUpperCorner();
             Point rightBottomCorner = rooms[k].getRightBottomCorner();
@@ -128,7 +129,7 @@ public class Stage implements GraphicsUser{
                 }
             }
         }//комнаты
-
+        Log.e("ready","yiss3");
         for (Junction j:junctions){
             Point from = j.getFrom();
             Point to =j.getTo();
@@ -160,14 +161,15 @@ public class Stage implements GraphicsUser{
 
 
         }//переходы
+        Log.e("ready","yiss4");
     }
 
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
         for (int i = 0; i < sideSize; i++) {
             for (int j = 0; j < sideSize; j++) {
-                int stageHeight = core.getHeight();
-                int stageWidth = core.getWidth();
+                float stageHeight = core.getHeight();
+                float stageWidth = core.getWidth();
 
                 int coordX = (int) (i * (stageHeight / sideSize) * scale);
                 int coordY = (int) (j * (stageHeight / sideSize) * scale);
@@ -175,10 +177,12 @@ public class Stage implements GraphicsUser{
                 Bitmap b = core.getBitmap("forest");
                 switch(stagePlan[i][j]){
                     case 0: b=core.getBitmap("forest");
+                        break;
                     case 1: b=core.getBitmap("wall");
+                        break;
                     case 2: b=core.getBitmap("floor");
                 }
-                core.resizeBitmap(b,(int)(stageHeight / sideSize*scale),(int)(stageHeight / sideSize*scale));
+                b=core.resizeBitmap(b,(int)(stageHeight / sideSize*scale),(int)(stageHeight / sideSize*scale));
                 core.drawBitmap(canvas,b,coordX,coordY);
             }
         }
