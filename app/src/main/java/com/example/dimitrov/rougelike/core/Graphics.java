@@ -28,10 +28,12 @@ public class Graphics extends View {
 
     public Graphics(Context context) {
         super(context);
-        l = new Labyrinth();
-        objects.add(l);
+
         bitmaps = new HashMap<String, Bitmap>();
         objects = new ArrayList<GraphicsUser>();
+
+        l = new Labyrinth();
+        objects.add(l);
     }
 
 
