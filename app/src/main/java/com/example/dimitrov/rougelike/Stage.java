@@ -77,6 +77,7 @@ public class Stage {
 
         }//переходы
 
+
     }
 
     private final int get(int room) {
