@@ -3,6 +3,7 @@ package com.example.dimitrov.rougelike;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import static com.example.dimitrov.rougelike.Application.tagBlagoi;
 
@@ -12,6 +13,8 @@ public class Game extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        ((LinearLayout)findViewById(R.id.game_layout)).addView(new Graphics(this));
     }
 
     @Override
