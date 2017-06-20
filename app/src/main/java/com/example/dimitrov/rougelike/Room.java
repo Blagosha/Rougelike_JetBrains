@@ -8,8 +8,8 @@ import static com.example.dimitrov.rougelike.Stage.cellSideSize;
 
 public class Room {
     private int seflCellIndexesX, seflCellIndexesY; // Индексы ячейки комнаты
-    Point leftUpperCorner, rightBottomCorner; // Вершины комнаты
-    Point cellLeftUpperCorner; // Левый верхний угол ячейки
+    private Point leftUpperCorner, rightBottomCorner; // Вершины комнаты
+    private Point cellLeftUpperCorner; // Левый верхний угол ячейки
 
     Room(int seflCellIndexesX, int seflCellIndexesY) {
         this.seflCellIndexesX = seflCellIndexesX;
@@ -30,4 +30,12 @@ public class Room {
         return random.nextInt(mx - mn) + mn;
     }
 
+    public Point getLeftUpperCorner(){
+        return leftUpperCorner;
+    }
+
+
+    public Point getRightBottomCorner() {
+        return rightBottomCorner;
+    }
 }

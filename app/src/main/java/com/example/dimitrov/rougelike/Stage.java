@@ -1,5 +1,7 @@
 package com.example.dimitrov.rougelike;
 
+import android.graphics.Point;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -21,6 +23,60 @@ public class Stage {
         cellSideSize = (int) (sideSize * 0.1);
 
         stagePlanGenereation();
+
+        for (int i=0;i<sideSize;i++){
+            for (int j=0;j<sideSize;j++){
+                stagePlan[i][j]=0;
+            }
+        }//пустой мир
+
+        for (int k=0;k<cntRooms;k++){
+            Point leftUpperCorner = rooms[k].getLeftUpperCorner();
+            Point rightBottomCorner = rooms[k].getRightBottomCorner();
+            for (int i=leftUpperCorner.x;i<rightBottomCorner.x;i++){
+                for (int j=leftUpperCorner.y;j<rightBottomCorner.y;j++){
+                    stagePlan[i][j]=1;
+                }
+            }
+            for (int i=leftUpperCorner.x+1;i<rightBottomCorner.x-1;i++){
+                for (int j=leftUpperCorner.y+1;j<rightBottomCorner.y-1;j++){
+                    stagePlan[i][j]=2;
+                }
+            }
+        }//комнаты
+
+        for (Junction j:junctions){
+            Point from = j.getFrom();
+            Point to =j.getTo();
+            int fromX= from.x;
+            int fromY= from.y;
+            int toX = to.x;
+            int toY = to.y;
+            if (fromX>toX){
+                for (int i=toX;i<=fromX;i++){
+                    stagePlan[i][fromY]=2;
+                }
+            }
+            else {
+                for (int i=fromX;i<=toX;i++){
+                    stagePlan[i][fromY]=2;
+                }
+            }
+
+            if (fromY>toY){
+                for (int i=toY;i<=fromY;i++){
+                    stagePlan[toX][i]=2;
+                }
+            }
+            else {
+                for (int i=fromY;i<=toY;i++){
+                    stagePlan[toX][i]=2;
+                }
+            }
+
+
+        }//переходы
+
     }
 
     private final int get(int room) {
