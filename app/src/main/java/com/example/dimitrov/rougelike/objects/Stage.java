@@ -1,12 +1,22 @@
 package com.example.dimitrov.rougelike.objects;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
+import android.view.Display;
+
+import com.example.dimitrov.rougelike.core.Graphics;
+import com.example.dimitrov.rougelike.core.GraphicsUser;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class Stage {
+import static com.example.dimitrov.rougelike.core.Graphics.scale;
+
+public class Stage implements GraphicsUser{
     int sideSize, cntRooms;
     public static int cellSideSize;
     private static final int mxCntRooms = 100;
@@ -23,14 +33,6 @@ public class Stage {
         cellSideSize = (int) (sideSize * 0.1);
 
         stagePlanGenereation();
-
-        /*for (int i=0;i<sideSize;i++){
-            for (int j=0;j<sideSize;j++){
-                System.out.print(stagePlan[i][j]);
-            }
-            System.out.println();
-        }*/
-
     }
 
     private final int get(int room) {
@@ -158,4 +160,23 @@ public class Stage {
 
         }//переходы
     }
+
+    @Override
+    public void onDraw(Canvas canvas, Graphics core) {
+        for (int i = 0; i < sideSize; i++) {
+            for (int j = 0; j < sideSize; j++) {
+                int stageHeight = core.getHeight();
+                int stageWidth = core.getWidth();
+
+                int coordX = (int) (i * (stageHeight / sideSize) * scale);
+                int coordY = (int) (j * (stageHeight / sideSize) * scale);
+
+
+            }
+        }
+    }
+    public void getBitmaps(Graphics core) {
+        core.setBitmap();
+    }
+
 }

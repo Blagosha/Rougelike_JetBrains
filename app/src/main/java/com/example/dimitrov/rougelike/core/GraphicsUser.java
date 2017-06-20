@@ -9,5 +9,5 @@ import android.graphics.Canvas;
 
 public interface GraphicsUser {
     void onDraw(Canvas canvas, Graphics core);
-    void getBitmaps();
+    void getBitmaps(Graphics core);
 }
