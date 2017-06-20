@@ -14,7 +14,10 @@
         android:layout_alignLeft="@+id/how_to_play_btn"
         android:layout_alignStart="@+id/how_to_play_btn"
         android:layout_alignRight="@+id/how_to_play_btn"
-        android:layout_alignEnd="@+id/how_to_play_btn" />
+        android:layout_alignEnd="@+id/how_to_play_btn"
+        android:background="@drawable/rounded_button"
+        android:layout_marginBottom = "5dp"
+        android:typeface="serif"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -22,7 +25,11 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:id="@+id/how_to_play_btn"
-        android:text="How to Play"/>
+        android:text="      How to Play      "
+        android:background="@drawable/rounded_button"
+        android:layout_marginBottom = "5dp"
+        android:layout_marginTop="5dp"
+        android:typeface="serif"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -33,6 +40,9 @@
         android:layout_alignLeft="@+id/how_to_play_btn"
         android:layout_alignStart="@+id/how_to_play_btn"
         android:layout_alignRight="@+id/how_to_play_btn"
-        android:layout_alignEnd="@+id/how_to_play_btn" />
+        android:layout_alignEnd="@+id/how_to_play_btn"
+        android:background="@drawable/rounded_button"
+        android:layout_marginTop="5dp"
+        android:typeface="serif"/>
 
 </RelativeLayout>

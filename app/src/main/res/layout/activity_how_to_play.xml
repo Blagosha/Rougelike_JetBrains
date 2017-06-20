@@ -7,4 +7,7 @@
     android:background="@mipmap/backgroundpravila"
     tools:context="com.example.dimitrov.rougelike.How_to_play">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </android.support.constraint.ConstraintLayout>
