@@ -12,16 +12,16 @@
         android:theme="@style/AppTheme.NoActionBar">
 
 
-        <activity android:name=".Application">
+        <activity android:name=".layouts.Application">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Game" />
-        <activity android:name=".How_to_play" />
-        <activity android:name=".About_us"></activity>
+        <activity android:name=".layouts.Game" />
+        <activity android:name=".layouts.How_to_play" />
+        <activity android:name=".layouts.About_us"></activity>
     </application>
 
 </manifest>

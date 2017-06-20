@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/backgroundonas"
-    tools:context="com.example.dimitrov.rougelike.About_us">
+    tools:context="com.example.dimitrov.rougelike.layouts.About_us">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ABOUT US"
+        android:textSize="30dp"
+        android:layout_above="@+id/textView2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This fabulous application was made by:" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dimitrov Blagoi
+                Daniil Pavlov
+                Nurgaliev Timur
+                Nurgaliev Artyom" />
+
+
+     If you have any ideas how to improve
+     our app, please write on our official
+     e-mail: dimitrovblagoi@gmail.com"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="186dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
