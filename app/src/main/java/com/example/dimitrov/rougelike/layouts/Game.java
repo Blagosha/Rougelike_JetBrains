@@ -10,7 +10,6 @@ import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.objects.Labyrinth;
 
 public class Game extends AppCompatActivity {
-
     Graphics main_g;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
