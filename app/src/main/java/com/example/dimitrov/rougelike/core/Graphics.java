@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.view.View;
 
 import com.example.dimitrov.rougelike.R;
+import com.example.dimitrov.rougelike.objects.Labyrinth;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,12 +21,15 @@ import java.util.Map;
 
 public class Graphics extends View {
 
+    Labyrinth l;
     Map<String, Bitmap> bitmaps;
     ArrayList<GraphicsUser> objects;
     public static float scale = 1;
 
     public Graphics(Context context) {
         super(context);
+        l = new Labyrinth();
+        objects.add(l);
         bitmaps = new HashMap<String, Bitmap>();
         objects = new ArrayList<GraphicsUser>();
     }
@@ -72,7 +76,7 @@ public class Graphics extends View {
     protected void onDraw(Canvas canvas) {
         for(int i=0;i<objects.size();i++)
         {
-            objects.get(i).getBitmaps();
+            objects.get(i).getBitmaps(this);
             objects.get(i).onDraw(canvas,this);
         }
     }

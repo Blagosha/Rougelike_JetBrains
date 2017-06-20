@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.Display;
 
+import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
 
@@ -58,7 +59,7 @@ public class Stage implements GraphicsUser{
                 cellUsed[i][j] = false;
 
         int alreadyRoomsGenerated = 0;
-        while (alreadyRoomsGenerated < cntRooms) {
+        while (alreadyRoomsGenerated < cntRooms-2) {
             int x = random.nextInt(cellUsed.length);
             int y = random.nextInt(cellUsed.length);
 
@@ -171,12 +172,21 @@ public class Stage implements GraphicsUser{
                 int coordX = (int) (i * (stageHeight / sideSize) * scale);
                 int coordY = (int) (j * (stageHeight / sideSize) * scale);
 
-
+                Bitmap b = core.getBitmap("forest");
+                switch(stagePlan[i][j]){
+                    case 0: b=core.getBitmap("forest");
+                    case 1: b=core.getBitmap("wall");
+                    case 2: b=core.getBitmap("floor");
+                }
+                core.resizeBitmap(b,(int)(stageHeight / sideSize*scale),(int)(stageHeight / sideSize*scale));
+                core.drawBitmap(canvas,b,coordX,coordY);
             }
         }
     }
     public void getBitmaps(Graphics core) {
-        core.setBitmap();
+        core.setBitmap("floor",core.readBitmap(R.mipmap.floor));
+        core.setBitmap("wall",core.readBitmap(R.mipmap.wall));
+        core.setBitmap("forest",core.readBitmap(R.mipmap.forest));
     }
 
 }
