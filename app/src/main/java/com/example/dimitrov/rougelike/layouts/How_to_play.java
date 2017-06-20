@@ -1,39 +1,41 @@
-package com.example.dimitrov.rougelike;
+package com.example.dimitrov.rougelike.layouts;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import static com.example.dimitrov.rougelike.Application.tagBlagoi;
+import com.example.dimitrov.rougelike.R;
 
-public class About_us extends AppCompatActivity {
+public class How_to_play extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_us);
+        setContentView(R.layout.activity_how_to_play);
+
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(tagBlagoi, "About_us_activity onPause");
+        Log.d(Application.tagBlagoi, "How_to_play_activity onPause");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(tagBlagoi, "About_us_activity onResume");
+        Log.d(Application.tagBlagoi, "How_to_play_activity onResume");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(tagBlagoi, "About_us_activity onStop");
+        Log.d(Application.tagBlagoi, "How_to_play_activity onStop");
     }
 
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(tagBlagoi, "About_us_activity onDestroy");
+        Log.d(Application.tagBlagoi, "How_to_play_activity onDestroy");
     }
 }

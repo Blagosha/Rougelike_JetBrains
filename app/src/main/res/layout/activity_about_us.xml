@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/backgroundonas"
-    tools:context="com.example.dimitrov.rougelike.About_us">
+    tools:context="com.example.dimitrov.rougelike.layouts.About_us">
 
     <TextView
         android:layout_width="wrap_content"

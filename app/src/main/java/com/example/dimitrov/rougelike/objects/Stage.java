@@ -1,4 +1,4 @@
-package com.example.dimitrov.rougelike;
+package com.example.dimitrov.rougelike.objects;
 
 import android.graphics.Point;
 

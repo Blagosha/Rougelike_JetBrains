@@ -1,4 +1,4 @@
-package com.example.dimitrov.rougelike;
+package com.example.dimitrov.rougelike.core;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,6 +9,8 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.DragEvent;
 import android.view.View;
+
+import com.example.dimitrov.rougelike.R;
 
 /**
  * Created by user on 6/20/17.
