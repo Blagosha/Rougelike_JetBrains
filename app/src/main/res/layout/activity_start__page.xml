@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:id="@+id/how_to_play_btn"
-        android:text="How to Play" />
+        android:text="How to Play"/>
 
     <Button
         android:layout_width="wrap_content"
