@@ -22,8 +22,8 @@ import java.util.Map;
 public class Graphics extends View {
 
     Labyrinth l;
-    Map<String, Bitmap> bitmaps;
-    ArrayList<GraphicsUser> objects;
+    private Map<String, Bitmap> bitmaps;
+    private ArrayList<GraphicsUser> objects;
     public static float scale = 1;
 
     public Graphics(Context context) {
@@ -72,6 +72,16 @@ public class Graphics extends View {
 
     public void drawBitmap(Canvas canvas, Bitmap bitmap, int x, int y) {
         canvas.drawBitmap(bitmap, x, y, new Paint());
+    }
+
+    public void addObj(GraphicsUser obj)
+    {
+        objects.add(obj);
+    }
+
+    public void removeObj(GraphicsUser obj)
+    {
+        objects.remove(obj);
     }
 
     @Override
