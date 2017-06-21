@@ -3,10 +3,12 @@ package com.example.dimitrov.rougelike.layouts;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.R;
+import com.example.dimitrov.rougelike.objects.Chest;
 import com.example.dimitrov.rougelike.objects.Hero;
 import com.example.dimitrov.rougelike.objects.Labyrinth;
 import com.example.dimitrov.rougelike.objects.Monster;
@@ -35,6 +37,7 @@ public class Game extends AppCompatActivity {
 
         int cntMonstersSpawn = Room.random(2, l.stages[0].rooms.length);
         ArrayList<Monster> monsters = new ArrayList<>();
+        ArrayList<Chest>chests = new ArrayList<>();
 
         int counter = 0;
         while (counter < cntMonstersSpawn) {
@@ -50,6 +53,26 @@ public class Game extends AppCompatActivity {
             main_g.addObj(monster);
             counter++;
         }
+
+        for (int i=0;i<l.stages[0].stagePlan.length;i++){
+            for (int j=0;j<l.stages[0].stagePlan[0].length;j++){
+                if (l.stages[0].stagePlan[i][j]==2 && isWallNear(i,j,l)){
+                    int chestGenerationFrequency = 100;
+                    if (Room.random(0, chestGenerationFrequency) == 0) {
+                        Chest chest = new Chest(i,j);
+                        chests.add(chest);
+                        main_g.addObj(chest);
+                    }
+                }
+            }
+        }
+        Log.d("Blagoi",new Integer(chests.size()).toString());
+    }
+
+    private boolean isWallNear(int i, int j,Labyrinth l){
+
+        return (l.stages[0].stagePlan[i-1][j]==1)||(l.stages[0].stagePlan[i+1][j]==1)||
+                (l.stages[0].stagePlan[i][j-1]==1)||(l.stages[0].stagePlan[i][j+1]==1);
     }
 
     @Override

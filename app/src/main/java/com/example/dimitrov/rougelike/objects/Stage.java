@@ -26,7 +26,7 @@ public class Stage implements GraphicsUser {
     public static int cellSideSize;
     private static final int mxCntRooms = 30;
     private static final int mnCntRooms = 20;
-    int[][] stagePlan; // Общий массив этажа
+    public int[][] stagePlan; // Общий массив этажа
     public int[][] orients;
     ArrayList<Junction> junctions; // массив переходов
     public Room[] rooms; // массив всех комнат
