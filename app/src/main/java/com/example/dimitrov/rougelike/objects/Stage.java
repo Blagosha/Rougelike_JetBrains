@@ -159,6 +159,25 @@ public class Stage implements GraphicsUser{
 
 
         }//переходы
+
+        for (int i=1;i<sideSize-1;i++){
+            for (int j=1;j<sideSize-1;j++){
+                if (stagePlan[i][j]==2){
+                    if (stagePlan[i][j-1]!=2){
+                        stagePlan[i][j-1]=1;
+                    }
+                    if (stagePlan[i][j+1]!=2){
+                        stagePlan[i][j+1]=1;
+                    }
+                    if (stagePlan[i-1][j]!=2){
+                        stagePlan[i-1][j]=1;
+                    }
+                    if (stagePlan[i+1][j]!=2){
+                        stagePlan[i+1][j]=1;
+                    }
+                }
+            }
+        }
     }
 
     @Override
