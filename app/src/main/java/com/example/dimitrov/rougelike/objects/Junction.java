@@ -4,7 +4,7 @@ import android.graphics.Point;
 
 public class Junction {
 
-    private Point from,to;
+    private Point from, to;
 
     public Junction(Room from, Room to) {
         this.from = getCenter(from);
@@ -20,10 +20,10 @@ public class Junction {
         return to;
     }
 
-    private Point getCenter(Room room){
+    private Point getCenter(Room room) {
         Point leftUpperCorner = room.getLeftUpperCorner();
         Point rightBottomCorner = room.getRightBottomCorner();
-        return new Point((rightBottomCorner.x+leftUpperCorner.x)/2,(rightBottomCorner.y+leftUpperCorner.y)/2);
+        return new Point((rightBottomCorner.x + leftUpperCorner.x) / 2, (rightBottomCorner.y + leftUpperCorner.y) / 2);
     }
 
 

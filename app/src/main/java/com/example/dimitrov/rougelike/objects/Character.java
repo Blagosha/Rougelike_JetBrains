@@ -1,9 +1,18 @@
 package com.example.dimitrov.rougelike.objects;
 
-public class Character{
+import android.graphics.Canvas;
+
+import com.example.dimitrov.rougelike.R;
+import com.example.dimitrov.rougelike.core.Graphics;
+import com.example.dimitrov.rougelike.core.GraphicsUser;
+
+import static com.example.dimitrov.rougelike.core.Graphics.scale;
+
+public class Character implements GraphicsUser {
     private int X;
     private int Y;
     private int hp;
+    protected String texture;
 
     public Character(int x, int y, int hp) {
         X = x;
@@ -33,5 +42,21 @@ public class Character{
 
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+    @Override
+    public void onDraw(Canvas canvas, Graphics core) {
+        core.drawBitmap(canvas, core.resizeBitmap(core.getBitmap(texture),
+                (int) (scale) + 1, (int) (scale) + 1),
+                (int) ((X - core.cameraX) * scale),
+                (int) ((Y - core.cameraY) * scale));
+    }
+
+    @Override
+    public void getBitmaps(Graphics core) {
+        core.setBitmap("green", core.readBitmap(R.mipmap.green));
+        core.setBitmap("greenzombie", core.readBitmap(R.mipmap.greenzombie));
+        core.setBitmap("red", core.readBitmap(R.mipmap.red));
+        core.setBitmap("triangle", core.readBitmap(R.mipmap.triangle));
     }
 }
