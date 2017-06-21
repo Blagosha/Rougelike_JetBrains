@@ -204,7 +204,7 @@ public class Stage implements GraphicsUser {
         float stageWidth = core.getWidth();
         for (int i = (int) core.cameraX - 1; i < core.cameraX+stageWidth / core.scale + 2; i++) {
             for (int j = (int) core.cameraY - 1; j < core.cameraY+stageHeight / core.scale + 2; j++) {
-                if (i < 0 || j < 0)
+                if (i < 0 || j < 0 || i>=cntRooms || j>=cntRooms)
                     continue;
 
                 int coordX = (int) ((i - core.cameraX) * core.scale) + 1;
