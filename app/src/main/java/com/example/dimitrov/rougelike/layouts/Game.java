@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.R;
+import com.example.dimitrov.rougelike.core.MainThread;
 import com.example.dimitrov.rougelike.objects.Chest;
 import com.example.dimitrov.rougelike.objects.Hero;
 import com.example.dimitrov.rougelike.objects.Labyrinth;
@@ -18,6 +19,11 @@ import java.util.ArrayList;
 
 public class Game extends AppCompatActivity {
     Graphics core;
+    Hero hero;
+    Labyrinth l;
+    ArrayList<Monster> monsters;
+    ArrayList<Chest>chests;
+    Thread thread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,18 +33,18 @@ public class Game extends AppCompatActivity {
         //Applying graphics core to layout
         core = new Graphics(this);
         ((LinearLayout) findViewById(R.id.game_layout)).addView(core);
-        Labyrinth l = new Labyrinth();
+        l = new Labyrinth();
         core.addObj(l);
 
         int heroRoomGenerationIndex = Room.random(0, l.stages[0].rooms.length);
         Point p = l.stages[0].rooms[heroRoomGenerationIndex].getCenter();
-        Hero hero = new Hero(p.x, p.y, 100); // creating hero 100 hp
+        hero = new Hero(p.x, p.y, 100); // creating hero 100 hp
         core.addObj(hero);
         core.hero=hero;
 
         int cntMonstersSpawn = Room.random(2, l.stages[0].rooms.length);
-        ArrayList<Monster> monsters = new ArrayList<>();
-        ArrayList<Chest>chests = new ArrayList<>();
+        monsters = new ArrayList<>();
+        chests = new ArrayList<>();
 
         int counter = 0;
         while (counter < cntMonstersSpawn) {
@@ -67,9 +73,16 @@ public class Game extends AppCompatActivity {
                 }
             }
         }
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new MainThread().main(Game.this);
+            }
+        });
+        thread.run();
     }
 
-    private boolean isWallNear(int i, int j,Labyrinth l){
+    private boolean isWallNear(int i, int j, Labyrinth l){
 
         return (l.stages[0].stagePlan[i-1][j]==1)||(l.stages[0].stagePlan[i+1][j]==1)||
                 (l.stages[0].stagePlan[i][j-1]==1)||(l.stages[0].stagePlan[i][j+1]==1);
