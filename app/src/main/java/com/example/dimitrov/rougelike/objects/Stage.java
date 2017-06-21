@@ -27,7 +27,7 @@ public class Stage implements GraphicsUser {
     private static final int mxCntRooms = 30;
     private static final int mnCntRooms = 20;
     int[][] stagePlan; // Общий массив этажа
-    public int [][]orients;
+    public int[][] orients;
     ArrayList<Junction> junctions; // массив переходов
     public Room[] rooms; // массив всех комнат
 
@@ -61,9 +61,9 @@ public class Stage implements GraphicsUser {
         pred = new int[cntRooms];
         stagePlan = new int[sideSize][sideSize];
         orients = new int[sideSize][sideSize];
-        for(int i=0;i<sideSize;i++)
-            for(int j=0;j<sideSize;j++)
-                orients[i][j]=new Random().nextInt(4);
+        for (int i = 0; i < sideSize; i++)
+            for (int j = 0; j < sideSize; j++)
+                orients[i][j] = new Random().nextInt(4);
 
         boolean[][] cellUsed = new boolean[sideSize / cellSideSize][sideSize / cellSideSize];
         for (int i = 0; i < cellUsed.length; i++)
@@ -208,9 +208,9 @@ public class Stage implements GraphicsUser {
             bits[i / 4][i % 4] = null;
         float stageHeight = core.getHeight();
         float stageWidth = core.getWidth();
-        for (int i = (int) core.cameraX - 1; i < core.cameraX+stageWidth / core.scale + 2; i++) {
-            for (int j = (int) core.cameraY - 1; j < core.cameraY+stageHeight / core.scale + 2; j++) {
-                if (i < 0 || j < 0 || i>=sideSize || j>=sideSize)
+        for (int i = (int) core.cameraX - 1; i < core.cameraX + stageWidth / core.scale + 2; i++) {
+            for (int j = (int) core.cameraY - 1; j < core.cameraY + stageHeight / core.scale + 2; j++) {
+                if (i < 0 || j < 0 || i >= sideSize || j >= sideSize)
                     continue;
 
                 int coordX = (int) ((i - core.cameraX) * core.scale) + 1;

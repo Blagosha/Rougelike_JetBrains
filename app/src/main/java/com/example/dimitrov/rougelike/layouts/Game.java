@@ -13,6 +13,7 @@ import com.example.dimitrov.rougelike.objects.Room;
 
 public class Game extends AppCompatActivity {
     Graphics main_g;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +21,7 @@ public class Game extends AppCompatActivity {
 
         //Applying graphics core to layout
         main_g = new Graphics(this);
-        ((LinearLayout)findViewById(R.id.game_layout)).addView(main_g);
+        ((LinearLayout) findViewById(R.id.game_layout)).addView(main_g);
         Labyrinth l = new Labyrinth();
         main_g.addObj(l);
 

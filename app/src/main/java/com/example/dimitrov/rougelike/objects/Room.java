@@ -22,8 +22,8 @@ public class Room {
         rightBottomCorner = new Point(leftUpperCorner.x + roomWidth, leftUpperCorner.y + roomHeight);
     }
 
-    public Point getCenter(){
-        return new Point((rightBottomCorner.x+leftUpperCorner.x)/2,(rightBottomCorner.y+leftUpperCorner.y)/2);
+    public Point getCenter() {
+        return new Point((rightBottomCorner.x + leftUpperCorner.x) / 2, (rightBottomCorner.y + leftUpperCorner.y) / 2);
     }
 
     public static int random(int mn, int mx) {
@@ -31,7 +31,7 @@ public class Room {
         return random.nextInt(mx - mn) + mn;
     }
 
-    public Point getLeftUpperCorner(){
+    public Point getLeftUpperCorner() {
         return leftUpperCorner;
     }
 

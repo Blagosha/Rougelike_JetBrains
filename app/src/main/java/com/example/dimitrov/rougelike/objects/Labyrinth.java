@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
 
-public class Labyrinth implements GraphicsUser{
+public class Labyrinth implements GraphicsUser {
     private static final int cntStages = 5; // Количество уровней в лабиринте
     public Stage[] stages = new Stage[cntStages]; // массив уровней
 
@@ -18,7 +18,7 @@ public class Labyrinth implements GraphicsUser{
 
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-        stages[0].onDraw(canvas,core);
+        stages[0].onDraw(canvas, core);
     }
 
     @Override
