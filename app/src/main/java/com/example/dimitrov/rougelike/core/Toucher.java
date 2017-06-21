@@ -10,12 +10,13 @@ import android.view.View;
 
 public class Toucher extends View {
 
-    int cameraX, cameraY;
+    public float cameraX=0, cameraY=0;
     public Toucher(Context context) {
         super(context);
         this.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                invalidate();
                 return false;
             }
         });

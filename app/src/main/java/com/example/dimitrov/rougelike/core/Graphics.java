@@ -79,6 +79,7 @@ public class Graphics extends Toucher {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        cameraY++;
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).getBitmaps(this);
             objects.get(i).onDraw(canvas, this);

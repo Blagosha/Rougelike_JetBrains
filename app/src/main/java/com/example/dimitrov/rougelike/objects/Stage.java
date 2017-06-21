@@ -23,8 +23,8 @@ import static com.example.dimitrov.rougelike.core.Graphics.scale;
 public class Stage implements GraphicsUser {
     int sideSize, cntRooms;
     public static int cellSideSize;
-    private static final int mxCntRooms = 10;
-    private static final int mnCntRooms = 3;
+    private static final int mxCntRooms = 30;
+    private static final int mnCntRooms = 20;
     int[][] stagePlan; // Общий массив этажа
     ArrayList<Junction> junctions; // массив переходов
     Room[] rooms; // массив всех комнат
@@ -197,33 +197,36 @@ public class Stage implements GraphicsUser {
 
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-        Bitmap [][]bits= new Bitmap[3][4];
-        for(int i=0; i<12;i++)
-            bits[i/4][i%4]=null;
-        for (int i = 0; i < sideSize; i++) {
-            for (int j = 0; j < sideSize; j++) {
-                float stageHeight = core.getHeight();
-                float stageWidth = core.getWidth();
+        Bitmap[][] bits = new Bitmap[3][4];
+        for (int i = 0; i < 12; i++)
+            bits[i / 4][i % 4] = null;
+        float stageHeight = core.getHeight();
+        float stageWidth = core.getWidth();
+        for (int i = (int) core.cameraX - 1; i < core.cameraX+stageWidth / core.scale + 2; i++) {
+            for (int j = (int) core.cameraY - 1; j < core.cameraY+stageHeight / core.scale + 2; j++) {
+                if (i < 0 || j < 0)
+                    continue;
 
-                int coordX = (int)(i*core.scale)+1;
-                int coordY = (int)(j*core.scale)+1;
+                int coordX = (int) ((i - core.cameraX) * core.scale) + 1;
+                int coordY = (int) ((j - core.cameraY) * core.scale) + 1;
 
                 Bitmap b = core.getBitmap("forest");
+                int orientation = new Random().nextInt(4);
                 switch (stagePlan[i][j]) {
                     case 0:
                         b = core.getBitmap("forest");
                         break;
                     case 1:
                         b = core.getBitmap("wall");
+                        orientation = 0;
                         break;
                     case 2:
                         b = core.getBitmap("floor");
                 }
-                int orientation=new Random().nextInt(4);
-                if(bits[stagePlan[i][j]][orientation]==null)
+                if (bits[stagePlan[i][j]][orientation] == null)
                     bits[stagePlan[i][j]][orientation] = core.rotateBitmap(core.resizeBitmap(b,
                             (int) (scale) + 1,
-                            (int) (scale) + 1),90*orientation);
+                            (int) (scale) + 1), 90 * orientation);
                 b = bits[stagePlan[i][j]][orientation];
                 core.drawBitmap(canvas, b, coordX, coordY);
             }
