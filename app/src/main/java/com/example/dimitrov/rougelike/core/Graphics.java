@@ -20,11 +20,11 @@ public class Graphics extends Toucher {
 
     private Map<String, Bitmap> bitmaps;
     private ArrayList<GraphicsUser> objects;
-    public static float scale = 100;
 
     public Graphics(Context context) {
         super(context);
 
+        scale = 100;
         bitmaps = new HashMap<String, Bitmap>();
         objects = new ArrayList<GraphicsUser>();
 
@@ -75,6 +75,14 @@ public class Graphics extends Toucher {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        if (cameraX < 0)
+            cameraX = 0;
+        if (cameraY < 0)
+            cameraY = 0;
+        if (cameraX > sideSize - getWidth() / scale)
+            cameraX = sideSize - getWidth() / scale;
+        if (cameraY > sideSize - getHeight() / scale)
+            cameraY = sideSize - getHeight() / scale;
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).getBitmaps(this);
             objects.get(i).onDraw(canvas, this);

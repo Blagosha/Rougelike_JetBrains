@@ -18,10 +18,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
-import static com.example.dimitrov.rougelike.core.Graphics.scale;
+import static com.example.dimitrov.rougelike.core.Toucher.sideSize;
+
 
 public class Stage implements GraphicsUser {
-    public int sideSize;
     public int cntRooms;
     public static int cellSideSize;
     private static final int mxCntRooms = 30;
@@ -36,7 +36,6 @@ public class Stage implements GraphicsUser {
 
 
     public Stage(int sideSize) {
-        this.sideSize = sideSize;
         cellSideSize = (int) (sideSize * 0.1);
 
         stagePlanGenereation();
@@ -54,6 +53,7 @@ public class Stage implements GraphicsUser {
 
     private final void stagePlanGenereation() {
         Random random = new Random();
+        sideSize = 100;
         cntRooms = mnCntRooms + random.nextInt(mxCntRooms - mnCntRooms);// сгененрировали количество комнат
         junctions = new ArrayList<>();
         graphEdges = new ArrayList<>();
@@ -231,8 +231,8 @@ public class Stage implements GraphicsUser {
                 }
                 if (bits[stagePlan[i][j]][orientation] == null)
                     bits[stagePlan[i][j]][orientation] = core.rotateBitmap(core.resizeBitmap(b,
-                            (int) (scale) + 1,
-                            (int) (scale) + 1), 90 * orientation);
+                            (int) (core.scale) + 1,
+                            (int) (core.scale) + 1), 90 * orientation);
                 b = bits[stagePlan[i][j]][orientation];
                 core.drawBitmap(canvas, b, coordX, coordY);
             }

@@ -6,7 +6,6 @@ import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
 
-import static com.example.dimitrov.rougelike.core.Graphics.scale;
 
 public class Character implements GraphicsUser {
     private int X;
@@ -47,9 +46,9 @@ public class Character implements GraphicsUser {
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
         core.drawBitmap(canvas, core.resizeBitmap(core.getBitmap(texture),
-                (int) (scale) + 1, (int) (scale) + 1),
-                (int) ((X - core.cameraX) * scale),
-                (int) ((Y - core.cameraY) * scale));
+                (int) (core.scale) + 1, (int) (core.scale) + 1),
+                (int) ((X - core.cameraX) * core.scale),
+                (int) ((Y - core.cameraY) * core.scale));
     }
 
     @Override
