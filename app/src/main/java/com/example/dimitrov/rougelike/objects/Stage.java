@@ -175,6 +175,21 @@ public class Stage implements GraphicsUser {
                     if (stagePlan[i + 1][j] == 0) {
                         stagePlan[i + 1][j] = 1;
                     }
+
+                    if (stagePlan[i + 1][j + 1] == 0) {
+                        stagePlan[i + 1][j + 1] = 1;
+                    }
+
+                    if (stagePlan[i + 1][j - 1] == 0) {
+                        stagePlan[i + 1][j - 1] = 1;
+                    }
+                    if (stagePlan[i - 1][j - 1] == 0) {
+                        stagePlan[i - 1][j - 1] = 1;
+                    }
+
+                    if (stagePlan[i - 1][j + 1] == 0) {
+                        stagePlan[i - 1][j + 1] = 1;
+                    }
                 }
             }
         }
