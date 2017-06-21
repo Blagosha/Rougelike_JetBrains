@@ -14,6 +14,8 @@ import com.example.dimitrov.rougelike.core.GraphicsUser;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 import static com.example.dimitrov.rougelike.core.Graphics.scale;
@@ -201,6 +203,7 @@ public class Stage implements GraphicsUser {
             for (int j = 0; j < sideSize; j++) {
                 float stageHeight = core.getHeight();
                 float stageWidth = core.getWidth();
+
 
                 int coordX = Math.round(i * (stageWidth / sideSize) * scale);
                 int coordY = Math.round(j * (stageWidth / sideSize) * scale);

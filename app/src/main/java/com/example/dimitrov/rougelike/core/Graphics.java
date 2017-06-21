@@ -22,7 +22,6 @@ import java.util.Map;
 
 public class Graphics extends Toucher {
 
-    Labyrinth l;
     private Map<String, Bitmap> bitmaps;
     private ArrayList<GraphicsUser> objects;
     public static float scale = 1f;
@@ -33,8 +32,6 @@ public class Graphics extends Toucher {
         bitmaps = new HashMap<String, Bitmap>();
         objects = new ArrayList<GraphicsUser>();
 
-        l = new Labyrinth();
-        objects.add(l);
     }
 
 
