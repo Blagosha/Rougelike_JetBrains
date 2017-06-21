@@ -18,7 +18,7 @@ import java.util.Random;
 
 import static com.example.dimitrov.rougelike.core.Graphics.scale;
 
-public class Stage implements GraphicsUser{
+public class Stage implements GraphicsUser {
     int sideSize, cntRooms;
     public static int cellSideSize;
     private static final int mxCntRooms = 10;
@@ -50,14 +50,14 @@ public class Stage implements GraphicsUser{
 
     private final void stagePlanGenereation() {
         Random random = new Random();
-        cntRooms = mnCntRooms + random.nextInt(mxCntRooms-mnCntRooms);// сгененрировали количество комнат
+        cntRooms = mnCntRooms + random.nextInt(mxCntRooms - mnCntRooms);// сгененрировали количество комнат
         junctions = new ArrayList<>();
         graphEdges = new ArrayList<>();
         rooms = new Room[cntRooms];
         pred = new int[cntRooms];
         stagePlan = new int[sideSize][sideSize];
 
-        boolean [][] cellUsed = new boolean[sideSize / cellSideSize][sideSize / cellSideSize];
+        boolean[][] cellUsed = new boolean[sideSize / cellSideSize][sideSize / cellSideSize];
         for (int i = 0; i < cellUsed.length; i++)
             for (int j = 0; j < cellUsed[0].length; j++)
                 cellUsed[i][j] = false;
@@ -109,51 +109,49 @@ public class Stage implements GraphicsUser{
             }
         } */ //добавили еще 20% рандомных переходов
 
-        for (int i=0;i<sideSize;i++){
-            for (int j=0;j<sideSize;j++){
-                stagePlan[i][j]=0;
+        for (int i = 0; i < sideSize; i++) {
+            for (int j = 0; j < sideSize; j++) {
+                stagePlan[i][j] = 0;
             }
         }//пустой мир
-        for (int k=0;k<cntRooms;k++){
+        for (int k = 0; k < cntRooms; k++) {
             Point leftUpperCorner = rooms[k].getLeftUpperCorner();
             Point rightBottomCorner = rooms[k].getRightBottomCorner();
-            for (int i=leftUpperCorner.x;i<rightBottomCorner.x;i++){
-                for (int j=leftUpperCorner.y;j<rightBottomCorner.y;j++){
-                    stagePlan[i][j]=1;
+            for (int i = leftUpperCorner.x; i < rightBottomCorner.x; i++) {
+                for (int j = leftUpperCorner.y; j < rightBottomCorner.y; j++) {
+                    stagePlan[i][j] = 1;
                 }
             }
-            for (int i=leftUpperCorner.x+1;i<rightBottomCorner.x-1;i++){
-                for (int j=leftUpperCorner.y+1;j<rightBottomCorner.y-1;j++){
-                    stagePlan[i][j]=2;
+            for (int i = leftUpperCorner.x + 1; i < rightBottomCorner.x - 1; i++) {
+                for (int j = leftUpperCorner.y + 1; j < rightBottomCorner.y - 1; j++) {
+                    stagePlan[i][j] = 2;
                 }
             }
         }//комнаты
-        for (Junction j:junctions){
+        for (Junction j : junctions) {
             Point from = j.getFrom();
-            Point to =j.getTo();
-            int fromX= from.x;
-            int fromY= from.y;
+            Point to = j.getTo();
+            int fromX = from.x;
+            int fromY = from.y;
             int toX = to.x;
             int toY = to.y;
-            if (fromX>toX){
-                for (int i=toX;i<=fromX;i++){
-                    stagePlan[i][fromY]=2;
+            if (fromX > toX) {
+                for (int i = toX; i <= fromX; i++) {
+                    stagePlan[i][fromY] = 2;
                 }
-            }
-            else {
-                for (int i=fromX;i<=toX;i++){
-                    stagePlan[i][fromY]=2;
+            } else {
+                for (int i = fromX; i <= toX; i++) {
+                    stagePlan[i][fromY] = 2;
                 }
             }
 
-            if (fromY>toY){
-                for (int i=toY;i<=fromY;i++){
-                    stagePlan[toX][i]=2;
+            if (fromY > toY) {
+                for (int i = toY; i <= fromY; i++) {
+                    stagePlan[toX][i] = 2;
                 }
-            }
-            else {
-                for (int i=fromY;i<=toY;i++){
-                    stagePlan[toX][i]=2;
+            } else {
+                for (int i = fromY; i <= toY; i++) {
+                    stagePlan[toX][i] = 2;
                 }
             }
 
@@ -168,26 +166,30 @@ public class Stage implements GraphicsUser{
                 float stageHeight = core.getHeight();
                 float stageWidth = core.getWidth();
 
-                int coordX = (int) (i * (stageHeight / sideSize) * scale);
-                int coordY = (int) (j * (stageHeight / sideSize) * scale);
+                int coordX = Math.round(i * (stageWidth / sideSize) * scale);
+                int coordY = Math.round(j * (stageWidth / sideSize) * scale);
 
                 Bitmap b = core.getBitmap("forest");
-                switch(stagePlan[i][j]){
-                    case 0: b=core.getBitmap("forest");
+                switch (stagePlan[i][j]) {
+                    case 0:
+                        b = core.getBitmap("forest");
                         break;
-                    case 1: b=core.getBitmap("wall");
+                    case 1:
+                        b = core.getBitmap("wall");
                         break;
-                    case 2: b=core.getBitmap("floor");
+                    case 2:
+                        b = core.getBitmap("floor");
                 }
-                b=core.resizeBitmap(b,(int)(stageHeight / sideSize*scale),(int)(stageHeight / sideSize*scale));
-                core.drawBitmap(canvas,b,coordX,coordY);
+                b = core.resizeBitmap(b, (int) (stageWidth / sideSize * scale) + 1, (int) (stageWidth / sideSize * scale) + 1);
+                core.drawBitmap(canvas, b, coordX, coordY);
             }
         }
     }
+
     public void getBitmaps(Graphics core) {
-        core.setBitmap("floor",core.readBitmap(R.mipmap.floor));
-        core.setBitmap("wall",core.readBitmap(R.mipmap.wall));
-        core.setBitmap("forest",core.readBitmap(R.mipmap.forest));
+        core.setBitmap("floor", core.readBitmap(R.mipmap.floor));
+        core.setBitmap("wall", core.readBitmap(R.mipmap.wall));
+        core.setBitmap("forest", core.readBitmap(R.mipmap.forest));
     }
 
 }
