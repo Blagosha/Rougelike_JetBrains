@@ -13,7 +13,8 @@ public class Entity implements GraphicsUser {
     private int X;
     private int Y;
     protected String texture;
-    Bitmap b;
+    Bitmap b,rb;
+    boolean isReversed=true;
 
     public Entity(int x, int y ) {
         X = x;
@@ -41,12 +42,17 @@ public class Entity implements GraphicsUser {
         core.drawBitmap(canvas, b,
                 (int) ((X - core.cameraX) * core.scale),
                 (int) ((Y - core.cameraY) * core.scale));
+        if(isReversed)
+            core.drawBitmap(canvas, rb,
+                    (int) ((X - core.cameraX) * core.scale),
+                    (int) ((Y - core.cameraY) * core.scale));
     }
 
     @Override
     public void onScaleChange(Graphics core) {
         b=core.resizeBitmap(core.getBitmap(texture),
                 (int) (core.scale) + 1, (int) (core.scale) + 1);
+        rb=core.scaleBitmap(b,-1,1);
     }
 
     @Override
