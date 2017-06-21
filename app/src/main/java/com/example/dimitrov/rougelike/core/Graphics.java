@@ -8,6 +8,8 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.Log;
 
+import com.example.dimitrov.rougelike.objects.Labyrinth;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,9 +57,7 @@ public class Graphics extends Toucher {
         return bitmaps.get(name);
     }
 
-    public void drawBitmap(Canvas canvas, Bitmap bitmap, int x, int y) {
-        canvas.drawBitmap(bitmap, x, y, new Paint());
-    }
+
 
     public void addObj(GraphicsUser obj) {
         objects.add(obj);
@@ -68,12 +68,22 @@ public class Graphics extends Toucher {
     }
     final float scaleBorder=50;
 
+    void proceed(GraphicsUser g, Canvas canvas)
+    {
+        g.getBitmaps(this);
+        if(scaleBuff!=scale)
+            g.onScaleChange(this);
+        g.onDraw(canvas, this);
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         if(init++==0)
             resetCam();
         minScale = (float)getWidth() / scaleBorder;
         maxScale = 300;
+
+
         if (scale < minScale)
             scale = minScale;
         if (scale > maxScale)
@@ -86,16 +96,14 @@ public class Graphics extends Toucher {
             cameraX = 0;
         if (cameraY < 0)
             cameraY = 0;
+
+        proceed(labyrinth,canvas);
         for (int i = 0; i < objects.size(); i++) {
-            objects.get(i).getBitmaps(this);
-            if(scaleBuff!=scale)
-                objects.get(i).onScaleChange(this);
-            objects.get(i).onDraw(canvas, this);
+           proceed(objects.get(i),canvas);
         }
-        hero.getBitmaps(this);
-        if(scaleBuff!=scale)
-            hero.onScaleChange(this);
-        hero.onDraw(canvas, this);
+        proceed(hero,canvas);
+        labyrinth.postDraw(canvas,this);
+
         scaleBuff=scale;
     }
 

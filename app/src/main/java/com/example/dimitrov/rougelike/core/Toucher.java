@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.dimitrov.rougelike.objects.Hero;
+import com.example.dimitrov.rougelike.objects.Labyrinth;
 
 public class Toucher extends View {
 
@@ -12,6 +13,7 @@ public class Toucher extends View {
     public float scale = 200, minScale, maxScale;
     public static int sideSize;
     public Hero hero;
+    public Labyrinth labyrinth;
 
     public void resetCam() {
         scale = 200;
@@ -82,14 +84,23 @@ public class Toucher extends View {
             }
         });
     }
-
-    public boolean isInSight(int x, int y)
+    public boolean isOnScreen(float x, float y)
     {
+        x+=.5f;
+        y+=.5f;
         if(x<(int)cameraX - 1||y<cameraY-1)
             return false;
         if(x>cameraX + getWidth() / scale + 1||y>cameraY + getHeight() / scale + 1)
             return false;
-        if(Math.hypot(hero.x -x,hero.y -y)>hero.viewRadius)
+        return true;
+    }
+    public boolean isInSight(float x, float y)
+    {
+        if(!isOnScreen(x,y))
+            return false;
+        x+=.5f;
+        y+=.5f;
+        if(Math.hypot(hero.x - x, hero.y - y) > hero.viewRadius)
             return false;
         return true;
     }

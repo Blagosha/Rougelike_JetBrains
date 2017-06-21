@@ -2,6 +2,7 @@ package com.example.dimitrov.rougelike.objects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 
 import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.Graphics;
@@ -26,14 +27,17 @@ public class Entity implements GraphicsUser {
     public void onDraw(Canvas canvas, Graphics core) {
         if(!core.isInSight(x,y))
             return;
+        canvas.drawBitmap(rb,
+                (int) ((x - core.cameraX) * core.scale),
+                (int) ((y - core.cameraY) * core.scale), new Paint());
         if(isReversed)
-            core.drawBitmap(canvas, rb,
+            canvas.drawBitmap(rb,
                     (int) ((x - core.cameraX) * core.scale),
-                    (int) ((y - core.cameraY) * core.scale));
+                    (int) ((y - core.cameraY) * core.scale), new Paint());
         else
-            core.drawBitmap(canvas, b,
+            canvas.drawBitmap(b,
                     (int) ((x - core.cameraX) * core.scale),
-                    (int) ((y - core.cameraY) * core.scale));
+                    (int) ((y - core.cameraY) * core.scale), new Paint());
     }
 
     @Override
@@ -47,5 +51,10 @@ public class Entity implements GraphicsUser {
     public void getBitmaps(Graphics core) {
         core.addBitmap(R.mipmap.chest,"chest");
         core.addBitmap(R.mipmap.chestopen,"chestOpen");
+    }
+
+    @Override
+    public void postDraw(Canvas canvas, Graphics core) {
+
     }
 }

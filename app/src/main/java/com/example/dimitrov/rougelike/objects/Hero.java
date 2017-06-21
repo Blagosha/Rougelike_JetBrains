@@ -9,7 +9,7 @@ public class Hero extends Character {
     public Hero(int x, int y, int hp) {
         super(x, y, hp);
         texture = "green";
-        viewRadius = (255d / fadeRate + 3) * thickness;
+        viewRadius = (255 / fadeRate + 1.71f) * thickness;
     }
 
     public double viewRadius;

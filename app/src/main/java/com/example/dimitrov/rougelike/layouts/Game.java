@@ -3,7 +3,6 @@ package com.example.dimitrov.rougelike.layouts;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.example.dimitrov.rougelike.core.Graphics;
@@ -19,10 +18,8 @@ import java.util.ArrayList;
 
 public class Game extends AppCompatActivity {
     public Graphics core;
-    public Hero hero;
-    public Labyrinth l;
     public ArrayList<Monster> monsters;
-    public ArrayList<Chest>chests;
+    public ArrayList<Chest> chests;
     Thread thread;
 
     @Override
@@ -33,15 +30,14 @@ public class Game extends AppCompatActivity {
         //Applying graphics core to layout
         core = new Graphics(this);
         ((LinearLayout) findViewById(R.id.game_layout)).addView(core);
-        l = new Labyrinth();
-        core.addObj(l);
+        core.labyrinth = new Labyrinth();
 
-        int heroRoomGenerationIndex = Room.random(0, l.stages[0].rooms.length);
-        Point p = l.stages[0].rooms[heroRoomGenerationIndex].getCenter();
-        hero = new Hero(p.x, p.y, 100); // creating hero 100 hp
-        core.hero=hero;
+        int heroRoomGenerationIndex = Room.random(0, core.labyrinth.stages[0].rooms.length);
+        Point p = core.labyrinth.stages[0].rooms[heroRoomGenerationIndex].getCenter();
 
-        int cntMonstersSpawn = Room.random(2, l.stages[0].rooms.length);
+        core.hero = new Hero(p.x, p.y, 100); // creating hero 100 hp
+
+        int cntMonstersSpawn = Room.random(2, core.labyrinth.stages[0].rooms.length);
         monsters = new ArrayList<>();
         chests = new ArrayList<>();
 
@@ -53,19 +49,19 @@ public class Game extends AppCompatActivity {
                 continue;
             }
 
-            p = l.stages[0].rooms[counter].getCenter();
+            p = core.labyrinth.stages[0].rooms[counter].getCenter();
             Monster monster = new Monster(p.x, p.y, 100);
             monsters.add(monster);
             core.addObj(monster);
             counter++;
         }
 
-        for (int i=0;i<l.stages[0].stagePlan.length;i++){
-            for (int j=0;j<l.stages[0].stagePlan[0].length;j++){
-                if (l.stages[0].stagePlan[i][j]==2 && isWallNear(i,j,l)){
+        for (int i = 0; i < core.labyrinth.stages[0].stagePlan.length; i++) {
+            for (int j = 0; j < core.labyrinth.stages[0].stagePlan[0].length; j++) {
+                if (core.labyrinth.stages[0].stagePlan[i][j] == 2 && isWallNear(i, j, core.labyrinth)) {
                     int chestGenerationFrequency = 100;
                     if (Room.random(0, chestGenerationFrequency) == 0) {
-                        Chest chest = new Chest(i,j);
+                        Chest chest = new Chest(i, j);
                         chests.add(chest);
                         core.addObj(chest);
                     }
@@ -80,10 +76,10 @@ public class Game extends AppCompatActivity {
         });
     }
 
-    private boolean isWallNear(int i, int j, Labyrinth l){
+    private boolean isWallNear(int i, int j, Labyrinth l) {
 
-        return (l.stages[0].stagePlan[i-1][j]==1)||(l.stages[0].stagePlan[i+1][j]==1)||
-                (l.stages[0].stagePlan[i][j-1]==1)||(l.stages[0].stagePlan[i][j+1]==1);
+        return (l.stages[0].stagePlan[i - 1][j] == 1) || (l.stages[0].stagePlan[i + 1][j] == 1) ||
+                (l.stages[0].stagePlan[i][j - 1] == 1) || (l.stages[0].stagePlan[i][j + 1] == 1);
     }
 
     @Override

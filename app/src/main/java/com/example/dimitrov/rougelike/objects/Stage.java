@@ -2,6 +2,7 @@ package com.example.dimitrov.rougelike.objects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Point;
 
 import com.example.dimitrov.rougelike.R;
@@ -27,6 +28,7 @@ public class Stage implements GraphicsUser {
     private static final int mnCntRooms = 20;
     public int[][] stagePlan; // Общий массив этажа
     public int[][] orients;
+    public boolean[][] isExplored;
     ArrayList<Junction> junctions; // массив переходов
     public Room[] rooms; // массив всех комнат
 
@@ -59,10 +61,12 @@ public class Stage implements GraphicsUser {
         rooms = new Room[cntRooms];
         pred = new int[cntRooms];
         stagePlan = new int[sideSize][sideSize];
+        isExplored = new boolean[sideSize][sideSize];
         orients = new int[sideSize][sideSize];
         for (int i = 0; i < sideSize; i++)
-            for (int j = 0; j < sideSize; j++)
+            for (int j = 0; j < sideSize; j++) {
                 orients[i][j] = new Random().nextInt(4);
+            }
 
         boolean[][] cellUsed = new boolean[sideSize / cellSideSize][sideSize / cellSideSize];
         for (int i = 0; i < cellUsed.length; i++)
@@ -228,7 +232,8 @@ public class Stage implements GraphicsUser {
                             (int) (core.scale) + 1,
                             (int) (core.scale) + 1), 90 * orientation);
                 b = bits[stagePlan[i][j]][orientation];
-                core.drawBitmap(canvas, b, coordX, coordY);
+                isExplored[i][j]=true;
+                canvas.drawBitmap(b, coordX, coordY, new Paint());
             }
         }
     }
@@ -243,6 +248,42 @@ public class Stage implements GraphicsUser {
         core.addBitmap(R.mipmap.floor,"floor");
         core.addBitmap(R.mipmap.wall,"wall");
         core.addBitmap(R.mipmap.forest,"forest");
+    }
+
+    @Override
+    public void postDraw(Canvas canvas, Graphics core) {
+        for (int i = 0; i < sideSize; i++) {
+            for (int j = 0; j < sideSize; j++) {
+                if(!core.isOnScreen(i,j)||core.isInSight(i,j))
+                    continue;
+                if(!isExplored[i][j])
+                    continue;
+                if(stagePlan[i][j]==FOREST)
+                    continue;
+                int coordX = (int) ((i - core.cameraX) * core.scale);
+                int coordY = (int) ((j - core.cameraY) * core.scale);
+
+                int orientation = orients[i][j];
+                switch (stagePlan[i][j]) {
+                    case WALL:
+                        b = core.getBitmap("wall");
+                        orientation = 0;
+                        break;
+                    case FLOOR:
+                    default:
+                        b = core.getBitmap("floor");
+                }
+                if (bits[stagePlan[i][j]][orientation] == null)
+                    bits[stagePlan[i][j]][orientation] = core.rotateBitmap(core.resizeBitmap(b,
+                            (int) (core.scale) + 1,
+                            (int) (core.scale) + 1), 90 * orientation);
+                b = bits[stagePlan[i][j]][orientation];
+                isExplored[i][j]=true;
+                Paint paint = new Paint();
+                paint.setAlpha(42);
+                canvas.drawBitmap(b, coordX, coordY, paint);
+            }
+        }
     }
 
 }
