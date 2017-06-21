@@ -6,11 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.util.Log;
-import android.view.View;
-
-import com.example.dimitrov.rougelike.R;
-import com.example.dimitrov.rougelike.objects.Labyrinth;
 
 import java.util.ArrayList;
 import java.util.HashMap;

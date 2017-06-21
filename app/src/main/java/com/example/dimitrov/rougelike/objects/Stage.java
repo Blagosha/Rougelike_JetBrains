@@ -26,7 +26,7 @@ public class Stage implements GraphicsUser {
     private final int WALL = 1;
     private final int FLOOR = 2;
     private final int CHEST = 3;
-    private final int MOSTER = 4;
+    private final int MONSTER = 4;
 
     public int cntRooms;
     public static int cellSideSize;
@@ -125,7 +125,7 @@ public class Stage implements GraphicsUser {
 
         for (int i = 0; i < sideSize; i++) {
             for (int j = 0; j < sideSize; j++) {
-                stagePlan[i][j] = 0;
+                stagePlan[i][j] = FOREST;
             }
         }//пустой мир
         for (int k = 0; k < cntRooms; k++) {
@@ -133,12 +133,12 @@ public class Stage implements GraphicsUser {
             Point rightBottomCorner = rooms[k].getRightBottomCorner();
             for (int i = leftUpperCorner.x; i < rightBottomCorner.x; i++) {
                 for (int j = leftUpperCorner.y; j < rightBottomCorner.y; j++) {
-                    stagePlan[i][j] = 1;
+                    stagePlan[i][j] = WALL;
                 }
             }
             for (int i = leftUpperCorner.x + 1; i < rightBottomCorner.x - 1; i++) {
                 for (int j = leftUpperCorner.y + 1; j < rightBottomCorner.y - 1; j++) {
-                    stagePlan[i][j] = 2;
+                    stagePlan[i][j] = FLOOR;
                 }
             }
         }//комнаты
@@ -151,21 +151,21 @@ public class Stage implements GraphicsUser {
             int toY = to.y;
             if (fromX > toX) {
                 for (int i = toX; i <= fromX; i++) {
-                    stagePlan[i][fromY] = 2;
+                    stagePlan[i][fromY] = FLOOR;
                 }
             } else {
                 for (int i = fromX; i <= toX; i++) {
-                    stagePlan[i][fromY] = 2;
+                    stagePlan[i][fromY] = FLOOR;
                 }
             }
 
             if (fromY > toY) {
                 for (int i = toY; i <= fromY; i++) {
-                    stagePlan[toX][i] = 2;
+                    stagePlan[toX][i] = FLOOR;
                 }
             } else {
                 for (int i = fromY; i <= toY; i++) {
-                    stagePlan[toX][i] = 2;
+                    stagePlan[toX][i] = FLOOR;
                 }
             }
 
@@ -174,33 +174,33 @@ public class Stage implements GraphicsUser {
 
         for (int i = 1; i < sideSize - 1; i++) {
             for (int j = 1; j < sideSize - 1; j++) {
-                if (stagePlan[i][j] == 2) {
-                    if (stagePlan[i][j - 1] == 0) {
-                        stagePlan[i][j - 1] = 1;
+                if (stagePlan[i][j] == FLOOR) {
+                    if (stagePlan[i][j - 1] == FOREST) {
+                        stagePlan[i][j - 1] = WALL;
                     }
-                    if (stagePlan[i][j + 1] == 0) {
-                        stagePlan[i][j + 1] = 1;
+                    if (stagePlan[i][j + 1] == FOREST) {
+                        stagePlan[i][j + 1] = WALL;
                     }
-                    if (stagePlan[i - 1][j] == 0) {
-                        stagePlan[i - 1][j] = 1;
+                    if (stagePlan[i - 1][j] == FOREST) {
+                        stagePlan[i - 1][j] = WALL;
                     }
-                    if (stagePlan[i + 1][j] == 0) {
-                        stagePlan[i + 1][j] = 1;
-                    }
-
-                    if (stagePlan[i + 1][j + 1] == 0) {
-                        stagePlan[i + 1][j + 1] = 1;
+                    if (stagePlan[i + 1][j] == FOREST) {
+                        stagePlan[i + 1][j] = WALL;
                     }
 
-                    if (stagePlan[i + 1][j - 1] == 0) {
-                        stagePlan[i + 1][j - 1] = 1;
-                    }
-                    if (stagePlan[i - 1][j - 1] == 0) {
-                        stagePlan[i - 1][j - 1] = 1;
+                    if (stagePlan[i + 1][j + 1] == FOREST) {
+                        stagePlan[i + 1][j + 1] = WALL;
                     }
 
-                    if (stagePlan[i - 1][j + 1] == 0) {
-                        stagePlan[i - 1][j + 1] = 1;
+                    if (stagePlan[i + 1][j - 1] == FOREST) {
+                        stagePlan[i + 1][j - 1] = WALL;
+                    }
+                    if (stagePlan[i - 1][j - 1] == FOREST) {
+                        stagePlan[i - 1][j - 1] = WALL;
+                    }
+
+                    if (stagePlan[i - 1][j + 1] == FOREST) {
+                        stagePlan[i - 1][j + 1] = WALL;
                     }
                 }
             }
@@ -225,14 +225,14 @@ public class Stage implements GraphicsUser {
                 Bitmap b = core.getBitmap("forest");
                 int orientation = orients[i][j];
                 switch (stagePlan[i][j]) {
-                    case 0:
+                    case FOREST:
                         b = core.getBitmap("forest");
                         break;
-                    case 1:
+                    case WALL:
                         b = core.getBitmap("wall");
                         orientation = 0;
                         break;
-                    case 2:
+                    case FLOOR:
                         b = core.getBitmap("floor");
                 }
                 if (bits[stagePlan[i][j]][orientation] == null)
