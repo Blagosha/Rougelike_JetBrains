@@ -203,8 +203,6 @@ public class Stage implements GraphicsUser {
     Bitmap b;
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-        for (int i = 0; i < 12; i++)
-            bits[i / 4][i % 4] = null;
         float stageHeight = core.getHeight();
         float stageWidth = core.getWidth();
         for (int i = (int) core.cameraX - 1; i < core.cameraX + stageWidth / core.scale + 2; i++) {
@@ -236,6 +234,12 @@ public class Stage implements GraphicsUser {
                 core.drawBitmap(canvas, b, coordX, coordY);
             }
         }
+    }
+
+    @Override
+    public void onScaleChange(Graphics core) {
+        for (int i = 0; i < 12; i++)
+            bits[i / 4][i % 4] = null;
     }
 
     public void getBitmaps(Graphics core) {

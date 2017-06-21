@@ -1,5 +1,6 @@
 package com.example.dimitrov.rougelike.objects;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 import com.example.dimitrov.rougelike.R;
@@ -12,6 +13,7 @@ public class Entity implements GraphicsUser {
     private int X;
     private int Y;
     protected String texture;
+    Bitmap b;
 
     public Entity(int x, int y ) {
         X = x;
@@ -36,10 +38,15 @@ public class Entity implements GraphicsUser {
 
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-        core.drawBitmap(canvas, core.resizeBitmap(core.getBitmap(texture),
-                (int) (core.scale) + 1, (int) (core.scale) + 1),
+        core.drawBitmap(canvas, b,
                 (int) ((X - core.cameraX) * core.scale),
                 (int) ((Y - core.cameraY) * core.scale));
+    }
+
+    @Override
+    public void onScaleChange(Graphics core) {
+        b=core.resizeBitmap(core.getBitmap(texture),
+                (int) (core.scale) + 1, (int) (core.scale) + 1);
     }
 
     @Override

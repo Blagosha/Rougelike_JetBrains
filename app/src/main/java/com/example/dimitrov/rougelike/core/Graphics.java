@@ -16,6 +16,7 @@ public class Graphics extends Toucher {
 
     private Map<String, Bitmap> bitmaps;
     private ArrayList<GraphicsUser> objects;
+    float scaleBuff;
 
     public Graphics(Context context) {
         super(context);
@@ -81,9 +82,11 @@ public class Graphics extends Toucher {
             cameraY = 0;
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).getBitmaps(this);
+            if(scaleBuff!=scale)
+                objects.get(i).onScaleChange(this);
             objects.get(i).onDraw(canvas, this);
         }
-
+        scaleBuff=scale;
     }
 
 }

@@ -22,6 +22,11 @@ public class Labyrinth implements GraphicsUser {
     }
 
     @Override
+    public void onScaleChange(Graphics core) {
+        stages[0].onScaleChange(core);
+    }
+
+    @Override
     public void getBitmaps(Graphics core) {
         stages[0].getBitmaps(core);
     }
