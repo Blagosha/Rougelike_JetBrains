@@ -3,10 +3,6 @@ package com.example.dimitrov.rougelike.objects;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 
 import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.Graphics;
@@ -14,8 +10,6 @@ import com.example.dimitrov.rougelike.core.GraphicsUser;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Random;
 
 import static com.example.dimitrov.rougelike.core.Toucher.sideSize;
@@ -220,8 +214,8 @@ public class Stage implements GraphicsUser {
                 if (i < 0 || j < 0 || i >= sideSize || j >= sideSize)
                     continue;
 
-                int coordX = (int) ((i - core.cameraX) * core.scale) + 1;
-                int coordY = (int) ((j - core.cameraY) * core.scale) + 1;
+                int coordX = (int) ((i - core.cameraX) * core.scale);
+                int coordY = (int) ((j - core.cameraY) * core.scale);
 
                 int orientation = orients[i][j];
                 switch (stagePlan[i][j]) {

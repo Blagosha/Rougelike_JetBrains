@@ -8,12 +8,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="landscape"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:supportsRtl="true">
 
         <activity
             android:name=".layouts.Application"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,13 +23,16 @@
 
         <activity
             android:name=".layouts.Game"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".layouts.How_to_play"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".layouts.About_us"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
 

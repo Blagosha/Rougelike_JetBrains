@@ -2,18 +2,28 @@ package com.example.dimitrov.rougelike.core;
 
 import android.app.usage.UsageEvents;
 import android.content.Context;
+import android.content.Entity;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.example.dimitrov.rougelike.objects.Hero;
 
 import java.util.ArrayList;
 
 public class Toucher extends View {
 
     public float cameraX = 0, cameraY = 0;
-    public float scale;
+    public float scale=200;
     public static int sideSize;
+    public Hero hero;
 
+    public void resetCam()
+    {
+        scale=200;
+        cameraX = hero.getX()-getWidth()/scale/2+.5f;
+        cameraY = hero.getY()-getHeight()/scale/2+.5f;
+    }
 
     public Toucher(Context context) {
         super(context);
@@ -22,24 +32,30 @@ public class Toucher extends View {
             public boolean onTouch(View v, MotionEvent event) {
                 int currIndex = (event.getActionIndex() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
                 int currId = event.getPointerId(currIndex);
+                if (event.getPointerCount() == 3) {
+                    resetCam();
+                }
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         break;
                     case MotionEvent.ACTION_MOVE:
 
-                        if (event.getDownTime() < 300)
+                        if (event.getDownTime() < 400)
                             break;
                         try {
-                            if (event.getPointerCount() == 1) {
+                            if (event.getPointerCount() < 3) {
 
                                 cameraX -= (event.getX() - event.getHistoricalX(currId, 0)) / scale;
                                 cameraY -= (event.getY() - event.getHistoricalY(currId, 0)) / scale;
+
+                                cameraX -= (event.getX(event.findPointerIndex(1)) - event.getHistoricalX(event.findPointerIndex(1), 0)) / scale;
+                                cameraY -= (event.getY(event.findPointerIndex(1)) - event.getHistoricalY(event.findPointerIndex(1), 0)) / scale;
 
                             }
 
                             if (event.getPointerCount() == 2) {
 
-                                scale *= Math.hypot(
+                                double k = Math.hypot(
                                         event.getX(event.findPointerIndex(0))
                                                 - event.getX(event.findPointerIndex(1)),
                                         event.getY(event.findPointerIndex(0))
@@ -51,6 +67,9 @@ public class Toucher extends View {
                                         event.getHistoricalY(event.findPointerIndex(0), 0)
                                                 - event.getHistoricalY(event.findPointerIndex(1), 0)
                                 );
+                                scale *= k;
+                                cameraX += (1 - 1 / k) * getWidth() / scale / 2;
+                                cameraY += (1 - 1 / k) * getHeight() / scale / 2;
 
                             }
                         } catch (Exception e) {
@@ -59,6 +78,7 @@ public class Toucher extends View {
 
                         break;
                     case MotionEvent.ACTION_UP:
+
                 }
 
                 invalidate();

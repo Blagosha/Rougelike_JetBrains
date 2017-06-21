@@ -1,10 +1,8 @@
 package com.example.dimitrov.rougelike.objects;
 
-import android.graphics.Canvas;
 
 import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.Graphics;
-import com.example.dimitrov.rougelike.core.GraphicsUser;
 
 
 public class Character extends Entity {

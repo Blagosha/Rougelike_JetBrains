@@ -17,7 +17,7 @@ import com.example.dimitrov.rougelike.objects.Room;
 import java.util.ArrayList;
 
 public class Game extends AppCompatActivity {
-    Graphics main_g;
+    Graphics core;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +25,16 @@ public class Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         //Applying graphics core to layout
-        main_g = new Graphics(this);
-        ((LinearLayout) findViewById(R.id.game_layout)).addView(main_g);
+        core = new Graphics(this);
+        ((LinearLayout) findViewById(R.id.game_layout)).addView(core);
         Labyrinth l = new Labyrinth();
-        main_g.addObj(l);
+        core.addObj(l);
 
         int heroRoomGenerationIndex = Room.random(0, l.stages[0].rooms.length);
         Point p = l.stages[0].rooms[heroRoomGenerationIndex].getCenter();
         Hero hero = new Hero(p.x, p.y, 100); // creating hero 100 hp
-        main_g.addObj(hero);
+        core.addObj(hero);
+        core.hero=hero;
 
         int cntMonstersSpawn = Room.random(2, l.stages[0].rooms.length);
         ArrayList<Monster> monsters = new ArrayList<>();
@@ -50,7 +51,7 @@ public class Game extends AppCompatActivity {
             p = l.stages[0].rooms[counter].getCenter();
             Monster monster = new Monster(p.x, p.y, 100);
             monsters.add(monster);
-            main_g.addObj(monster);
+            core.addObj(monster);
             counter++;
         }
 
@@ -61,12 +62,11 @@ public class Game extends AppCompatActivity {
                     if (Room.random(0, chestGenerationFrequency) == 0) {
                         Chest chest = new Chest(i,j);
                         chests.add(chest);
-                        main_g.addObj(chest);
+                        core.addObj(chest);
                     }
                 }
             }
         }
-        Log.d("Blagoi",new Integer(chests.size()).toString());
     }
 
     private boolean isWallNear(int i, int j,Labyrinth l){

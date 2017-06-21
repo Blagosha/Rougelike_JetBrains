@@ -1,6 +1,5 @@
 package com.example.dimitrov.rougelike.core;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 public interface GraphicsUser {
