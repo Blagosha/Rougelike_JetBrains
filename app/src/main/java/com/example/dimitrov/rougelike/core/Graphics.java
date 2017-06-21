@@ -25,22 +25,21 @@ public class Graphics extends Toucher {
     Labyrinth l;
     private Map<String, Bitmap> bitmaps;
     private ArrayList<GraphicsUser> objects;
-    public static float scale=25;
+    public static float scale = 25;
 
     public Graphics(Context context) {
         super(context);
 
         bitmaps = new HashMap<String, Bitmap>();
         objects = new ArrayList<GraphicsUser>();
-        l = new Labyrinth();
-        objects.add(l);
+
     }
 
 
     //functions for playing with bitmaps
     public static Bitmap rotateBitmap(Bitmap b, int ang) {
         Matrix m = new Matrix();
-        m.setRotate(ang);
+        m.postRotate(ang);
         return Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), m, true);
     }
 
@@ -54,7 +53,7 @@ public class Graphics extends Toucher {
 
     public static Bitmap scaleBitmap(Bitmap b, float scaleX, float scaleY) {
         Matrix m = new Matrix();
-        m.setScale(scaleX, scaleY);
+        m.preScale(scaleX, scaleY);
         return Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), m, true);
     }
 

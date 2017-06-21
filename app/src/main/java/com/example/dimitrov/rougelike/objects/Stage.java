@@ -14,6 +14,8 @@ import com.example.dimitrov.rougelike.core.GraphicsUser;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 import static com.example.dimitrov.rougelike.core.Graphics.scale;
@@ -173,6 +175,21 @@ public class Stage implements GraphicsUser {
                     if (stagePlan[i + 1][j] == 0) {
                         stagePlan[i + 1][j] = 1;
                     }
+
+                    if (stagePlan[i + 1][j + 1] == 0) {
+                        stagePlan[i + 1][j + 1] = 1;
+                    }
+
+                    if (stagePlan[i + 1][j - 1] == 0) {
+                        stagePlan[i + 1][j - 1] = 1;
+                    }
+                    if (stagePlan[i - 1][j - 1] == 0) {
+                        stagePlan[i - 1][j - 1] = 1;
+                    }
+
+                    if (stagePlan[i - 1][j + 1] == 0) {
+                        stagePlan[i - 1][j + 1] = 1;
+                    }
                 }
             }
         }
@@ -180,14 +197,12 @@ public class Stage implements GraphicsUser {
 
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-        Bitmap [][]bits= new Bitmap[3][4];
-        for(int i=0;i<12;i++)
-            bits[i/4][i%4]=null;
+        Bitmap []bits= new Bitmap[3];
+        bits[0]=bits[1]=bits[2]=null;
         for (int i = 0; i < sideSize; i++) {
             for (int j = 0; j < sideSize; j++) {
-
-                int coordX = Math.round(i * scale);
-                int coordY = Math.round(j * scale);
+                float stageHeight = core.getHeight();
+                float stageWidth = core.getWidth();
 
                 Bitmap b = core.getBitmap("forest");
                 switch (stagePlan[i][j]) {
