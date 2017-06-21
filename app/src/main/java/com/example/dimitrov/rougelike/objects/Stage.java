@@ -22,11 +22,11 @@ import static com.example.dimitrov.rougelike.core.Toucher.sideSize;
 
 
 public class Stage implements GraphicsUser {
-    private final int forestIndificator = 0;
-    private final int wallIndificator = 1;
-    private final int floorIndificator = 2;
-    private final int chestIndificator = 3;
-    private final int mosterIndificator = 4;
+    private final int FOREST = 0;
+    private final int WALL = 1;
+    private final int FLOOR = 2;
+    private final int CHEST = 3;
+    private final int MOSTER = 4;
 
     public int cntRooms;
     public static int cellSideSize;
