@@ -20,6 +20,7 @@ public class Game extends AppCompatActivity {
         main_g = new Graphics(this);
         ((LinearLayout)findViewById(R.id.game_layout)).addView(main_g);
         Labyrinth l = new Labyrinth();
+
         main_g.addObj(l);
     }
 
