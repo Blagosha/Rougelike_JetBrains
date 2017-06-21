@@ -18,7 +18,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
-import static com.example.dimitrov.rougelike.core.Graphics.scale;
+import static com.example.dimitrov.rougelike.core.Toucher.sideSize;
+
 
 public class Stage implements GraphicsUser {
     private final int forestIndificator = 0;
@@ -31,7 +32,7 @@ public class Stage implements GraphicsUser {
     public static int cellSideSize;
     private static final int mxCntRooms = 30;
     private static final int mnCntRooms = 20;
-    int[][] stagePlan; // Общий массив этажа
+    public int[][] stagePlan; // Общий массив этажа
     public int[][] orients;
     ArrayList<Junction> junctions; // массив переходов
     public Room[] rooms; // массив всех комнат
@@ -41,7 +42,6 @@ public class Stage implements GraphicsUser {
 
 
     public Stage(int sideSize) {
-        this.sideSize = sideSize;
         cellSideSize = (int) (sideSize * 0.1);
 
         stagePlanGenereation();
@@ -237,8 +237,8 @@ public class Stage implements GraphicsUser {
                 }
                 if (bits[stagePlan[i][j]][orientation] == null)
                     bits[stagePlan[i][j]][orientation] = core.rotateBitmap(core.resizeBitmap(b,
-                            (int) (scale) + 1,
-                            (int) (scale) + 1), 90 * orientation);
+                            (int) (core.scale) + 1,
+                            (int) (core.scale) + 1), 90 * orientation);
                 b = bits[stagePlan[i][j]][orientation];
                 core.drawBitmap(canvas, b, coordX, coordY);
             }
