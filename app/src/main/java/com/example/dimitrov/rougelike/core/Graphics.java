@@ -19,12 +19,12 @@ import java.util.Map;
  * Created by user on 6/20/17.
  */
 
-public class Graphics extends View {
+public class Graphics extends Toucher {
 
     Labyrinth l;
     private Map<String, Bitmap> bitmaps;
     private ArrayList<GraphicsUser> objects;
-    public static float scale = 1;
+    public static float scale = 10;
 
     public Graphics(Context context) {
         super(context);
@@ -48,9 +48,8 @@ public class Graphics extends View {
         return scaleBitmap(b, (float) w / b.getWidth(), (float) h / b.getHeight());
     }
 
-    public Bitmap readBitmap(int res)
-    {
-        return BitmapFactory.decodeResource(getResources(),res);
+    public Bitmap readBitmap(int res) {
+        return BitmapFactory.decodeResource(getResources(), res);
     }
 
     public static Bitmap scaleBitmap(Bitmap b, float scaleX, float scaleY) {
@@ -59,37 +58,32 @@ public class Graphics extends View {
         return Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), m, true);
     }
 
-    public Bitmap getBitmap(String name)
-    {
+    public Bitmap getBitmap(String name) {
         return bitmaps.get(name);
     }
 
-    public void setBitmap(String name, Bitmap b)
-    {
-        if(!bitmaps.containsKey(name))
-            bitmaps.put(name,b);
+    public void setBitmap(String name, Bitmap b) {
+        if (!bitmaps.containsKey(name))
+            bitmaps.put(name, b);
     }
 
     public void drawBitmap(Canvas canvas, Bitmap bitmap, int x, int y) {
         canvas.drawBitmap(bitmap, x, y, new Paint());
     }
 
-    public void addObj(GraphicsUser obj)
-    {
+    public void addObj(GraphicsUser obj) {
         objects.add(obj);
     }
 
-    public void removeObj(GraphicsUser obj)
-    {
+    public void removeObj(GraphicsUser obj) {
         objects.remove(obj);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        for(int i=0;i<objects.size();i++)
-        {
+        for (int i = 0; i < objects.size(); i++) {
             objects.get(i).getBitmaps(this);
-            objects.get(i).onDraw(canvas,this);
+            objects.get(i).onDraw(canvas, this);
         }
     }
 
