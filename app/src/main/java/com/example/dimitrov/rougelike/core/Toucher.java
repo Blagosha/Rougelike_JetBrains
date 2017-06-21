@@ -20,8 +20,8 @@ public class Toucher extends View {
 
     public void resetCam() {
         scale = 200;
-        cameraX = hero.getX() - getWidth() / scale / 2 + .5f;
-        cameraY = hero.getY() - getHeight() / scale / 2 + .5f;
+        cameraX = hero.X - getWidth() / scale / 2 + .5f;
+        cameraY = hero.Y - getHeight() / scale / 2 + .5f;
     }
 
     public Toucher(Context context) {

@@ -10,9 +10,9 @@ import com.example.dimitrov.rougelike.core.GraphicsUser;
 
 
 public class Entity implements GraphicsUser {
-    private int X;
-    private int Y;
-    protected String texture;
+    public int X;
+    public int Y;
+    public String texture;
     Bitmap b,rb;
     boolean isReversed=true;
 
@@ -21,29 +21,15 @@ public class Entity implements GraphicsUser {
         Y = y;
     }
 
-    public int getX() {
-        return X;
-    }
-
-    public void setX(int x) {
-        X = x;
-    }
-
-    public int getY() {
-        return Y;
-    }
-
-    public void setY(int y) {
-        Y = y;
-    }
 
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-        core.drawBitmap(canvas, b,
-                (int) ((X - core.cameraX) * core.scale),
-                (int) ((Y - core.cameraY) * core.scale));
         if(isReversed)
             core.drawBitmap(canvas, rb,
+                    (int) ((X - core.cameraX) * core.scale),
+                    (int) ((Y - core.cameraY) * core.scale));
+        else
+            core.drawBitmap(canvas, b,
                     (int) ((X - core.cameraX) * core.scale),
                     (int) ((Y - core.cameraY) * core.scale));
     }

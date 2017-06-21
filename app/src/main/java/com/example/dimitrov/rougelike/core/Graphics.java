@@ -92,6 +92,10 @@ public class Graphics extends Toucher {
                 objects.get(i).onScaleChange(this);
             objects.get(i).onDraw(canvas, this);
         }
+        hero.getBitmaps(this);
+        if(scaleBuff!=scale)
+            hero.onScaleChange(this);
+        hero.onDraw(canvas, this);
         scaleBuff=scale;
     }
 

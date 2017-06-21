@@ -39,7 +39,6 @@ public class Game extends AppCompatActivity {
         int heroRoomGenerationIndex = Room.random(0, l.stages[0].rooms.length);
         Point p = l.stages[0].rooms[heroRoomGenerationIndex].getCenter();
         hero = new Hero(p.x, p.y, 100); // creating hero 100 hp
-        core.addObj(hero);
         core.hero=hero;
 
         int cntMonstersSpawn = Room.random(2, l.stages[0].rooms.length);
