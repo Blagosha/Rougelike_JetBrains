@@ -4,10 +4,6 @@ import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
 
-/**
- * Created by user on 6/21/17.
- */
-
 public class Toucher extends View {
 
     public float cameraX=0, cameraY=0;

@@ -16,10 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by user on 6/20/17.
- */
-
 public class Graphics extends Toucher {
 
     private Map<String, Bitmap> bitmaps;
