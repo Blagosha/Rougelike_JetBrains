@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.View;
 
 import com.example.dimitrov.rougelike.R;
@@ -83,7 +84,9 @@ public class Graphics extends Toucher {
     protected void onDraw(Canvas canvas) {
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).getBitmaps(this);
+            Log.e("norm","yes");
             objects.get(i).onDraw(canvas, this);
+            Log.e("norm","yiss");
         }
     }
 
