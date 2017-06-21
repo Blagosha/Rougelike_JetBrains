@@ -14,15 +14,14 @@ import java.util.ArrayList;
 public class Toucher extends View {
 
     public float cameraX = 0, cameraY = 0;
-    public float scale=200;
+    public float scale = 200, minScale, maxScale;
     public static int sideSize;
     public Hero hero;
 
-    public void resetCam()
-    {
-        scale=200;
-        cameraX = hero.getX()-getWidth()/scale/2+.5f;
-        cameraY = hero.getY()-getHeight()/scale/2+.5f;
+    public void resetCam() {
+        scale = 200;
+        cameraX = hero.getX() - getWidth() / scale / 2 + .5f;
+        cameraY = hero.getY() - getHeight() / scale / 2 + .5f;
     }
 
     public Toucher(Context context) {
@@ -67,6 +66,8 @@ public class Toucher extends View {
                                         event.getHistoricalY(event.findPointerIndex(0), 0)
                                                 - event.getHistoricalY(event.findPointerIndex(1), 0)
                                 );
+                                k = Math.max(k, minScale / scale);
+                                k = Math.min(k, maxScale / scale);
                                 scale *= k;
                                 cameraX += (1 - 1 / k) * getWidth() / scale / 2;
                                 cameraY += (1 - 1 / k) * getHeight() / scale / 2;

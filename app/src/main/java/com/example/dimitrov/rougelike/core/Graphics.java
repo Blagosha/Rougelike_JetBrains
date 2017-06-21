@@ -66,16 +66,18 @@ public class Graphics extends Toucher {
     public void removeObj(GraphicsUser obj) {
         objects.remove(obj);
     }
+    final float scaleBorder=50;
 
     @Override
     protected void onDraw(Canvas canvas) {
         if(init++==0)
             resetCam();
-        float scaleBorder=50;
-        if (scale < (float)getWidth() / scaleBorder)
-            scale = (float)getWidth() / scaleBorder;
-        if (scale > 300)
-            scale = 300;
+        minScale = (float)getWidth() / scaleBorder;
+        maxScale = 300;
+        if (scale < minScale)
+            scale = minScale;
+        if (scale > maxScale)
+            scale = maxScale;
         if (cameraX > sideSize - getWidth() / scale)
             cameraX = sideSize - getWidth() / scale;
         if (cameraY > sideSize - getHeight() / scale)
