@@ -44,6 +44,7 @@ public class Graphics extends Toucher {
     public static Bitmap scaleBitmap(Bitmap b, float scaleX, float scaleY) {
         Matrix m = new Matrix();
         m.preScale(scaleX, scaleY);
+
         return Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), m, true);
     }
 
