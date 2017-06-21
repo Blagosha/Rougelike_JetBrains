@@ -5,6 +5,5 @@ import com.example.dimitrov.rougelike.layouts.Game;
 public class MainThread {
     public void main(Game game)
     {
-        game.core.resetCam();
     }
 }
