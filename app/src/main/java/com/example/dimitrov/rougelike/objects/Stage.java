@@ -21,6 +21,12 @@ import java.util.Random;
 import static com.example.dimitrov.rougelike.core.Graphics.scale;
 
 public class Stage implements GraphicsUser {
+    private final int forestIndificator = 0;
+    private final int wallIndificator = 1;
+    private final int floorIndificator = 2;
+    private final int chestIndificator = 3;
+    private final int mosterIndificator = 4;
+
     public int sideSize;
     public int cntRooms;
     public static int cellSideSize;
