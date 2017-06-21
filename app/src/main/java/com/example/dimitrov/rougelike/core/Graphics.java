@@ -25,7 +25,7 @@ public class Graphics extends Toucher {
     Labyrinth l;
     private Map<String, Bitmap> bitmaps;
     private ArrayList<GraphicsUser> objects;
-    public static float scale = 0.5f;
+    public static float scale = 1f;
 
     public Graphics(Context context) {
         super(context);
