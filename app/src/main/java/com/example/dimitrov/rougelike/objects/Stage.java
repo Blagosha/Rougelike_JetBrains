@@ -23,8 +23,8 @@ import static com.example.dimitrov.rougelike.core.Graphics.scale;
 public class Stage implements GraphicsUser {
     int sideSize, cntRooms;
     public static int cellSideSize;
-    private static final int mxCntRooms = 10;
-    private static final int mnCntRooms = 3;
+    private static final int mxCntRooms = 30;
+    private static final int mnCntRooms = 20;
     int[][] stagePlan; // Общий массив этажа
     ArrayList<Junction> junctions; // массив переходов
     Room[] rooms; // массив всех комнат
