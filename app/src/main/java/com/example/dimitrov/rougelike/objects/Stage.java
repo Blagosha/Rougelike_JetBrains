@@ -27,6 +27,7 @@ public class Stage implements GraphicsUser {
     private static final int mxCntRooms = 30;
     private static final int mnCntRooms = 20;
     int[][] stagePlan; // Общий массив этажа
+    public int [][]orients;
     ArrayList<Junction> junctions; // массив переходов
     public Room[] rooms; // массив всех комнат
 
@@ -59,6 +60,10 @@ public class Stage implements GraphicsUser {
         rooms = new Room[cntRooms];
         pred = new int[cntRooms];
         stagePlan = new int[sideSize][sideSize];
+        orients = new int[sideSize][sideSize];
+        for(int i=0;i<sideSize;i++)
+            for(int j=0;j<sideSize;j++)
+                orients[i][j]=new Random().nextInt(4);
 
         boolean[][] cellUsed = new boolean[sideSize / cellSideSize][sideSize / cellSideSize];
         for (int i = 0; i < cellUsed.length; i++)
@@ -212,7 +217,7 @@ public class Stage implements GraphicsUser {
                 int coordY = (int) ((j - core.cameraY) * core.scale) + 1;
 
                 Bitmap b = core.getBitmap("forest");
-                int orientation = new Random().nextInt(4);
+                int orientation = orients[i][j];
                 switch (stagePlan[i][j]) {
                     case 0:
                         b = core.getBitmap("forest");
