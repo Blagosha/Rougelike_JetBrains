@@ -7,7 +7,7 @@ import com.example.dimitrov.rougelike.core.GraphicsUser;
 
 public class Labyrinth implements GraphicsUser{
     private static final int cntStages = 5; // Количество уровней в лабиринте
-    Stage[] stages = new Stage[cntStages]; // массив уровней
+    public Stage[] stages = new Stage[cntStages]; // массив уровней
 
     public Labyrinth() {
         for (int i = 0; i < cntStages; i++) {

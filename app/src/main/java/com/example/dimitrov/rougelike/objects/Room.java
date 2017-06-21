@@ -1,11 +1,8 @@
 package com.example.dimitrov.rougelike.objects;
 
 import android.graphics.Point;
-import android.util.Log;
 
 import java.util.Random;
-
-import static android.R.attr.tag;
 
 public class Room {
     private int seflCellIndexesX, seflCellIndexesY; // Индексы ячейки комнаты
@@ -25,7 +22,11 @@ public class Room {
         rightBottomCorner = new Point(leftUpperCorner.x + roomWidth, leftUpperCorner.y + roomHeight);
     }
 
-    int random(int mn, int mx) {
+    public Point getCenter(){
+        return new Point((rightBottomCorner.x+leftUpperCorner.x)/2,(rightBottomCorner.y+leftUpperCorner.y)/2);
+    }
+
+    public static int random(int mn, int mx) {
         Random random = new Random();
         return random.nextInt(mx - mn) + mn;
     }

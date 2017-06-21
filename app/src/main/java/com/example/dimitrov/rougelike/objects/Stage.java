@@ -21,13 +21,14 @@ import java.util.Random;
 import static com.example.dimitrov.rougelike.core.Graphics.scale;
 
 public class Stage implements GraphicsUser {
-    int sideSize, cntRooms;
+    public int sideSize;
+    public int cntRooms;
     public static int cellSideSize;
     private static final int mxCntRooms = 30;
     private static final int mnCntRooms = 20;
     int[][] stagePlan; // Общий массив этажа
     ArrayList<Junction> junctions; // массив переходов
-    Room[] rooms; // массив всех комнат
+    public Room[] rooms; // массив всех комнат
 
     int[] pred; // специальные переменные для СНМ
     ArrayList<int[]> graphEdges; // ребра графа
