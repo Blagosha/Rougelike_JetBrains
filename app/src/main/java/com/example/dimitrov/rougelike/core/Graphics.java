@@ -6,11 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.util.Log;
-import android.view.View;
-
-import com.example.dimitrov.rougelike.R;
-import com.example.dimitrov.rougelike.objects.Labyrinth;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +15,7 @@ public class Graphics extends Toucher {
 
     private Map<String, Bitmap> bitmaps;
     private ArrayList<GraphicsUser> objects;
-    public static float scale = 10;
+    public static float scale = 50;
 
     public Graphics(Context context) {
         super(context);
