@@ -207,10 +207,10 @@ public class Stage implements GraphicsUser {
             }
         }
     }
-
+    Bitmap[][] bits = new Bitmap[3][4];
+    Bitmap b;
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-        Bitmap[][] bits = new Bitmap[3][4];
         for (int i = 0; i < 12; i++)
             bits[i / 4][i % 4] = null;
         float stageHeight = core.getHeight();
@@ -223,7 +223,6 @@ public class Stage implements GraphicsUser {
                 int coordX = (int) ((i - core.cameraX) * core.scale) + 1;
                 int coordY = (int) ((j - core.cameraY) * core.scale) + 1;
 
-                Bitmap b = core.getBitmap("forest");
                 int orientation = orients[i][j];
                 switch (stagePlan[i][j]) {
                     case 0:
@@ -248,9 +247,9 @@ public class Stage implements GraphicsUser {
     }
 
     public void getBitmaps(Graphics core) {
-        core.setBitmap("floor", core.readBitmap(R.mipmap.floor));
-        core.setBitmap("wall", core.readBitmap(R.mipmap.wall));
-        core.setBitmap("forest", core.readBitmap(R.mipmap.forest));
+        core.addBitmap(R.mipmap.floor,"floor");
+        core.addBitmap(R.mipmap.wall,"wall");
+        core.addBitmap(R.mipmap.forest,"forest");
     }
 
 }

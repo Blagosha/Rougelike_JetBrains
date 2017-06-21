@@ -11,7 +11,7 @@ public class Character extends Entity {
     private int hp;
 
     public Character(int x, int y, int hp) {
-        super(x,y);
+        super(x, y);
         this.hp = hp;
     }
 
@@ -24,12 +24,11 @@ public class Character extends Entity {
     }
 
 
-
     @Override
     public void getBitmaps(Graphics core) {
-        core.setBitmap("green", core.readBitmap(R.mipmap.green));
-        core.setBitmap("greenzombie", core.readBitmap(R.mipmap.greenzombie));
-        core.setBitmap("red", core.readBitmap(R.mipmap.red));
-        core.setBitmap("triangle", core.readBitmap(R.mipmap.triangle));
+        core.addBitmap(R.mipmap.green, "green");
+        core.addBitmap(R.mipmap.greenzombie, "greenzombie");
+        core.addBitmap(R.mipmap.red, "red");
+        core.addBitmap(R.mipmap.triangle, "triangle");
     }
 }

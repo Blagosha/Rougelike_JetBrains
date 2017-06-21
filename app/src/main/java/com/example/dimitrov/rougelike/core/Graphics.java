@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,23 +38,21 @@ public class Graphics extends Toucher {
         return scaleBitmap(b, (float) w / b.getWidth(), (float) h / b.getHeight());
     }
 
-    public Bitmap readBitmap(int res) {
-        return BitmapFactory.decodeResource(getResources(), res);
-    }
-
     public static Bitmap scaleBitmap(Bitmap b, float scaleX, float scaleY) {
         Matrix m = new Matrix();
         m.preScale(scaleX, scaleY);
         return Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), m, true);
     }
 
-    public Bitmap getBitmap(String name) {
-        return bitmaps.get(name);
+    public void addBitmap(int res,String name) {
+        if (!bitmaps.containsKey(name)) {
+            BitmapFactory.decodeResource(getResources(), res);
+            bitmaps.put(name, resizeBitmap(BitmapFactory.decodeResource(getResources(), res),200,200));
+        }
     }
 
-    public void setBitmap(String name, Bitmap b) {
-        if (!bitmaps.containsKey(name))
-            bitmaps.put(name, resizeBitmap(b,50,50));
+    public Bitmap getBitmap(String name) {
+        return bitmaps.get(name);
     }
 
     public void drawBitmap(Canvas canvas, Bitmap bitmap, int x, int y) {
@@ -82,6 +81,7 @@ public class Graphics extends Toucher {
             objects.get(i).getBitmaps(this);
             objects.get(i).onDraw(canvas, this);
         }
+
     }
 
 }

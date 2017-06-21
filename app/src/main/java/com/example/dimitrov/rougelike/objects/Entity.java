@@ -36,16 +36,15 @@ public class Entity implements GraphicsUser {
 
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-        /*core.drawBitmap(canvas, core.resizeBitmap(core.getBitmap(texture),
+        core.drawBitmap(canvas, core.resizeBitmap(core.getBitmap(texture),
                 (int) (core.scale) + 1, (int) (core.scale) + 1),
                 (int) ((X - core.cameraX) * core.scale),
                 (int) ((Y - core.cameraY) * core.scale));
-                */
     }
 
     @Override
     public void getBitmaps(Graphics core) {
-        core.setBitmap("chest",core.readBitmap(R.mipmap.chest));
-        core.setBitmap("chestOpen",core.readBitmap(R.mipmap.chestopen));
+        core.addBitmap(R.mipmap.chest,"chest");
+        core.addBitmap(R.mipmap.chestopen,"chestOpen");
     }
 }
