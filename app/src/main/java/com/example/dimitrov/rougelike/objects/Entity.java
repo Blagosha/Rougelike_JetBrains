@@ -10,28 +10,30 @@ import com.example.dimitrov.rougelike.core.GraphicsUser;
 
 
 public class Entity implements GraphicsUser {
-    public int X;
-    public int Y;
+    public int x;
+    public int y;
     public String texture;
     Bitmap b,rb;
     boolean isReversed=true;
 
     public Entity(int x, int y ) {
-        X = x;
-        Y = y;
+        this.x = x;
+        this.y = y;
     }
 
 
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
+        if(!core.isInSight(x,y))
+            return;
         if(isReversed)
             core.drawBitmap(canvas, rb,
-                    (int) ((X - core.cameraX) * core.scale),
-                    (int) ((Y - core.cameraY) * core.scale));
+                    (int) ((x - core.cameraX) * core.scale),
+                    (int) ((y - core.cameraY) * core.scale));
         else
             core.drawBitmap(canvas, b,
-                    (int) ((X - core.cameraX) * core.scale),
-                    (int) ((Y - core.cameraY) * core.scale));
+                    (int) ((x - core.cameraX) * core.scale),
+                    (int) ((y - core.cameraY) * core.scale));
     }
 
     @Override

@@ -203,13 +203,10 @@ public class Stage implements GraphicsUser {
     Bitmap b;
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-        float stageHeight = core.getHeight();
-        float stageWidth = core.getWidth();
-        for (int i = (int) core.cameraX - 1; i < core.cameraX + stageWidth / core.scale + 2; i++) {
-            for (int j = (int) core.cameraY - 1; j < core.cameraY + stageHeight / core.scale + 2; j++) {
-                if (i < 0 || j < 0 || i >= sideSize || j >= sideSize)
+        for (int i = 0; i < sideSize; i++) {
+            for (int j = 0; j < sideSize; j++) {
+                if(!core.isInSight(i,j))
                     continue;
-
                 int coordX = (int) ((i - core.cameraX) * core.scale);
                 int coordY = (int) ((j - core.cameraY) * core.scale);
 

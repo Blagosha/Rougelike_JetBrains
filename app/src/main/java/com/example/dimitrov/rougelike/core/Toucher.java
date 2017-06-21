@@ -1,15 +1,10 @@
 package com.example.dimitrov.rougelike.core;
 
-import android.app.usage.UsageEvents;
 import android.content.Context;
-import android.content.Entity;
-import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.dimitrov.rougelike.objects.Hero;
-
-import java.util.ArrayList;
 
 public class Toucher extends View {
 
@@ -20,8 +15,8 @@ public class Toucher extends View {
 
     public void resetCam() {
         scale = 200;
-        cameraX = hero.X - getWidth() / scale / 2 + .5f;
-        cameraY = hero.Y - getHeight() / scale / 2 + .5f;
+        cameraX = hero.x - getWidth() / scale / 2 + .5f;
+        cameraY = hero.y - getHeight() / scale / 2 + .5f;
     }
 
     public Toucher(Context context) {
@@ -86,6 +81,17 @@ public class Toucher extends View {
                 return true;
             }
         });
+    }
+
+    public boolean isInSight(int x, int y)
+    {
+        if(x<(int)cameraX - 1||y<cameraY-1)
+            return false;
+        if(x>cameraX + getWidth() / scale + 1||y>cameraY + getHeight() / scale + 1)
+            return false;
+        if(Math.hypot(hero.x -x,hero.y -y)>hero.viewRadius)
+            return false;
+        return true;
     }
 
 }

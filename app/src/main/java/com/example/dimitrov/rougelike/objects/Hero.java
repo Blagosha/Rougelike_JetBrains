@@ -9,27 +9,30 @@ public class Hero extends Character {
     public Hero(int x, int y, int hp) {
         super(x, y, hp);
         texture = "green";
+        viewRadius = (255d / fadeRate + 3) * thickness;
     }
+
+    public double viewRadius;
+
+    float thickness = .5f;
+    int fadeRate = 10;
 
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
         super.onDraw(canvas, core);
 
-        float thickness = core.scale / 2;
-        int fadeRate = 10;
-
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(thickness);
+        paint.setStrokeWidth(thickness * core.scale);
 
         int alpha = 0;
-        for (float i = 0; i < core.sideSize * core.scale * 2; i += thickness-1) {
+        for (float i = 0; i < core.sideSize * 2; i += thickness*0.98) {
             if (alpha > 255)
                 alpha = 255;
             paint.setAlpha(alpha);
             canvas.drawCircle(
-                    (int) ((X - core.cameraX + .5f) * core.scale),
-                    (int) ((Y - core.cameraY + .5f) * core.scale), i, paint);
+                    (int) ((x - core.cameraX + .5f) * core.scale),
+                    (int) ((y - core.cameraY + .5f) * core.scale), i * core.scale, paint);
             alpha += fadeRate;
         }
     }
