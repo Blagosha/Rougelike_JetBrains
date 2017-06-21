@@ -222,7 +222,7 @@ public class Stage implements GraphicsUser {
                 int coordX = (int) ((i - core.cameraX) * core.scale) + 1;
                 int coordY = (int) ((j - core.cameraY) * core.scale) + 1;
 
-                Bitmap b = core.getBitmap("forest");
+                Bitmap b;
                 int orientation = orients[i][j];
                 switch (stagePlan[i][j]) {
                     case 0:
@@ -233,6 +233,7 @@ public class Stage implements GraphicsUser {
                         orientation = 0;
                         break;
                     case 2:
+                    default:
                         b = core.getBitmap("floor");
                 }
                 if (bits[stagePlan[i][j]][orientation] == null)

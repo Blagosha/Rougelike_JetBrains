@@ -7,32 +7,12 @@ import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
 
 
-public class Character implements GraphicsUser {
-    private int X;
-    private int Y;
+public class Character extends Entity {
     private int hp;
-    protected String texture;
 
     public Character(int x, int y, int hp) {
-        X = x;
-        Y = y;
+        super(x,y);
         this.hp = hp;
-    }
-
-    public int getX() {
-        return X;
-    }
-
-    public void setX(int x) {
-        X = x;
-    }
-
-    public int getY() {
-        return Y;
-    }
-
-    public void setY(int y) {
-        Y = y;
     }
 
     public int getHp() {
@@ -43,13 +23,7 @@ public class Character implements GraphicsUser {
         this.hp = hp;
     }
 
-    @Override
-    public void onDraw(Canvas canvas, Graphics core) {
-        core.drawBitmap(canvas, core.resizeBitmap(core.getBitmap(texture),
-                (int) (core.scale) + 1, (int) (core.scale) + 1),
-                (int) ((X - core.cameraX) * core.scale),
-                (int) ((Y - core.cameraY) * core.scale));
-    }
+
 
     @Override
     public void getBitmaps(Graphics core) {

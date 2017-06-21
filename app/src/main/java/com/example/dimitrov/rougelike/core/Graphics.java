@@ -58,7 +58,7 @@ public class Graphics extends Toucher {
 
     public void setBitmap(String name, Bitmap b) {
         if (!bitmaps.containsKey(name))
-            bitmaps.put(name, b);
+            bitmaps.put(name, resizeBitmap(b,50,50));
     }
 
     public void drawBitmap(Canvas canvas, Bitmap bitmap, int x, int y) {
