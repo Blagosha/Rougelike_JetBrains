@@ -44,10 +44,10 @@ public class Graphics extends Toucher {
         return Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), m, true);
     }
 
-    public void addBitmap(int res,String name) {
+    public void addBitmap(int res, String name) {
         if (!bitmaps.containsKey(name)) {
             BitmapFactory.decodeResource(getResources(), res);
-            bitmaps.put(name, resizeBitmap(BitmapFactory.decodeResource(getResources(), res),200,200));
+            bitmaps.put(name, resizeBitmap(BitmapFactory.decodeResource(getResources(), res), 300, 300));
         }
     }
 
@@ -77,6 +77,10 @@ public class Graphics extends Toucher {
             cameraX = sideSize - getWidth() / scale;
         if (cameraY > sideSize - getHeight() / scale)
             cameraY = sideSize - getHeight() / scale;
+        if (scale < getWidth() / sideSize)
+            scale = getWidth() / sideSize;
+        if (scale > 300)
+            scale = 300;
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).getBitmaps(this);
             objects.get(i).onDraw(canvas, this);
