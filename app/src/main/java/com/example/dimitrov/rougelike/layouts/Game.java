@@ -18,11 +18,11 @@ import com.example.dimitrov.rougelike.objects.Room;
 import java.util.ArrayList;
 
 public class Game extends AppCompatActivity {
-    Graphics core;
-    Hero hero;
-    Labyrinth l;
-    ArrayList<Monster> monsters;
-    ArrayList<Chest>chests;
+    public Graphics core;
+    public Hero hero;
+    public Labyrinth l;
+    public ArrayList<Monster> monsters;
+    public ArrayList<Chest>chests;
     Thread thread;
 
     @Override
@@ -79,7 +79,6 @@ public class Game extends AppCompatActivity {
                 new MainThread().main(Game.this);
             }
         });
-        thread.run();
     }
 
     private boolean isWallNear(int i, int j, Labyrinth l){
@@ -91,11 +90,13 @@ public class Game extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        thread.interrupt();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        thread.run();
     }
 
 }

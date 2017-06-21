@@ -17,6 +17,7 @@ public class Graphics extends Toucher {
     private Map<String, Bitmap> bitmaps;
     private ArrayList<GraphicsUser> objects;
     float scaleBuff;
+    int init=0;
 
     public Graphics(Context context) {
         super(context);
@@ -68,6 +69,8 @@ public class Graphics extends Toucher {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        if(init++==0)
+            resetCam();
         if (scale < (float)getWidth() / ((float)sideSize))
             scale = (float)getWidth() / ((float)sideSize);
         if (scale > 300)
