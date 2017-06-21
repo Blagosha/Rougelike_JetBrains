@@ -10,6 +10,7 @@ import android.view.View;
 
 public class Toucher extends View {
 
+    int cameraX, cameraY;
     public Toucher(Context context) {
         super(context);
         this.setOnTouchListener(new OnTouchListener() {

@@ -180,15 +180,14 @@ public class Stage implements GraphicsUser {
 
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-        Bitmap []bits= new Bitmap[3];
-        bits[0]=bits[1]=bits[2]=null;
+        Bitmap [][]bits= new Bitmap[3][4];
+        for(int i=0;i<12;i++)
+            bits[i/4][i%4]=null;
         for (int i = 0; i < sideSize; i++) {
             for (int j = 0; j < sideSize; j++) {
-                float stageHeight = core.getHeight();
-                float stageWidth = core.getWidth();
 
-                int coordX = Math.round(i * (stageWidth / sideSize) * scale);
-                int coordY = Math.round(j * (stageWidth / sideSize) * scale);
+                int coordX = Math.round(i * scale);
+                int coordY = Math.round(j * scale);
 
                 Bitmap b = core.getBitmap("forest");
                 switch (stagePlan[i][j]) {
@@ -201,11 +200,12 @@ public class Stage implements GraphicsUser {
                     case 2:
                         b = core.getBitmap("floor");
                 }
-                if(bits[stagePlan[i][j]]==null)
-                    bits[stagePlan[i][j]] = core.resizeBitmap(b,
-                            (int) (stageWidth / sideSize * scale) + 1,
-                            (int) (stageWidth / sideSize * scale) + 1);
-                b = bits[stagePlan[i][j]];
+                int orientation=new Random().nextInt(4);
+                if(bits[stagePlan[i][j]][orientation]==null)
+                    bits[stagePlan[i][j]][orientation] = core.rotateBitmap(core.resizeBitmap(b,
+                            (int) (scale) + 1,
+                            (int) (scale) + 1),90*orientation);
+                b = bits[stagePlan[i][j]][orientation];
                 core.drawBitmap(canvas, b, coordX, coordY);
             }
         }
