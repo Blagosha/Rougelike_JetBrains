@@ -20,7 +20,7 @@ public class Graphics extends Toucher {
 
     private Map<String, Bitmap> bitmaps;
     private ArrayList<GraphicsUser> objects;
-    public static float scale = 100;
+    public static float scale = 10;
 
     public Graphics(Context context) {
         super(context);
