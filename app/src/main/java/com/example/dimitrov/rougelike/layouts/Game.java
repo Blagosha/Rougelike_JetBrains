@@ -12,6 +12,7 @@ import com.example.dimitrov.rougelike.objects.Chest;
 import com.example.dimitrov.rougelike.objects.Hero;
 import com.example.dimitrov.rougelike.objects.Labyrinth;
 import com.example.dimitrov.rougelike.objects.Monster;
+import com.example.dimitrov.rougelike.objects.Portal;
 import com.example.dimitrov.rougelike.objects.Room;
 
 import java.util.ArrayList;
@@ -54,7 +55,9 @@ public class Game extends AppCompatActivity {
             monsters.add(monster);
             core.addObj(monster);
             counter++;
-        }
+        } // spawning monsters
+
+
 
         for (int i = 0; i < core.labyrinth.stages[0].stagePlan.length; i++) {
             for (int j = 0; j < core.labyrinth.stages[0].stagePlan[0].length; j++) {
@@ -67,7 +70,14 @@ public class Game extends AppCompatActivity {
                     }
                 }
             }
-        }
+        } // spawning chests
+
+        counter=Room.random(2,core.labyrinth.stages[0].rooms.length);
+        p = core.labyrinth.stages[0].rooms[counter].getCenter();
+        Portal portal = new Portal(p.x,p.y-1);
+        core.addObj(portal);// spawning portal
+
+
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -76,8 +86,7 @@ public class Game extends AppCompatActivity {
         });
     }
 
-    private boolean isWallNear(int i, int j, Labyrinth l) {
-
+    private boolean isWallNear(int i, int j, Labyrinth l) { // return true if there is wall near else false
         return (l.stages[0].stagePlan[i - 1][j] == 1) || (l.stages[0].stagePlan[i + 1][j] == 1) ||
                 (l.stages[0].stagePlan[i][j - 1] == 1) || (l.stages[0].stagePlan[i][j + 1] == 1);
     }

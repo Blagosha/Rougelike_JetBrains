@@ -28,5 +28,6 @@ public class Character extends Entity {
         core.addBitmap(R.mipmap.greenzombie, "greenzombie");
         core.addBitmap(R.mipmap.red, "red");
         core.addBitmap(R.mipmap.triangle, "triangle");
+
     }
 }

@@ -5,16 +5,16 @@ import android.graphics.Point;
 import java.util.Random;
 
 public class Room {
-    private int seflCellIndexesX, seflCellIndexesY; // Индексы ячейки комнаты
-    private Point leftUpperCorner, rightBottomCorner; // Вершины комнаты
-    private Point cellLeftUpperCorner; // Левый верхний угол ячейки
+    private int seflCellIndexesX, seflCellIndexesY; // indexes for room's cell
+    private Point leftUpperCorner, rightBottomCorner; // room's corners
+    private Point cellLeftUpperCorner; // left upper cell's corner
 
     Room(int seflCellIndexesX, int seflCellIndexesY) {
         this.seflCellIndexesX = seflCellIndexesX;
         this.seflCellIndexesY = seflCellIndexesY;
         cellLeftUpperCorner = new Point(seflCellIndexesX * Stage.cellSideSize, seflCellIndexesY * Stage.cellSideSize);
 
-        int minRoomSide = 5; // минимальная длина стороны комнаты
+        int minRoomSide = 5; // minimal room side length
         int roomHeight = random(minRoomSide, Stage.cellSideSize);
         int roomWidth = random(minRoomSide, Stage.cellSideSize);
 
