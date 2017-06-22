@@ -11,6 +11,7 @@ import android.graphics.RectF;
 import android.util.Log;
 
 import com.example.dimitrov.rougelike.objects.Labyrinth;
+import com.example.dimitrov.rougelike.objects.Score;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ public class Graphics extends Toucher {
     private ArrayList<GraphicsUser> objects;
     float scaleBuff;
     int init = 0;
+    public Score score;
 
     public Graphics(Context context) {
         super(context);
@@ -110,6 +112,7 @@ public class Graphics extends Toucher {
             proceed(objects.get(i), canvas);
         }
         proceed(hero, canvas);
+        proceed(score, canvas);
         if (fadeEnabled)
             labyrinth.postDraw(canvas, this);
 

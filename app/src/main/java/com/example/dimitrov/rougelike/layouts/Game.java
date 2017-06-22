@@ -36,7 +36,6 @@ public class Game extends AppCompatActivity {
         core = new Graphics(this);
         ((LinearLayout) findViewById(R.id.game_layout)).addView(core);
         core.labyrinth = new Labyrinth();
-
         int heroRoomGenerationIndex = Room.random(0, core.labyrinth.stages[0].rooms.length);
         Point p = core.labyrinth.stages[0].rooms[heroRoomGenerationIndex].getCenter();
         core.hero = new Hero(p.x, p.y, 100); // creating hero 100 hp
@@ -80,8 +79,7 @@ public class Game extends AppCompatActivity {
         Portal Portal = new Portal(p.x,p.y-1);
         core.addObj(Portal);// spawning Portal
 
-        Score score = new Score();
-        core.addObj(score);
+        core.score = new Score();
 
         thread = new Thread(new Runnable() {
             @Override
