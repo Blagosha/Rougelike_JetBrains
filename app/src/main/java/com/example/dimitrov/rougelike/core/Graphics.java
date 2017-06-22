@@ -35,7 +35,8 @@ public class Graphics extends Toucher {
     //functions for playing with bitmaps
     public static Bitmap rotateBitmap(Bitmap b, int ang) {
         Matrix m = new Matrix();
-        m.preRotate(ang);
+        m.reset();
+        m.setRotate(ang, b.getWidth() / 2, b.getHeight() / 2);
         return Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), m, true);
     }
 
@@ -45,6 +46,7 @@ public class Graphics extends Toucher {
 
     public static Bitmap scaleBitmap(Bitmap b, float scaleX, float scaleY) {
         Matrix m = new Matrix();
+        m.reset();
         m.postScale(scaleX, scaleY);
         return Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), m, true);
     }

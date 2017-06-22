@@ -15,9 +15,10 @@ import java.util.TreeSet;
 
 public class Monster extends Character {
     Graphics core;
+
     public Monster(int x, int y, int hp, Graphics core) {
         super(x, y, hp);
-        this.core=core;
+        this.core = core;
         int monsterInd = Room.random(0, 3);
         texture = "triangle";
         hp = 300;
@@ -32,9 +33,11 @@ public class Monster extends Character {
             hp = 200;
         }
     }
-    int oldX,oldY;
-    int newX=-1,newY=-1;
+
+    int oldX, oldY;
+    int newX = -1, newY = -1;
     int newPosition;
+
     @Override
     public void movement(Graphics core) {
         int noticeDistance = (int) (1.5 * core.hero.viewRadius);
@@ -51,7 +54,6 @@ public class Monster extends Character {
                 }
                 oldY = (int) y;
                 oldX = (int) x;
-
 
 
                 do {
@@ -95,7 +97,7 @@ public class Monster extends Character {
 
         } else {
             //monster moving to hero
-            Point heroCurrentPosition = new Point((int)(core.hero.x), (int)(core.hero.y));
+            Point heroCurrentPosition = new Point((int) (core.hero.x), (int) (core.hero.y));
             Point monsterCurrentPosition = new Point((int) x, (int) y);
             Point nextStepPoint = bfs(monsterCurrentPosition, heroCurrentPosition);
             // moving realization
