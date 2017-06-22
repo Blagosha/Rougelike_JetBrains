@@ -16,9 +16,8 @@ public class Labyrinth implements GraphicsUser {
         }
     }
 
-    public void postDraw(Canvas canvas,Graphics core)
-    {
-        stages[0].postDraw(canvas,core);
+    public void postDraw(Canvas canvas, Graphics core) {
+        stages[0].postDraw(canvas, core);
     }
 
     @Override

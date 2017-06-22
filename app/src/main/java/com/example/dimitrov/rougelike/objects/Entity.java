@@ -2,11 +2,14 @@ package com.example.dimitrov.rougelike.objects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Rect;
 
 import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
+
 
 
 public class Entity implements GraphicsUser {
@@ -17,7 +20,7 @@ public class Entity implements GraphicsUser {
     boolean isReversed=true;
     float lastTime =System.currentTimeMillis();
 
-    public Entity(int x, int y ) {
+    public Entity(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -29,24 +32,25 @@ public class Entity implements GraphicsUser {
 
         if(!core.isInSight(x,y))
             return;
-        canvas.drawBitmap(rb,
-                (int) ((x - core.cameraX) * core.scale),
-                (int) ((y - core.cameraY) * core.scale), new Paint());
-        if(isReversed)
-            canvas.drawBitmap(rb,
-                    (int) ((x - core.cameraX) * core.scale),
-                    (int) ((y - core.cameraY) * core.scale), new Paint());
+        if (isReversed)
+            core.drawBitmap(canvas, rb, (int) ((x - core.cameraX) * core.scale), (int) ((y - core.cameraY) * core.scale), (int) core.scale, 255);
         else
-            canvas.drawBitmap(b,
-                    (int) ((x - core.cameraX) * core.scale),
-                    (int) ((y - core.cameraY) * core.scale), new Paint());
+            core.drawBitmap(canvas, b, (int) ((x - core.cameraX) * core.scale), (int) ((y - core.cameraY) * core.scale), (int) core.scale, 255);
     }
 
     @Override
     public void onScaleChange(Graphics core) {
-        b=core.resizeBitmap(core.getBitmap(texture),
-                (int) (core.scale) + 1, (int) (core.scale) + 1);
-        rb=core.scaleBitmap(b,-1,1);
+        if (b == null) {
+            b = core.getBitmap(texture);
+            rb = core.scaleBitmap(b, -1, 1);
+        }
+        if (b.getWidth() / core.scale > 1.25)
+            b = core.resizeBitmap(core.getBitmap(texture), (int) core.scale, (int) core.scale);
+        else if (b.getWidth() / core.scale < 0.8)
+            b = core.resizeBitmap(core.getBitmap(texture), (int) core.scale, (int) core.scale);
+        else return;
+        rb = core.scaleBitmap(b, -1, 1);
+
     }
 
     @Override

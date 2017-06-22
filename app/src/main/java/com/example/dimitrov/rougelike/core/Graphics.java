@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.Log;
 
 import com.example.dimitrov.rougelike.objects.Labyrinth;
@@ -19,7 +21,7 @@ public class Graphics extends Toucher {
     private Map<String, Bitmap> bitmaps;
     private ArrayList<GraphicsUser> objects;
     float scaleBuff;
-    int init=0;
+    int init = 0;
 
     public Graphics(Context context) {
         super(context);
@@ -57,7 +59,11 @@ public class Graphics extends Toucher {
         return bitmaps.get(name);
     }
 
-
+    public void drawBitmap(Canvas canvas, Bitmap b, int x, int y, int size, int alpha) {
+        Paint paint = new Paint();
+        paint.setAlpha(alpha);
+        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()), new Rect(x, y, x + size, y + size), paint);
+    }
 
     public void addObj(GraphicsUser obj) {
         objects.add(obj);
@@ -66,21 +72,21 @@ public class Graphics extends Toucher {
     public void removeObj(GraphicsUser obj) {
         objects.remove(obj);
     }
-    final float scaleBorder=50;
 
-    void proceed(GraphicsUser g, Canvas canvas)
-    {
+    final float scaleBorder = 50;
+
+    void proceed(GraphicsUser g, Canvas canvas) {
         g.getBitmaps(this);
-        if(scaleBuff!=scale)
+        if (scaleBuff != scale)
             g.onScaleChange(this);
         g.onDraw(canvas, this);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if(init++==0)
+        if (init++ == 0)
             resetCam();
-        minScale = (float)getWidth() / scaleBorder;
+        minScale = (float) getWidth() / scaleBorder;
         maxScale = 300;
 
 
@@ -96,15 +102,16 @@ public class Graphics extends Toucher {
             cameraX = 0;
         if (cameraY < 0)
             cameraY = 0;
+        canvas.drawRect(0, 0, getWidth(), getHeight(), new Paint());
 
-        proceed(labyrinth,canvas);
+        proceed(labyrinth, canvas);
         for (int i = 0; i < objects.size(); i++) {
-           proceed(objects.get(i),canvas);
+            proceed(objects.get(i), canvas);
         }
-        proceed(hero,canvas);
-        labyrinth.postDraw(canvas,this);
+        proceed(hero, canvas);
+        labyrinth.postDraw(canvas, this);
 
-        scaleBuff=scale;
+        scaleBuff = scale;
     }
 
 }

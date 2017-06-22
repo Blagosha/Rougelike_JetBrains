@@ -2,6 +2,7 @@ package com.example.dimitrov.rougelike.objects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 
@@ -195,14 +196,15 @@ public class Stage implements GraphicsUser {
 
     Bitmap[][] bits = new Bitmap[3][4];
     Bitmap b;
+
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
         for (int i = 0; i < sideSize; i++) {
             for (int j = 0; j < sideSize; j++) {
-                if(!core.isInSight(i,j))
+                isExplored[i][j] |= core.isInVision(i, j);
+
+                if (!core.isInSight(i, j))
                     continue;
-                int coordX = (int) ((i - core.cameraX) * core.scale);
-                int coordY = (int) ((j - core.cameraY) * core.scale);
 
                 int orientation = orients[i][j];
                 switch (stagePlan[i][j]) {
@@ -220,38 +222,41 @@ public class Stage implements GraphicsUser {
                 if (bits[stagePlan[i][j]][orientation] == null)
                     bits[stagePlan[i][j]][orientation] = core.rotateBitmap(core.resizeBitmap(b,
                             (int) (core.scale) + 1,
-                            (int) (core.scale) + 1), 90 * orientation);
+                            (int) (core.scale) + 1), orientation * 90);
                 b = bits[stagePlan[i][j]][orientation];
-                isExplored[i][j]=true;
-                canvas.drawBitmap(b, coordX, coordY, new Paint());
+                int coordX = (int) ((i - core.cameraX) * core.scale);
+                int coordY = (int) ((j - core.cameraY) * core.scale);
+                core.drawBitmap(canvas, b, coordX, coordY, (int) core.scale + 1, 255);
             }
         }
     }
 
     @Override
     public void onScaleChange(Graphics core) {
-        for (int i = 0; i < 12; i++)
-            bits[i / 4][i % 4] = null;
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 4; j++)
+                if (bits[i][j] != null)
+                    if (bits[i][j].getWidth() / core.scale > 1.25 || bits[i][j].getWidth() / core.scale < 0.8)
+                        bits[i][j] = null;
+
     }
 
     public void getBitmaps(Graphics core) {
-        core.addBitmap(R.mipmap.floor,"floor");
-        core.addBitmap(R.mipmap.wall,"wall");
-        core.addBitmap(R.mipmap.forest,"forest");
+        core.addBitmap(R.mipmap.floor, "floor");
+        core.addBitmap(R.mipmap.wall, "wall");
+        core.addBitmap(R.mipmap.forest, "forest");
     }
 
     @Override
     public void postDraw(Canvas canvas, Graphics core) {
         for (int i = 0; i < sideSize; i++) {
             for (int j = 0; j < sideSize; j++) {
-                if(!core.isOnScreen(i,j)||core.isInSight(i,j))
+                if (core.isInSight(i, j) || !core.isOnScreen(i, j))
                     continue;
-                if(!isExplored[i][j])
+                if (!isExplored[i][j])
                     continue;
-                if(stagePlan[i][j]==FOREST)
+                if (stagePlan[i][j] == FOREST)
                     continue;
-                int coordX = (int) ((i - core.cameraX) * core.scale);
-                int coordY = (int) ((j - core.cameraY) * core.scale);
 
                 int orientation = orients[i][j];
                 switch (stagePlan[i][j]) {
@@ -266,12 +271,11 @@ public class Stage implements GraphicsUser {
                 if (bits[stagePlan[i][j]][orientation] == null)
                     bits[stagePlan[i][j]][orientation] = core.rotateBitmap(core.resizeBitmap(b,
                             (int) (core.scale) + 1,
-                            (int) (core.scale) + 1), 90 * orientation);
+                            (int) (core.scale) + 1), orientation * 90);
                 b = bits[stagePlan[i][j]][orientation];
-                isExplored[i][j]=true;
-                Paint paint = new Paint();
-                paint.setAlpha(42);
-                canvas.drawBitmap(b, coordX, coordY, paint);
+                int coordX = (int) ((i - core.cameraX) * core.scale);
+                int coordY = (int) ((j - core.cameraY) * core.scale);
+                core.drawBitmap(canvas, b, coordX + (int) core.scale / 10, coordY + (int) core.scale / 10, (int) core.scale * 4 / 5, 42);
             }
         }
     }
