@@ -12,6 +12,7 @@ import com.example.dimitrov.rougelike.objects.Chest;
 import com.example.dimitrov.rougelike.objects.Hero;
 import com.example.dimitrov.rougelike.objects.Labyrinth;
 import com.example.dimitrov.rougelike.objects.Monster;
+import com.example.dimitrov.rougelike.objects.Portal;
 import com.example.dimitrov.rougelike.objects.Room;
 
 import java.util.ArrayList;
@@ -56,6 +57,8 @@ public class Game extends AppCompatActivity {
             counter++;
         } // spawning monsters
 
+
+
         for (int i = 0; i < core.labyrinth.stages[0].stagePlan.length; i++) {
             for (int j = 0; j < core.labyrinth.stages[0].stagePlan[0].length; j++) {
                 if (core.labyrinth.stages[0].stagePlan[i][j] == 2 && isWallNear(i, j, core.labyrinth)) {
@@ -68,6 +71,13 @@ public class Game extends AppCompatActivity {
                 }
             }
         } // spawning chests
+
+        counter=Room.random(2,core.labyrinth.stages[0].rooms.length);
+        p = core.labyrinth.stages[0].rooms[counter].getCenter();
+        Portal portal = new Portal(p.x,p.y-1);
+        core.addObj(portal);// spawning portal
+
+
         thread = new Thread(new Runnable() {
             @Override
             public void run() {

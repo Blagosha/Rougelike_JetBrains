@@ -51,6 +51,8 @@ public class Entity implements GraphicsUser {
     public void getBitmaps(Graphics core) {
         core.addBitmap(R.mipmap.chest,"chest");
         core.addBitmap(R.mipmap.chestopen,"chestOpen");
+        core.addBitmap(R.mipmap.toppartofportal, "toppartofportal");
+        core.addBitmap(R.mipmap.bottompartofportal, "bottompartofportal");
     }
 
     @Override
