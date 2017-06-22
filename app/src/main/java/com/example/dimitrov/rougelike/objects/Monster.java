@@ -2,7 +2,6 @@ package com.example.dimitrov.rougelike.objects;
 
 
 import android.graphics.Picture;
-import android.graphics.Point;
 import android.util.Pair;
 
 import com.example.dimitrov.rougelike.core.Graphics;
@@ -39,7 +38,7 @@ public class Monster extends Character {
     @Override
     public void movement(Graphics core) {
         int noticeDistance = (int) (1.5 * core.hero.viewRadius);
-        float currentTime = System.currentTimeMillis();
+        long currentTime = System.currentTimeMillis();
         float delta = currentTime - lastTime;
         lastTime = currentTime;
         if (monsterHeroDistance2(core.hero) > noticeDistance * noticeDistance) {
@@ -56,7 +55,7 @@ public class Monster extends Character {
 
 
                 do {
-                    newPosition = Room.random(0, 4);
+                    int newPosition = Room.random(0, 4);
 
                     switch (newPosition) {
                         case 0:
@@ -96,11 +95,16 @@ public class Monster extends Character {
 
         } else {
             //monster moving to hero
+            Point heroCurrentPosition = new Point((int)(core.hero.x), (int)(core.hero.y));
+            Point monsterCurrentPosition = new Point((int) x, (int) y);
+            Point nextStepPoint = bfs(monsterCurrentPosition, heroCurrentPosition);
+            // moving realization
+        }
+    }
 
     public Point bfs(Point from, Point to) {
         Set<Point> used = new TreeSet<Point>();
         Map<Point, Integer> map = new HashMap<Point, Integer>();
-        Point nextStepPoint = new Point();
         Queue<Pair<Point, Integer>> q = new LinkedList<>();
         q.add(new Pair<>(from, 0));
 
@@ -136,10 +140,11 @@ public class Monster extends Character {
 
                 return current;
             }
-
             Point addPoint = new Point(current.x - 1, current.y);
+            boolean kek = !used.contains(addPoint);
+            boolean mem = core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y);
             if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y)) {
-                q.add(new Pair<>(addPoint, depth + 1));
+                q.add(new Pair<Point, Integer>(addPoint, depth + 1));
                 map.put(addPoint, depth + 1);
                 used.add(addPoint);
             }
@@ -166,7 +171,7 @@ public class Monster extends Character {
             }
         }
 
-        return nextStepPoint;
+        return new Point();
     }
 
     public int monsterHeroDistance2(Hero hero) {

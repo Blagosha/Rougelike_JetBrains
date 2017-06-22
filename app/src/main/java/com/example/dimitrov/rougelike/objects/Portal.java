@@ -25,7 +25,6 @@ public class Portal extends Entity {
     }
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-        bottom.b=core.rotateBitmap(bottom.b,new Random().nextInt(360));
         bottom.onDraw(canvas,core);
         super.onDraw(canvas, core);
     }
@@ -40,6 +39,5 @@ public class Portal extends Entity {
     public void getBitmaps(Graphics core) {
         super.getBitmaps(core);
         bottom.getBitmaps(core);
-
     }
 }
