@@ -10,7 +10,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.Log;
 
-import com.bumptech.glide.Glide;
 import com.example.dimitrov.rougelike.objects.Labyrinth;
 
 import java.util.ArrayList;
@@ -89,7 +88,6 @@ public class Graphics extends Toucher {
             resetCam();
         minScale = (float) getWidth() / scaleBorder;
         maxScale = 300;
-
 
         if (scale < minScale)
             scale = minScale;

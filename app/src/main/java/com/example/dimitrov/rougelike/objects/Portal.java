@@ -2,17 +2,9 @@ package com.example.dimitrov.rougelike.objects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.util.Log;
 
 import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.Graphics;
-
-import java.util.Random;
-
-/**
- * Created by Санчес on 22.06.2017.
- */
 
 public class Portal extends Entity {
     Entity bottom;
