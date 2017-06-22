@@ -26,14 +26,14 @@ public class Stage implements GraphicsUser {
     public static int cellSideSize;
     private static final int mxCntRooms = 30;
     private static final int mnCntRooms = 20;
-    public int[][] stagePlan; // Общий массив этажа
+    public int[][] stagePlan; // all stage array
     public int[][] orients;
     public boolean[][] isExplored;
-    ArrayList<Junction> junctions; // массив переходов
-    public Room[] rooms; // массив всех комнат
+    ArrayList<Junction> junctions; // array of all junctions
+    public Room[] rooms; // array of all rooms
 
-    int[] pred; // специальные переменные для СНМ
-    ArrayList<int[]> graphEdges; // ребра графа
+    int[] pred; // speacial variables for DSU
+    ArrayList<int[]> graphEdges; // graph edges
 
 
     public Stage(int sideSize) {
@@ -55,7 +55,7 @@ public class Stage implements GraphicsUser {
     private final void stagePlanGenereation() {
         Random random = new Random();
         sideSize = 100;
-        cntRooms = mnCntRooms + random.nextInt(mxCntRooms - mnCntRooms);// сгененрировали количество комнат
+        cntRooms = mnCntRooms + random.nextInt(mxCntRooms - mnCntRooms); // generation random count for rooms
         junctions = new ArrayList<>();
         graphEdges = new ArrayList<>();
         rooms = new Room[cntRooms];
@@ -92,7 +92,7 @@ public class Stage implements GraphicsUser {
                 graphEdges.add(new int[]{i, j});
             }
         }
-        Collections.shuffle(graphEdges); // перемешанный массив ребер графа
+        Collections.shuffle(graphEdges); // shuffled graph edges array
 
         boolean[] edgeUsed = new boolean[graphEdges.size()];
         for (int i = 0; i < graphEdges.size(); i++) edgeUsed[i] = false;
@@ -105,26 +105,14 @@ public class Stage implements GraphicsUser {
                 edgeUsed[i] = true;
                 junctions.add(new Junction(rooms[vertex], rooms[urtex]));
             }
-        } // создали минимальный остов
-        /*int cntGenerateRandomJunctions = (int) (junctions.size() * 0.2); // добавляем еще 20% рандомных переходов
-        int counter = 0;
-        while (counter < cntGenerateRandomJunctions) {
-            int ind = random.nextInt(graphEdges.size());
-
-            if (!edgeUsed[ind]) {
-                int vertex = graphEdges.get(ind)[0];
-                int urtex = graphEdges.get(ind)[1];
-                junctions.add(new Junction(rooms[vertex], rooms[urtex]));
-                edgeUsed[ind] = true;
-                counter++;
-            }
-        } */ //добавили еще 20% рандомных переходов
+        } // created carcass
 
         for (int i = 0; i < sideSize; i++) {
             for (int j = 0; j < sideSize; j++) {
                 stagePlan[i][j] = FOREST;
             }
-        }//пустой мир
+        }// empty stage
+
         for (int k = 0; k < cntRooms; k++) {
             Point leftUpperCorner = rooms[k].getLeftUpperCorner();
             Point rightBottomCorner = rooms[k].getRightBottomCorner();
@@ -138,7 +126,8 @@ public class Stage implements GraphicsUser {
                     stagePlan[i][j] = FLOOR;
                 }
             }
-        }//комнаты
+        } // rooms
+
         for (Junction j : junctions) {
             Point from = j.getFrom();
             Point to = j.getTo();
@@ -167,7 +156,7 @@ public class Stage implements GraphicsUser {
             }
 
 
-        }//переходы
+        } // junctions
 
         for (int i = 1; i < sideSize - 1; i++) {
             for (int j = 1; j < sideSize - 1; j++) {
@@ -203,6 +192,7 @@ public class Stage implements GraphicsUser {
             }
         }
     }
+
     Bitmap[][] bits = new Bitmap[3][4];
     Bitmap b;
     @Override
