@@ -11,14 +11,13 @@ import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
 
 
-
 public class Entity implements GraphicsUser {
     public float x;
     public float y;
     public String texture;
-    Bitmap b,rb;
-    boolean isReversed=true;
-    long lastTime =System.currentTimeMillis();
+    Bitmap b, rb;
+    boolean isReversed = true;
+    long lastTime = System.currentTimeMillis();
 
     public Entity(int x, int y) {
         this.x = x;
@@ -30,7 +29,7 @@ public class Entity implements GraphicsUser {
     public void onDraw(Canvas canvas, Graphics core) {
         movement(core);
 
-        if(!core.isInSight(x,y))
+        if (!core.isInSight(x, y) && core.fadeEnabled)
             return;
         if (isReversed)
             core.drawBitmap(canvas, rb, (int) ((x - core.cameraX) * core.scale), (int) ((y - core.cameraY) * core.scale), (int) core.scale, 255);
@@ -55,8 +54,8 @@ public class Entity implements GraphicsUser {
 
     @Override
     public void getBitmaps(Graphics core) {
-        core.addBitmap(R.mipmap.chest,"chest");
-        core.addBitmap(R.mipmap.chestopen,"chestOpen");
+        core.addBitmap(R.mipmap.chest, "chest");
+        core.addBitmap(R.mipmap.chestopen, "chestOpen");
     }
 
     @Override
@@ -65,7 +64,7 @@ public class Entity implements GraphicsUser {
     }
 
 
-    public void movement(Graphics core){
+    public void movement(Graphics core) {
 
     }
 }

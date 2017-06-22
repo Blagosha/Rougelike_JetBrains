@@ -23,7 +23,7 @@ public class Portal extends Entity {
     }
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-        if(!core.isInSight(x,y))
+        if(!core.isInSight(x,y)&&core.fadeEnabled)
             return;
         Matrix m = new Matrix();
         float n_x=(x - core.cameraX) * core.scale,n_y=(y - core.cameraY) * core.scale;

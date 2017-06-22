@@ -203,7 +203,9 @@ public class Stage implements GraphicsUser {
             for (int j = 0; j < sideSize; j++) {
                 isExplored[i][j] |= core.isInVision(i, j);
 
-                if (!core.isInSight(i, j))
+                if (!core.isOnScreen(i, j))
+                    continue;
+                if(!core.isInVision(i,j)&&core.fadeEnabled)
                     continue;
 
                 int orientation = orients[i][j];
@@ -280,10 +282,9 @@ public class Stage implements GraphicsUser {
         }
     }
 
-    public boolean isNotWall(int x, int y){
-        return stagePlan[x][y]!= WALL;
+    public boolean isNotWall(int x, int y) {
+        return stagePlan[x][y] != WALL;
     }
-
 
 
 }

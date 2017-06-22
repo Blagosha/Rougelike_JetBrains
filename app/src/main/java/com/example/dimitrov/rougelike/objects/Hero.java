@@ -41,9 +41,10 @@ public class Hero extends Character {
                 if (j++ > 10)
                     break;
             paint.setAlpha(alpha);
-            canvas.drawCircle(
-                    (int) ((x - core.cameraX + .5f) * core.scale),
-                    (int) ((y - core.cameraY + .5f) * core.scale), i * core.scale, paint);
+            if (core.fadeEnabled)
+                canvas.drawCircle(
+                        (int) ((x - core.cameraX + .5f) * core.scale),
+                        (int) ((y - core.cameraY + .5f) * core.scale), i * core.scale, paint);
             alpha += fadeRate;
         }
     }

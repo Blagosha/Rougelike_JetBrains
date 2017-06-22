@@ -110,7 +110,8 @@ public class Graphics extends Toucher {
             proceed(objects.get(i), canvas);
         }
         proceed(hero, canvas);
-        labyrinth.postDraw(canvas, this);
+        if (fadeEnabled)
+            labyrinth.postDraw(canvas, this);
 
         scaleBuff = scale;
     }

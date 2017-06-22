@@ -10,6 +10,7 @@ import com.example.dimitrov.rougelike.objects.Labyrinth;
 
 public class Toucher extends View {
 
+    public boolean fadeEnabled = false;
     public float cameraX = 0, cameraY = 0;
     public float scale = 200, minScale, maxScale;
     public static int sideSize;
