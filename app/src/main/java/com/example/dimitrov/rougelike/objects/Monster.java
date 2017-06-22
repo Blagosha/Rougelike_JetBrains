@@ -39,7 +39,7 @@ public class Monster extends Character {
     public void movement(Graphics core) {
         int noticeDistance = (int) (1.5 * core.hero.viewRadius);
         long currentTime = System.currentTimeMillis();
-        float delta = currentTime - lastTime;
+        long delta = currentTime - lastTime;
         lastTime = currentTime;
         if (monsterHeroDistance2(core.hero) > noticeDistance * noticeDistance) {
             //random monster moving
