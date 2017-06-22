@@ -7,7 +7,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainThread {
-    public void main(Game game) {
     public void main(final Game game) {
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
