@@ -102,7 +102,7 @@ public class Toucher extends View {
     }
 
     public boolean isInSight(float x, float y) {
-        return isOnScreen(x,y)&&isInVision(x,y);
+        return isOnScreen(x, y) && isInVision(x, y);
     }
 
 }

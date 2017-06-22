@@ -233,11 +233,11 @@ public class Stage implements GraphicsUser {
                 if (bits[stagePlan[i][j]][orientation] == null)
                     bits[stagePlan[i][j]][orientation] = core.rotateBitmap(core.resizeBitmap(b,
                             (int) (core.scale) + 1,
-                            (int) (core.scale) + 1),orientation*90);
+                            (int) (core.scale) + 1), orientation * 90);
                 b = bits[stagePlan[i][j]][orientation];
                 int coordX = (int) ((i - core.cameraX) * core.scale);
                 int coordY = (int) ((j - core.cameraY) * core.scale);
-                core.drawBitmap(canvas,b,coordX,coordY,(int)core.scale+1,255);
+                core.drawBitmap(canvas, b, coordX, coordY, (int) core.scale + 1, 255);
             }
         }
     }
@@ -245,10 +245,10 @@ public class Stage implements GraphicsUser {
     @Override
     public void onScaleChange(Graphics core) {
         for (int i = 0; i < 3; i++)
-            for(int j=0;j<4;j++)
-            if (bits[i][j] != null)
-                if (bits[i][j].getWidth() / core.scale > 1.25 || bits[i][j].getWidth() / core.scale < 0.8)
-                    bits[i][j] = null;
+            for (int j = 0; j < 4; j++)
+                if (bits[i][j] != null)
+                    if (bits[i][j].getWidth() / core.scale > 1.25 || bits[i][j].getWidth() / core.scale < 0.8)
+                        bits[i][j] = null;
 
     }
 
@@ -262,7 +262,7 @@ public class Stage implements GraphicsUser {
     public void postDraw(Canvas canvas, Graphics core) {
         for (int i = 0; i < sideSize; i++) {
             for (int j = 0; j < sideSize; j++) {
-                if (core.isInSight(i,j)||!core.isOnScreen(i,j))
+                if (core.isInSight(i, j) || !core.isOnScreen(i, j))
                     continue;
                 if (!isExplored[i][j])
                     continue;
@@ -282,11 +282,11 @@ public class Stage implements GraphicsUser {
                 if (bits[stagePlan[i][j]][orientation] == null)
                     bits[stagePlan[i][j]][orientation] = core.rotateBitmap(core.resizeBitmap(b,
                             (int) (core.scale) + 1,
-                            (int) (core.scale) + 1),orientation*90);
+                            (int) (core.scale) + 1), orientation * 90);
                 b = bits[stagePlan[i][j]][orientation];
                 int coordX = (int) ((i - core.cameraX) * core.scale);
                 int coordY = (int) ((j - core.cameraY) * core.scale);
-               core.drawBitmap(canvas,b,coordX+(int)core.scale/10,coordY+(int)core.scale/10,(int)core.scale*4/5,42);
+                core.drawBitmap(canvas, b, coordX + (int) core.scale / 10, coordY + (int) core.scale / 10, (int) core.scale * 4 / 5, 42);
             }
         }
     }

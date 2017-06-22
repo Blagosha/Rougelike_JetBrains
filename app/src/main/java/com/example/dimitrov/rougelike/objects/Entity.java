@@ -26,7 +26,7 @@ public class Entity implements GraphicsUser {
 
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-        if(!core.isInSight(x,y))
+        if (!core.isInSight(x, y))
             return;
         if (isReversed)
             core.drawBitmap(canvas, rb, (int) ((x - core.cameraX) * core.scale), (int) ((y - core.cameraY) * core.scale), (int) core.scale, 255);
@@ -38,14 +38,14 @@ public class Entity implements GraphicsUser {
     public void onScaleChange(Graphics core) {
         if (b == null) {
             b = core.getBitmap(texture);
-            rb = core.scaleBitmap(b,-1,1);
+            rb = core.scaleBitmap(b, -1, 1);
         }
         if (b.getWidth() / core.scale > 1.25)
             b = core.resizeBitmap(core.getBitmap(texture), (int) core.scale, (int) core.scale);
         else if (b.getWidth() / core.scale < 0.8)
             b = core.resizeBitmap(core.getBitmap(texture), (int) core.scale, (int) core.scale);
         else return;
-        rb = core.scaleBitmap(b,-1,1);
+        rb = core.scaleBitmap(b, -1, 1);
 
     }
 

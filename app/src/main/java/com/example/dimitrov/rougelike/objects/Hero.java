@@ -26,12 +26,12 @@ public class Hero extends Character {
         paint.setStrokeWidth(thickness * core.scale);
 
         int alpha = 0;
-        int j=0;
-        for (float i = 0; i < core.sideSize * 2; i += thickness*0.98) {
+        int j = 0;
+        for (float i = 0; i < core.sideSize * 2; i += thickness * 0.98) {
             if (alpha > 255)
                 alpha = 255;
-            if(alpha==255)
-                if(j++>10)
+            if (alpha == 255)
+                if (j++ > 10)
                     break;
             paint.setAlpha(alpha);
             canvas.drawCircle(
