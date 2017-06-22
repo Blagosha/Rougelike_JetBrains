@@ -16,6 +16,8 @@ import com.example.dimitrov.rougelike.objects.Labyrinth;
 import com.example.dimitrov.rougelike.objects.Monster;
 import com.example.dimitrov.rougelike.objects.Portal;
 import com.example.dimitrov.rougelike.objects.Room;
+import com.example.dimitrov.rougelike.objects.Score;
+import com.example.dimitrov.rougelike.objects.Stage;
 
 import java.util.ArrayList;
 
@@ -78,6 +80,8 @@ public class Game extends AppCompatActivity {
         Portal Portal = new Portal(p.x,p.y-1);
         core.addObj(Portal);// spawning Portal
 
+        Score score = new Score();
+        core.addObj(score);
 
         thread = new Thread(new Runnable() {
             @Override
