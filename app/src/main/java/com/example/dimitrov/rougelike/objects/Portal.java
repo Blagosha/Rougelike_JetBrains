@@ -9,12 +9,6 @@ import android.util.Log;
 import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.Graphics;
 
-import java.util.Random;
-
-/**
- * Created by Санчес on 22.06.2017.
- */
-
 public class Portal extends Entity {
     Entity bottom;
     public Portal(int x, int y) {

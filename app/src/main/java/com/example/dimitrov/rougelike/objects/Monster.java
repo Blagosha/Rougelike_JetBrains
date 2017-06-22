@@ -40,7 +40,7 @@ public class Monster extends Character {
 
     @Override
     public void movement(Graphics core) {
-        int noticeDistance = (int) (1.5 * core.hero.viewRadius);
+        int noticeDistance = 100;//(int) (1.5 * core.hero.viewRadius);
         long currentTime = System.currentTimeMillis();
         long delta = currentTime - lastTime;
         lastTime = currentTime;
@@ -54,7 +54,6 @@ public class Monster extends Character {
                 }
                 oldY = (int) y;
                 oldX = (int) x;
-
 
                 do {
                     newPosition = Room.random(0, 4);
@@ -100,7 +99,19 @@ public class Monster extends Character {
             Point heroCurrentPosition = new Point((int) (core.hero.x), (int) (core.hero.y));
             Point monsterCurrentPosition = new Point((int) x, (int) y);
             Point nextStepPoint = bfs(monsterCurrentPosition, heroCurrentPosition);
-            // moving realization
+
+            if (nextStepPoint.x == monsterCurrentPosition.x + 1) {
+                x += speed * delta;
+            }
+            if (nextStepPoint.x == monsterCurrentPosition.x - 1) {
+                x -= speed * delta;
+            }
+            if (nextStepPoint.y == monsterCurrentPosition.y + 1) {
+                y += speed * delta;
+            }
+            if (nextStepPoint.y == monsterCurrentPosition.y - 1) {
+                y -= speed * delta;
+            }
         }
     }
 
@@ -117,25 +128,25 @@ public class Monster extends Character {
             if (current.equals(to)) {
                 while (map.get(current) > 1) {
                     Point nextRetirePoint = new Point(current.x + 1, current.y);
-                    if (used.contains(nextRetirePoint) && (map.get(nextRetirePoint) < map.get(current))) {
+                    if (used.contains(nextRetirePoint) && (map.get(nextRetirePoint) == map.get(current) - 1)) {
                         current = new Point(nextRetirePoint.x, nextRetirePoint.y);
                         continue;
                     }
 
                     nextRetirePoint = new Point(current.x - 1, current.y);
-                    if (used.contains(nextRetirePoint) && (map.get(nextRetirePoint) < map.get(current))) {
+                    if (used.contains(nextRetirePoint) && (map.get(nextRetirePoint) == map.get(current) - 1)) {
                         current = new Point(nextRetirePoint.x, nextRetirePoint.y);
                         continue;
                     }
 
                     nextRetirePoint = new Point(current.x, current.y + 1);
-                    if (used.contains(nextRetirePoint) && (map.get(nextRetirePoint) < map.get(current))) {
+                    if (used.contains(nextRetirePoint) && (map.get(nextRetirePoint) == map.get(current) - 1)) {
                         current = new Point(nextRetirePoint.x, nextRetirePoint.y);
                         continue;
                     }
 
                     nextRetirePoint = new Point(current.x, current.y - 1);
-                    if (used.contains(nextRetirePoint) && (map.get(nextRetirePoint) < map.get(current))) {
+                    if (used.contains(nextRetirePoint) && (map.get(nextRetirePoint) == map.get(current) - 1)) {
                         current = new Point(nextRetirePoint.x, nextRetirePoint.y);
                     }
                 }
@@ -143,8 +154,6 @@ public class Monster extends Character {
                 return current;
             }
             Point addPoint = new Point(current.x - 1, current.y);
-            boolean kek = !used.contains(addPoint);
-            boolean mem = core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y);
             if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y)) {
                 q.add(new Pair<Point, Integer>(addPoint, depth + 1));
                 map.put(addPoint, depth + 1);
