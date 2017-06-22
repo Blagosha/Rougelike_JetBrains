@@ -18,7 +18,7 @@ public class Entity implements GraphicsUser {
     public String texture;
     Bitmap b,rb;
     boolean isReversed=true;
-    float lastTime =System.currentTimeMillis();
+    long lastTime =System.currentTimeMillis();
 
     public Entity(int x, int y) {
         this.x = x;
