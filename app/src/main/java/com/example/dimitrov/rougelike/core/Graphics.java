@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.Log;
 
 import com.example.dimitrov.rougelike.objects.Labyrinth;
@@ -57,7 +59,12 @@ public class Graphics extends Toucher {
         return bitmaps.get(name);
     }
 
-
+    public void drawBitmap(Canvas canvas,Bitmap b,int x,int y, int size, int alpha)
+    {
+        Paint paint = new Paint();
+        paint.setAlpha(alpha);
+        canvas.drawBitmap(b, new Rect(0,0,b.getWidth(),b.getHeight()),new Rect(x,y,x+size,y+size), paint);
+    }
 
     public void addObj(GraphicsUser obj) {
         objects.add(obj);
@@ -96,6 +103,7 @@ public class Graphics extends Toucher {
             cameraX = 0;
         if (cameraY < 0)
             cameraY = 0;
+        canvas.drawRect(0,0,getWidth(),getHeight(),new Paint());
 
         proceed(labyrinth,canvas);
         for (int i = 0; i < objects.size(); i++) {

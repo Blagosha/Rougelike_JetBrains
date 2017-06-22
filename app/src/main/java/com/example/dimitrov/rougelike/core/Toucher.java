@@ -84,25 +84,25 @@ public class Toucher extends View {
             }
         });
     }
-    public boolean isOnScreen(float x, float y)
-    {
-        x+=.5f;
-        y+=.5f;
-        if(x<(int)cameraX - 1||y<cameraY-1)
+
+    public boolean isOnScreen(float x, float y) {
+        x += .5f;
+        y += .5f;
+        if (x < (int) cameraX - 1 || y < cameraY - 1)
             return false;
-        if(x>cameraX + getWidth() / scale + 1||y>cameraY + getHeight() / scale + 1)
+        if (x > cameraX + getWidth() / scale + 1 || y > cameraY + getHeight() / scale + 1)
             return false;
         return true;
     }
-    public boolean isInSight(float x, float y)
-    {
-        if(!isOnScreen(x,y))
-            return false;
-        x+=.5f;
-        y+=.5f;
-        if(Math.hypot(hero.x - x, hero.y - y) > hero.viewRadius)
-            return false;
-        return true;
+
+    public boolean isInVision(float x, float y) {
+        x += .5f;
+        y += .5f;
+        return Math.hypot(hero.x - x, hero.y - y) <= hero.viewRadius;
+    }
+
+    public boolean isInSight(float x, float y) {
+        return isOnScreen(x,y)&&isInVision(x,y);
     }
 
 }
