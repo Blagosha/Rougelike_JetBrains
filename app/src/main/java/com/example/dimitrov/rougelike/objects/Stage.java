@@ -17,9 +17,9 @@ import static com.example.dimitrov.rougelike.core.Toucher.sideSize;
 
 
 public class Stage implements GraphicsUser {
-    private final int FOREST = 0;
-    private final int WALL = 1;
-    private final int FLOOR = 2;
+    public static final int FOREST = 0;
+    public static final int WALL = 1;
+    public static final int FLOOR = 2;
 
 
     public int cntRooms;
@@ -285,5 +285,11 @@ public class Stage implements GraphicsUser {
             }
         }
     }
+
+    public boolean isNotWall(int x, int y){
+        return stagePlan[x][y]!= WALL;
+    }
+
+
 
 }

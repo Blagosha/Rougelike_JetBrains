@@ -9,13 +9,13 @@ import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
 
 
-
 public class Entity implements GraphicsUser {
-    public int x;
-    public int y;
+    public float x;
+    public float y;
     public String texture;
     Bitmap b,rb;
     boolean isReversed=true;
+    float lastTime =System.currentTimeMillis();
 
     public Entity(int x, int y ) {
         this.x = x;
@@ -25,6 +25,8 @@ public class Entity implements GraphicsUser {
 
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
+        movement(core);
+
         if(!core.isInSight(x,y))
             return;
         canvas.drawBitmap(rb,
@@ -55,6 +57,11 @@ public class Entity implements GraphicsUser {
 
     @Override
     public void postDraw(Canvas canvas, Graphics core) {
+
+    }
+
+
+    public void movement(Graphics core){
 
     }
 }
