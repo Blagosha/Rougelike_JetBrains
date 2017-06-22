@@ -74,8 +74,8 @@ public class Game extends AppCompatActivity {
 
         counter=Room.random(2,core.labyrinth.stages[0].rooms.length);
         p = core.labyrinth.stages[0].rooms[counter].getCenter();
-        //Portal Portal = new Portal(p.x,p.y-1);
-        //core.addObj(Portal);// spawning Portal
+        Portal Portal = new Portal(p.x,p.y-1);
+        core.addObj(Portal);// spawning Portal
 
 
         thread = new Thread(new Runnable() {

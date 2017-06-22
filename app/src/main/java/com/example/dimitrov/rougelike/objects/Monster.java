@@ -44,29 +44,29 @@ public class Monster extends Character {
         if (monsterHeroDistance2(core.hero) > noticeDistance * noticeDistance) {
             //random monster moving
 
-            if (Math.hypot(x-oldX,y-oldY)>1||newX==-1) {
-                if(newX!=-1) {
+            if (Math.hypot(x - oldX, y - oldY) > 1 || newX == -1) {
+                if (newX != -1) {
                     x = newX;
                     y = newY;
                 }
-                oldY= (int) y;
-                oldX= (int) x;
+                oldY = (int) y;
+                oldX = (int) x;
 
 
 
                 do {
-                    int newPosition = Room.random(0, 4);
+                    newPosition = Room.random(0, 4);
 
                     switch (newPosition) {
                         case 0:
                             newX = (int) (x - 1);
                             newY = (int) y;
-                            isReversed=true;
+                            isReversed = true;
                             break;
                         case 1:
                             newX = (int) (x + 1);
                             newY = (int) (y);
-                            isReversed=false;
+                            isReversed = false;
                             break;
                         case 2:
                             newX = (int) (x);
