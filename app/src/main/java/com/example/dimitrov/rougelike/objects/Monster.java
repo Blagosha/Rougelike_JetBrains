@@ -1,12 +1,24 @@
 package com.example.dimitrov.rougelike.objects;
 
 
+import android.graphics.Picture;
+import android.graphics.Point;
+import android.util.Pair;
+
 import com.example.dimitrov.rougelike.core.Graphics;
 
-public class Monster extends Character {
-    public Monster(int x, int y, int hp) {
-        super(x, y, hp);
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+import java.util.TreeSet;
 
+public class Monster extends Character {
+    Graphics core;
+    public Monster(int x, int y, int hp, Graphics core) {
+        super(x, y, hp);
+        this.core=core;
         int monsterInd = Room.random(0, 3);
         texture = "triangle";
         hp = 300;
@@ -59,10 +71,86 @@ public class Monster extends Character {
 
         } else {
             //monster moving to hero
-
+            if (isInCell()) {
+                Point heroCurrentPosition = new Point((int)(core.hero.x), (int)(core.hero.y));
+                Point monsterCurrentPosition = new Point((int) x, (int) y);
+                Point nextStepPoint = bfs(heroCurrentPosition, monsterCurrentPosition);
+                // moving realization
+            }
         }
     }
 
+    public Point bfs(Point from, Point to) {
+        Set<Point> used = new TreeSet<Point>();
+        Map<Point, Integer> map = new HashMap<Point, Integer>();
+        Point nextStepPoint = new Point();
+        Queue<Pair<Point, Integer>> q = new LinkedList<>();
+        q.add(new Pair<>(from, 0));
+
+        while (q.size() != 0) {
+            Point current = q.peek().first;
+            Integer depth = q.poll().second;
+
+            if (current.equals(to)) {
+                while (map.get(current) > 1) {
+                    Point nextRetirePoint = new Point(current.x + 1, current.y);
+                    if (used.contains(nextRetirePoint) && (map.get(nextRetirePoint) < map.get(current))) {
+                        current = new Point(nextRetirePoint.x, nextRetirePoint.y);
+                        continue;
+                    }
+
+                    nextRetirePoint = new Point(current.x - 1, current.y);
+                    if (used.contains(nextRetirePoint) && (map.get(nextRetirePoint) < map.get(current))) {
+                        current = new Point(nextRetirePoint.x, nextRetirePoint.y);
+                        continue;
+                    }
+
+                    nextRetirePoint = new Point(current.x, current.y + 1);
+                    if (used.contains(nextRetirePoint) && (map.get(nextRetirePoint) < map.get(current))) {
+                        current = new Point(nextRetirePoint.x, nextRetirePoint.y);
+                        continue;
+                    }
+
+                    nextRetirePoint = new Point(current.x, current.y - 1);
+                    if (used.contains(nextRetirePoint) && (map.get(nextRetirePoint) < map.get(current))) {
+                        current = new Point(nextRetirePoint.x, nextRetirePoint.y);
+                    }
+                }
+
+                return current;
+            }
+
+            Point addPoint = new Point(current.x - 1, current.y);
+            if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y)) {
+                q.add(new Pair<>(addPoint, depth + 1));
+                map.put(addPoint, depth + 1);
+                used.add(addPoint);
+            }
+
+            addPoint = new Point(current.x + 1, current.y);
+            if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y)) {
+                q.add(new Pair<>(addPoint, depth + 1));
+                map.put(addPoint, depth + 1);
+                used.add(addPoint);
+            }
+
+            addPoint = new Point(current.x, current.y - 1);
+            if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y)) {
+                q.add(new Pair<>(addPoint, depth + 1));
+                map.put(addPoint, depth + 1);
+                used.add(addPoint);
+            }
+
+            addPoint = new Point(current.x, current.y + 1);
+            if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y)) {
+                q.add(new Pair<>(addPoint, depth + 1));
+                map.put(addPoint, depth + 1);
+                used.add(addPoint);
+            }
+        }
+
+        return nextStepPoint;
+    }
 
     public int monsterHeroDistance2(Hero hero) {
         return (int) ((hero.x - this.x) * (hero.x - this.x) + (hero.y - this.y) * (hero.y - this.y));
