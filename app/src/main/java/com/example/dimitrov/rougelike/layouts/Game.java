@@ -51,7 +51,7 @@ public class Game extends AppCompatActivity {
             }
 
             p = core.labyrinth.stages[0].rooms[counter].getCenter();
-            Monster monster = new Monster(p.x, p.y, 100);
+            Monster monster = new Monster(p.x, p.y, 100, core);
             monsters.add(monster);
             core.addObj(monster);
             counter++;
