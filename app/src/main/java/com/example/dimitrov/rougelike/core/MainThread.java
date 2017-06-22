@@ -21,7 +21,7 @@ public class MainThread {
             }
         };
 
-        timer.schedule(task, 0,16);
+        timer.schedule(task, 0,5);
 
     }
 }

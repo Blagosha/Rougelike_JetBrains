@@ -53,7 +53,7 @@ public class Game extends AppCompatActivity {
             }
 
             p = core.labyrinth.stages[0].rooms[counter].getCenter();
-            Monster monster = new Monster(p.x, p.y, 100);
+            Monster monster = new Monster(p.x, p.y, 100, core);
             monsters.add(monster);
             core.addObj(monster);
             counter++;
@@ -76,8 +76,8 @@ public class Game extends AppCompatActivity {
 
         counter=Room.random(2,core.labyrinth.stages[0].rooms.length);
         p = core.labyrinth.stages[0].rooms[counter].getCenter();
-        Portal portal = new Portal(p.x,p.y-1);
-        core.addObj(portal);// spawning portal
+        Portal Portal = new Portal(p.x,p.y-1);
+        core.addObj(Portal);// spawning Portal
 
 
         thread = new Thread(new Runnable() {

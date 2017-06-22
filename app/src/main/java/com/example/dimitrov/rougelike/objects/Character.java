@@ -7,7 +7,7 @@ import com.example.dimitrov.rougelike.core.Graphics;
 
 public class Character extends Entity {
     private int hp;
-    protected int speed;
+    protected double speed;
 
     public Character(int x, int y, int hp) {
         super(x, y);

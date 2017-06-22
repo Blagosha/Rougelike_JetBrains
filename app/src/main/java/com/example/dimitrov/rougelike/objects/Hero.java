@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.util.Log;
 
 import com.example.dimitrov.rougelike.core.Graphics;
 
@@ -12,7 +13,7 @@ public class Hero extends Character {
         super(x, y, hp);
         texture = "green";
         viewRadius = (255 / fadeRate + 1.71f) * thickness;
-        speed = 1;
+        speed = 0.001f;
     }
 
     public PointF newPos;
@@ -21,7 +22,7 @@ public class Hero extends Character {
     public double viewRadius;
 
     float thickness = .5f;
-    int fadeRate = 1;
+    int fadeRate = 10;
 
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
