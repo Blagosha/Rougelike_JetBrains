@@ -34,88 +34,82 @@ public class Monster extends Character {
         }
     }
 
-    int oldX, oldY;
-    int newX = -1, newY = -1;
     int newPosition;
 
-    @Override
-    public void movement(Graphics core) {
-        int noticeDistance = 100;//(int) (1.5 * core.hero.viewRadius);
-        long currentTime = System.currentTimeMillis();
-        long delta = currentTime - lastTime;
-        lastTime = currentTime;
-        if (monsterHeroDistance2(core.hero) > noticeDistance * noticeDistance) {
-            //random monster moving
-
-            if (Math.hypot(x - oldX, y - oldY) > 1 || newX == -1) {
-                if (newX != -1) {
-                    x = newX;
-                    y = newY;
-                }
-                oldY = (int) y;
-                oldX = (int) x;
-
-                do {
-                    newPosition = Room.random(0, 4);
-
-                    switch (newPosition) {
-                        case 0:
-                            newX = (int) (x - 1);
-                            newY = (int) y;
-                            isReversed = true;
-                            break;
-                        case 1:
-                            newX = (int) (x + 1);
-                            newY = (int) (y);
-                            isReversed = false;
-                            break;
-                        case 2:
-                            newX = (int) (x);
-                            newY = (int) (y - 1);
-                            break;
-                        case 3:
-                            newX = (int) (x);
-                            newY = (int) (y + 1);
-                    }
-
-                } while (!core.labyrinth.stages[0].isNotWall(newX, newY));
-            }
-            if (newPosition == 0) {
-                x -= speed * delta;
-            }
-            if (newPosition == 1) {
-                x += speed * delta;
-            }
-            if (newPosition == 2) {
-                y -= speed * delta;
-            }
-            if (newPosition == 3) {
-                y += speed * delta;
-            }
-
-
-        } else {
-            //monster moving to hero
-            Point heroCurrentPosition = new Point((int) (core.hero.x), (int) (core.hero.y));
-            Point monsterCurrentPosition = new Point((int) x, (int) y);
-            Point nextStepPoint = bfs(monsterCurrentPosition, heroCurrentPosition);
-
-            if (nextStepPoint.x == monsterCurrentPosition.x + 1) {
-                x += speed * delta;
-            }
-            if (nextStepPoint.x == monsterCurrentPosition.x - 1) {
-                x -= speed * delta;
-            }
-            if (nextStepPoint.y == monsterCurrentPosition.y + 1) {
-                y += speed * delta;
-            }
-            if (nextStepPoint.y == monsterCurrentPosition.y - 1) {
-                y -= speed * delta;
-            }
+    void processMoving(long delta) {
+        if (newX == oldX + 1) {
+            x += speed * delta;
+            isReversed = false;
+        }
+        if (newX == oldX - 1) {
+            x -= speed * delta;
+            isReversed = true;
+        }
+        if (newY == oldY + 1) {
+            y += speed * delta;
+        }
+        if (newY == oldY - 1) {
+            y -= speed * delta;
         }
     }
 
+    @Override
+    public void movement(Graphics core) {
+        int noticeDistance = (int) (1.5 * core.hero.viewRadius);
+        long currentTime = System.currentTimeMillis();
+        long delta = currentTime - lastTime;
+        lastTime = currentTime;
+
+        if (Math.hypot(x - oldX, y - oldY) > Math.hypot(newX - oldX, newY - oldY)
+                || (newX == oldX && oldY == newY)) {
+            x = oldX = newX;
+            y = oldY = newY;
+
+            Point p;
+
+            if (Math.hypot(core.hero.newX - newX, core.hero.newY - newY) > noticeDistance)
+                p = onFar();
+            else
+                p = bfs(new Point(oldX, oldY), new Point(core.hero.newX, core.hero.newY));
+
+            newX = p.x;
+            newY = p.y;
+
+        }
+        processMoving(delta);
+    }
+
+    Point onFar() {
+        int newX, newY;
+        do {
+            newPosition = Room.random(0, 4);
+
+            switch (newPosition) {
+                case 0:
+                    newX = (int) (x - 1);
+                    newY = (int) y;
+                    break;
+                case 1:
+                    newX = (int) (x + 1);
+                    newY = (int) (y);
+
+                    break;
+                case 2:
+                    newX = (int) (x);
+                    newY = (int) (y - 1);
+                    break;
+                case 3:
+                default:
+                    newX = (int) (x);
+                    newY = (int) (y + 1);
+            }
+        } while (!core.labyrinth.stages[0].isNotWall(newX, newY));
+        return new Point(newX, newY);
+    }
+
     public Point bfs(Point from, Point to) {
+        if(from.equals(to))
+            return from;
         Set<Point> used = new TreeSet<Point>();
         Map<Point, Integer> map = new HashMap<Point, Integer>();
         Queue<Pair<Point, Integer>> q = new LinkedList<>();
@@ -185,8 +179,5 @@ public class Monster extends Character {
         return new Point();
     }
 
-    public int monsterHeroDistance2(Hero hero) {
-        return (int) ((hero.x - x) * (hero.x - x) + (hero.y - y) * (hero.y - y));
-    }
 
 }

@@ -9,8 +9,13 @@ public class Character extends Entity {
     private int hp;
     protected double speed;
 
+    int oldX, oldY;
+    int newX, newY;
+
     public Character(int x, int y, int hp) {
         super(x, y);
+        oldX = newX = x;
+        oldY = newY = y;
         this.hp = hp;
     }
 
