@@ -1,6 +1,7 @@
 package com.example.dimitrov.rougelike.core;
 
 import android.content.Context;
+import android.graphics.PointF;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -76,6 +77,10 @@ public class Toucher extends View {
 
                         break;
                     case MotionEvent.ACTION_UP:
+                        if (event.getPointerCount() == 1 && event.getDownTime() < 400) {
+                            hero.newPos = new PointF(event.getX() / scale + cameraX + .5f, event.getY() / scale + cameraY + .5f);
+                            hero.isNew = true;
+                        }
 
                 }
 

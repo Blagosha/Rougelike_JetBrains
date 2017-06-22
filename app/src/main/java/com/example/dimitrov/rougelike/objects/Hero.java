@@ -2,6 +2,8 @@ package com.example.dimitrov.rougelike.objects;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.PointF;
 
 import com.example.dimitrov.rougelike.core.Graphics;
 
@@ -10,8 +12,11 @@ public class Hero extends Character {
         super(x, y, hp);
         texture = "green";
         viewRadius = (255 / fadeRate + 1.71f) * thickness;
-        speed=1;
+        speed = 1;
     }
+
+    public PointF newPos;
+    public boolean isNew = false;
 
     public double viewRadius;
 
