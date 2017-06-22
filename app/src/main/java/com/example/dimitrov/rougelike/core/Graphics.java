@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
 import com.example.dimitrov.rougelike.objects.Labyrinth;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class Graphics extends Toucher {
     //functions for playing with bitmaps
     public static Bitmap rotateBitmap(Bitmap b, int ang) {
         Matrix m = new Matrix();
-        m.postRotate(ang);
+        m.preRotate(ang);
         return Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), m, true);
     }
 
@@ -44,7 +45,7 @@ public class Graphics extends Toucher {
 
     public static Bitmap scaleBitmap(Bitmap b, float scaleX, float scaleY) {
         Matrix m = new Matrix();
-        m.preScale(scaleX, scaleY);
+        m.postScale(scaleX, scaleY);
         return Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), m, true);
     }
 

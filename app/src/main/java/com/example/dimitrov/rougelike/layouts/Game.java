@@ -1,10 +1,13 @@
 package com.example.dimitrov.rougelike.layouts;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.MainThread;
@@ -35,7 +38,6 @@ public class Game extends AppCompatActivity {
 
         int heroRoomGenerationIndex = Room.random(0, core.labyrinth.stages[0].rooms.length);
         Point p = core.labyrinth.stages[0].rooms[heroRoomGenerationIndex].getCenter();
-
         core.hero = new Hero(p.x, p.y, 100); // creating hero 100 hp
 
         int cntMonstersSpawn = Room.random(2, core.labyrinth.stages[0].rooms.length);
