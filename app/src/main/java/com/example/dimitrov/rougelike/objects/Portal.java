@@ -9,6 +9,8 @@ import android.util.Log;
 import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.Graphics;
 
+import java.util.Random;
+
 public class Portal extends Entity {
     Entity bottom;
     public Portal(int x, int y) {
@@ -21,7 +23,8 @@ public class Portal extends Entity {
     }
     @Override
     public void onDraw(Canvas canvas, Graphics core) {
-
+        if(!core.isInSight(x,y))
+            return;
         Matrix m = new Matrix();
         float n_x=(x - core.cameraX) * core.scale,n_y=(y - core.cameraY) * core.scale;
         m.setTranslate(n_x,n_y);
