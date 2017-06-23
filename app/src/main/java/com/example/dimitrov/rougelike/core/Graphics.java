@@ -109,7 +109,6 @@ public class Graphics extends Toucher {
             proceed(objects.get(i), canvas);
         }
         proceed(hero, canvas);
-        proceed(score, canvas);
         if (fadeEnabled)
             labyrinth.postDraw(canvas, this);
 

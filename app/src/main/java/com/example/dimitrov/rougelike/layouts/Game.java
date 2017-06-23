@@ -3,7 +3,10 @@ package com.example.dimitrov.rougelike.layouts;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.R;
@@ -32,7 +35,9 @@ public class Game extends AppCompatActivity {
 
         //Applying graphics core to layout
         core = new Graphics(this);
-        ((LinearLayout) findViewById(R.id.game_layout)).addView(core);
+        ((RelativeLayout) findViewById(R.id.game_layout)).addView(core);
+        Button button = (Button)findViewById(R.id.click);
+
         core.labyrinth = new Labyrinth();
         int heroRoomGenerationIndex = Room.random(0, core.labyrinth.stages[0].rooms.length);
         Point p = core.labyrinth.stages[0].rooms[heroRoomGenerationIndex].getCenter();
@@ -78,7 +83,7 @@ public class Game extends AppCompatActivity {
         core.addObj(Portal);// spawning Portal
 
         core.score = new Score();
-
+        core.addObj(core.score);
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
