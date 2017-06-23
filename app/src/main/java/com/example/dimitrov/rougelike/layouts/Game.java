@@ -33,11 +33,21 @@ public class Game extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        thread.interrupt();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         //Applying graphics core to layout
         core = new Graphics(this);
         ((RelativeLayout) findViewById(R.id.game_layout)).addView(core);
-        Button button = (Button)findViewById(R.id.click);
+        Button button = (Button) findViewById(R.id.click);
 
         core.labyrinth = new Labyrinth();
         int heroRoomGenerationIndex = Room.random(0, core.labyrinth.stages[0].rooms.length);
@@ -61,7 +71,6 @@ public class Game extends AppCompatActivity {
         } // spawning monsters
 
 
-
         for (int i = 0; i < core.labyrinth.stages[0].stagePlan.length; i++) {
             for (int j = 0; j < core.labyrinth.stages[0].stagePlan[0].length; j++) {
                 if (core.labyrinth.stages[0].stagePlan[i][j] == 2 && isWallNear(i, j, core.labyrinth)) {
@@ -74,9 +83,9 @@ public class Game extends AppCompatActivity {
             }
         } // spawning chests
 
-        counter=Room.random(2,core.labyrinth.stages[0].rooms.length);
+        counter = Room.random(2, core.labyrinth.stages[0].rooms.length);
         p = core.labyrinth.stages[0].rooms[counter].getCenter();
-        Portal Portal = new Portal(p.x,p.y-1);
+        Portal Portal = new Portal(p.x, p.y - 1);
         core.addObj(Portal);// spawning Portal
 
         core.score = new Score();
@@ -84,7 +93,7 @@ public class Game extends AppCompatActivity {
         button.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction()==MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     core.isShooting = true;
                     core.fire.setVisibility(View.INVISIBLE);
                 }
@@ -98,23 +107,13 @@ public class Game extends AppCompatActivity {
                 new MainThread().main(Game.this);
             }
         });
+        thread.run();
     }
 
     private boolean isWallNear(int i, int j, Labyrinth l) { // return true if there is wall near else false
         return (l.stages[0].stagePlan[i - 1][j] == 1) || (l.stages[0].stagePlan[i + 1][j] == 1) ||
                 (l.stages[0].stagePlan[i][j - 1] == 1) || (l.stages[0].stagePlan[i][j + 1] == 1);
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        thread.interrupt();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        thread.run();
     }
 
 }
