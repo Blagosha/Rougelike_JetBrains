@@ -83,7 +83,6 @@ public class Game extends AppCompatActivity {
         core.addObj(Portal);// spawning Portal
 
         core.score = new Score();
-        core.addObj(core.score);
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
