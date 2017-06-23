@@ -1,11 +1,11 @@
-package com.example.dimitrov.rougelike.objects;
+package com.example.dimitrov.rougelike.objects.environment;
 
 import android.graphics.Canvas;
 
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
 
-public class Labyrinth implements GraphicsUser {
+public class Labyrinth extends GraphicsUser {
     private static final int cntStages = 5; // count of stages in Labyrinth
     public Stage[] stages = new Stage[cntStages]; // array of stages
 
@@ -21,17 +21,17 @@ public class Labyrinth implements GraphicsUser {
     }
 
     @Override
-    public void onDraw(Canvas canvas, Graphics core) {
-        stages[0].onDraw(canvas, core);
+    public void onDraw(Canvas canvas) {
+        stages[0].onDraw(canvas);
     }
 
     @Override
-    public void onScaleChange(Graphics core) {
-        stages[0].onScaleChange(core);
+    public void onScaleChange() {
+        stages[0].onScaleChange();
     }
 
     @Override
-    public void getBitmaps(Graphics core) {
-        stages[0].getBitmaps(core);
+    public void getBitmaps() {
+        stages[0].getBitmaps();
     }
 }

@@ -1,26 +1,29 @@
 package com.example.dimitrov.rougelike.layouts;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.MainThread;
-import com.example.dimitrov.rougelike.objects.Chest;
-import com.example.dimitrov.rougelike.objects.Hero;
-import com.example.dimitrov.rougelike.objects.Labyrinth;
-import com.example.dimitrov.rougelike.objects.Monster;
-import com.example.dimitrov.rougelike.objects.Portal;
-import com.example.dimitrov.rougelike.objects.Room;
+import com.example.dimitrov.rougelike.objects.entities.Chest;
+import com.example.dimitrov.rougelike.objects.entities.Hero;
+import com.example.dimitrov.rougelike.objects.environment.Labyrinth;
+import com.example.dimitrov.rougelike.objects.entities.Monster;
+import com.example.dimitrov.rougelike.objects.entities.Portal;
+import com.example.dimitrov.rougelike.objects.environment.Room;
+import com.example.dimitrov.rougelike.objects.overlay.Score;
 
 import java.util.ArrayList;
 
+import static com.example.dimitrov.rougelike.core.GraphicsUser.core;
+
 public class Game extends AppCompatActivity {
-    public Graphics core;
     public ArrayList<Monster> monsters;
     public ArrayList<Chest> chests;
     Thread thread;
@@ -32,9 +35,10 @@ public class Game extends AppCompatActivity {
 
         //Applying graphics core to layout
         core = new Graphics(this);
-        ((LinearLayout) findViewById(R.id.game_layout)).addView(core);
-        core.labyrinth = new Labyrinth();
+        ((RelativeLayout) findViewById(R.id.game_layout)).addView(core);
+        Button button = (Button)findViewById(R.id.click);
 
+        core.labyrinth = new Labyrinth();
         int heroRoomGenerationIndex = Room.random(0, core.labyrinth.stages[0].rooms.length);
         Point p = core.labyrinth.stages[0].rooms[heroRoomGenerationIndex].getCenter();
         core.hero = new Hero(p.x, p.y, 100); // creating hero 100 hp
@@ -52,7 +56,7 @@ public class Game extends AppCompatActivity {
             }
 
             p = core.labyrinth.stages[0].rooms[counter].getCenter();
-            Monster monster = new Monster(p.x, p.y, 100, core);
+            Monster monster = new Monster(p.x, p.y, 100);
             monsters.add(monster);
             core.addObj(monster);
             counter++;
@@ -78,7 +82,8 @@ public class Game extends AppCompatActivity {
         Portal Portal = new Portal(p.x,p.y-1);
         core.addObj(Portal);// spawning Portal
 
-
+        core.score = new Score();
+        core.addObj(core.score);
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
