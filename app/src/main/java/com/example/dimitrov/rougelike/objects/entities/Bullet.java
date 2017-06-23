@@ -1,5 +1,7 @@
 package com.example.dimitrov.rougelike.objects.entities;
 
+import android.graphics.Canvas;
+
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
 import com.example.dimitrov.rougelike.objects.entities.Entity;
@@ -13,17 +15,23 @@ import java.util.ArrayList;
  */
 
 public class Bullet extends Entity  {
-    private double lastTime =System.currentTimeMillis();
-    private float speed = 0.002f;
+    private float speed = 0.004f;
     private int direction;
     private ArrayList<Monster> monsters;
 
+    @Override
+    public void onDraw(Canvas canvas) {
+        movement(core);
+        super.onDraw(canvas);
+    }
 
-    public Bullet(int x, int y, int direction, ArrayList<Monster>monsters) {
-        super(x, y);
+
+    public Bullet(float x, float y, int direction, ArrayList<Monster>monsters) {
+        super((int)x, (int)y);
         this.direction = direction;
         this.monsters = monsters;
         texture = "bullet";
+        onScaleChange();
     }
 
     private void processMoving(double delta){
@@ -65,4 +73,6 @@ public class Bullet extends Entity  {
     private void deleteBullet(Graphics core){
         core.removeObj(this);
     }
+
+
 }

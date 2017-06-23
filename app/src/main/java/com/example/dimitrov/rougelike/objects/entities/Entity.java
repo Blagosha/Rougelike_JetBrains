@@ -52,6 +52,7 @@ public class Entity extends GraphicsUser {
     public void getBitmaps() {
         core.addBitmap(R.mipmap.chest, "chest");
         core.addBitmap(R.mipmap.chestopen, "chestOpen");
+        core.addBitmap(R.mipmap.bullet,"bullet");
     }
 
 
