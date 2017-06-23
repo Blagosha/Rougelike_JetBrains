@@ -1,9 +1,7 @@
-package com.example.dimitrov.rougelike.objects;
+package com.example.dimitrov.rougelike.objects.environment;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.graphics.Point;
 
 import com.example.dimitrov.rougelike.R;
@@ -17,7 +15,7 @@ import java.util.Random;
 import static com.example.dimitrov.rougelike.core.Toucher.sideSize;
 
 
-public class Stage implements GraphicsUser {
+public class Stage extends GraphicsUser {
     public static final int FOREST = 0;
     public static final int WALL = 1;
     public static final int FLOOR = 2;
@@ -198,7 +196,7 @@ public class Stage implements GraphicsUser {
     Bitmap b;
 
     @Override
-    public void onDraw(Canvas canvas, Graphics core) {
+    public void onDraw(Canvas canvas) {
         for (int i = 0; i < sideSize; i++) {
             for (int j = 0; j < sideSize; j++) {
                 isExplored[i][j] |= core.isInVision(i, j);
@@ -234,7 +232,7 @@ public class Stage implements GraphicsUser {
     }
 
     @Override
-    public void onScaleChange(Graphics core) {
+    public void onScaleChange() {
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 4; j++)
                 if (bits[i][j] != null)
@@ -243,13 +241,13 @@ public class Stage implements GraphicsUser {
 
     }
 
-    public void getBitmaps(Graphics core) {
+    @Override
+    public void getBitmaps() {
         core.addBitmap(R.mipmap.floor, "floor");
         core.addBitmap(R.mipmap.wall, "wall");
         core.addBitmap(R.mipmap.forest, "forest");
     }
 
-    @Override
     public void postDraw(Canvas canvas, Graphics core) {
         for (int i = 0; i < sideSize; i++) {
             for (int j = 0; j < sideSize; j++) {

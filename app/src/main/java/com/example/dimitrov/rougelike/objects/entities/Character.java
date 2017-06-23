@@ -1,10 +1,12 @@
-package com.example.dimitrov.rougelike.objects;
+package com.example.dimitrov.rougelike.objects.entities;
 
 
-import android.graphics.Picture;
+import android.graphics.Canvas;
 import android.util.Pair;
 
+import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.Graphics;
+import com.example.dimitrov.rougelike.core.Point;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -13,30 +15,46 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Monster extends Character {
-    Graphics core;
 
-    public Monster(int x, int y, int hp, Graphics core) {
-        super(x, y, hp);
-        this.core = core;
-        int monsterInd = Room.random(0, 3);
-        texture = "triangle";
-        hp = 300;
-        speed = 0.001f;
+public class Character extends Entity {
+    private int hp;
+    protected double speed;
 
-        if (monsterInd == 0) {
-            texture = "greenzombie";
-            hp = 100;
+    int oldX, oldY;
+    int newX, newY;
 
-        } else if (monsterInd == 1) {
-            texture = "red";
-            hp = 200;
-        }
+    public Character(int x, int y, int hp) {
+        super(x, y);
+        oldX = newX = x;
+        oldY = newY = y;
+        this.hp = hp;
     }
 
-    int newPosition;
+    public int getHp() {
+        return hp;
+    }
 
-    void processMoving(long delta) {
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void movement(Graphics core) {
+        long currentTime = System.currentTimeMillis();
+        long delta = currentTime - lastTime;
+        lastTime = currentTime;
+
+        if (Math.hypot(x - oldX, y - oldY) > Math.hypot(newX - oldX, newY - oldY)
+                || (newX == oldX && oldY == newY)) {
+            x = oldX = newX;
+            y = oldY = newY;
+
+            Point p = getTarget();
+
+            newX = p.x;
+            newY = p.y;
+
+        }
+
         if (newX == oldX + 1) {
             x += speed * delta;
             isReversed = false;
@@ -53,62 +71,12 @@ public class Monster extends Character {
         }
     }
 
-    @Override
-    public void movement(Graphics core) {
-        int noticeDistance = (int) (1.5 * core.hero.viewRadius);
-        long currentTime = System.currentTimeMillis();
-        long delta = currentTime - lastTime;
-        lastTime = currentTime;
-
-        if (Math.hypot(x - oldX, y - oldY) > Math.hypot(newX - oldX, newY - oldY)
-                || (newX == oldX && oldY == newY)) {
-            x = oldX = newX;
-            y = oldY = newY;
-
-            Point p;
-
-            if (Math.hypot(core.hero.newX - newX, core.hero.newY - newY) > noticeDistance)
-                p = onFar();
-            else
-                p = bfs(new Point(oldX, oldY), new Point(core.hero.newX, core.hero.newY));
-
-            newX = p.x;
-            newY = p.y;
-
-        }
-        processMoving(delta);
-    }
-
-    Point onFar() {
-        int newX, newY;
-        do {
-            newPosition = Room.random(0, 4);
-
-            switch (newPosition) {
-                case 0:
-                    newX = (int) (x - 1);
-                    newY = (int) y;
-                    break;
-                case 1:
-                    newX = (int) (x + 1);
-                    newY = (int) (y);
-
-                    break;
-                case 2:
-                    newX = (int) (x);
-                    newY = (int) (y - 1);
-                    break;
-                case 3:
-                default:
-                    newX = (int) (x);
-                    newY = (int) (y + 1);
-            }
-        } while (!core.labyrinth.stages[0].isNotWall(newX, newY));
+    public Point getTarget() {
         return new Point(newX, newY);
     }
 
-    public Point bfs(Point from, Point to) {
-        if(from.equals(to))
+    public Point getNextStep(Point from, Point to) {
+        if (from.equals(to))
             return from;
         Set<Point> used = new TreeSet<Point>();
         Map<Point, Integer> map = new HashMap<Point, Integer>();
@@ -176,8 +144,22 @@ public class Monster extends Character {
             }
         }
 
-        return new Point();
+        return from;
     }
 
 
+    @Override
+    public void onDraw(Canvas canvas) {
+        movement(core);
+        super.onDraw(canvas);
+    }
+
+    @Override
+    public void getBitmaps() {
+        core.addBitmap(R.mipmap.green, "green");
+        core.addBitmap(R.mipmap.greenzombie, "greenzombie");
+        core.addBitmap(R.mipmap.red, "red");
+        core.addBitmap(R.mipmap.triangle, "triangle");
+
+    }
 }

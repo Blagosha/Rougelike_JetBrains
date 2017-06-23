@@ -1,13 +1,17 @@
 package com.example.dimitrov.rougelike.core;
 
+
 import android.graphics.Canvas;
 
-public interface GraphicsUser {
-    void onDraw(Canvas canvas, Graphics core);
+public abstract class GraphicsUser {
+    public static Graphics core;
 
-    void onScaleChange(Graphics core);
+    public void onDraw(Canvas canvas) {
+    }
 
-    void getBitmaps(Graphics core);
+    public void onScaleChange() {
+    }
 
-    void postDraw(Canvas canvas, Graphics core);
+    public void getBitmaps() {
+    }
 }

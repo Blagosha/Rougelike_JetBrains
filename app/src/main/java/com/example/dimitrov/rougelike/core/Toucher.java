@@ -1,16 +1,18 @@
 package com.example.dimitrov.rougelike.core;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PointF;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.dimitrov.rougelike.objects.Hero;
-import com.example.dimitrov.rougelike.objects.Labyrinth;
+import com.example.dimitrov.rougelike.objects.entities.Hero;
+import com.example.dimitrov.rougelike.objects.environment.Labyrinth;
 
 public class Toucher extends View {
 
-    public boolean fadeEnabled = false;
+    public boolean fadeEnabled = true;
     public float cameraX = 0, cameraY = 0;
     public float scale = 200, minScale, maxScale;
     public static int sideSize;
@@ -38,7 +40,7 @@ public class Toucher extends View {
                         break;
                     case MotionEvent.ACTION_MOVE:
 
-                        if (event.getDownTime() < 400)
+                        if (event.getEventTime() - event.getDownTime() < 200)
                             break;
                         try {
                             if (event.getPointerCount() < 3) {
@@ -78,8 +80,9 @@ public class Toucher extends View {
 
                         break;
                     case MotionEvent.ACTION_UP:
-                        if (event.getPointerCount() == 1 && event.getDownTime() < 400) {
-                            hero.newPos = new PointF(event.getX() / scale + cameraX + .5f, event.getY() / scale + cameraY + .5f);
+                        if (event.getPointerCount() == 1 && event.getEventTime() - event.getDownTime() < 200) {
+                            hero.newPos = new PointF(event.getX() / scale + cameraX - .5f, event.getY() / scale + cameraY - .5f);
+                            Log.d("Yeah",Float.toString(hero.newPos.x)+" "+Float.toString(hero.newPos.y));
                             hero.isNew = true;
                         }
 

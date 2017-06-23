@@ -1,21 +1,18 @@
-package com.example.dimitrov.rougelike.objects;
+package com.example.dimitrov.rougelike.objects.entities;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Rect;
 
 import com.example.dimitrov.rougelike.R;
-import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
 
 
-public class Entity implements GraphicsUser {
+public class Entity extends GraphicsUser {
+
     public float x;
     public float y;
     public String texture;
-    Bitmap b, rb;
+    public Bitmap b, rb;
     boolean isReversed = true;
     long lastTime = System.currentTimeMillis();
 
@@ -26,8 +23,7 @@ public class Entity implements GraphicsUser {
 
 
     @Override
-    public void onDraw(Canvas canvas, Graphics core) {
-        movement(core);
+    public void onDraw(Canvas canvas) {
 
         if (!core.isInSight(x, y) && core.fadeEnabled)
             return;
@@ -38,7 +34,7 @@ public class Entity implements GraphicsUser {
     }
 
     @Override
-    public void onScaleChange(Graphics core) {
+    public void onScaleChange() {
         if (b == null) {
             b = core.getBitmap(texture);
             rb = core.scaleBitmap(b, -1, 1);
@@ -53,18 +49,10 @@ public class Entity implements GraphicsUser {
     }
 
     @Override
-    public void getBitmaps(Graphics core) {
+    public void getBitmaps() {
         core.addBitmap(R.mipmap.chest, "chest");
         core.addBitmap(R.mipmap.chestopen, "chestOpen");
     }
 
-    @Override
-    public void postDraw(Canvas canvas, Graphics core) {
 
-    }
-
-
-    public void movement(Graphics core) {
-
-    }
 }

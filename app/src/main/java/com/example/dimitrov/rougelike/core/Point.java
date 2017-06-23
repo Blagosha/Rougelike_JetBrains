@@ -1,8 +1,8 @@
-package com.example.dimitrov.rougelike.objects;
+package com.example.dimitrov.rougelike.core;
 
 import android.support.annotation.NonNull;
 
-public class Point extends android.graphics.Point implements Comparable<Point>{
+public class Point extends android.graphics.Point implements Comparable<Point> {
     public Point() {
     }
 

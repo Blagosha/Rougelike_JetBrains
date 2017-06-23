@@ -1,4 +1,4 @@
-package com.example.dimitrov.rougelike.objects;
+package com.example.dimitrov.rougelike.objects.entities;
 
 
 public class Chest extends Entity {
