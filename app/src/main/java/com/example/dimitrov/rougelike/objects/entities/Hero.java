@@ -28,7 +28,7 @@ public class Hero extends Character {
     public double viewRadius;
 
     float thickness = .5f;
-    int fadeRate = 1;
+    int fadeRate = 10;
 
     @Override
     public void onDraw(Canvas canvas) {
