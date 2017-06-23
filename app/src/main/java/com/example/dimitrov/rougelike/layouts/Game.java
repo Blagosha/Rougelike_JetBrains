@@ -39,11 +39,13 @@ public class Game extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         thread.interrupt();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        MainThread.gameResult = 0;
         //Applying graphics core to layout
         core = new Graphics(this);
         ((RelativeLayout) findViewById(R.id.game_layout)).addView(core);
