@@ -3,6 +3,7 @@ package com.example.dimitrov.rougelike.layouts;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.MainThread;
+import com.example.dimitrov.rougelike.objects.entities.Bullet;
 import com.example.dimitrov.rougelike.objects.entities.Chest;
 import com.example.dimitrov.rougelike.objects.entities.Hero;
 import com.example.dimitrov.rougelike.objects.environment.Labyrinth;
@@ -83,6 +85,15 @@ public class Game extends AppCompatActivity {
         core.addObj(Portal);// spawning Portal
 
         core.score = new Score();
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bullet bullet  = new Bullet(core.hero.x,core.hero.y,0,monsters);
+                core.addObj(bullet);
+            }
+        });
+
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
