@@ -1,10 +1,12 @@
 package com.example.dimitrov.rougelike.objects.overlay;
 
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
 
@@ -17,6 +19,14 @@ public class Score extends GraphicsUser {
         Paint p = new Paint();
         p.setColor(Color.WHITE);
         p.setTextSize(core.getHeight() / 10);
-        canvas.drawText("Score: " + Integer.toString(score), 0,p.getTextSize(), p);
+        Bitmap b = core.getBitmap("coin");
+        core.drawBitmap(canvas,b,0,0,150,255);
+        canvas.drawText("-"+Integer.toString(score),150,p.getTextSize(), p);
     }
+
+    public void getBitmaps() {
+        core.addBitmap(R.mipmap.coin, "coin");
+    }
+
+
 }
