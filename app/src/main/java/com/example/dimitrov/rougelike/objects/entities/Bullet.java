@@ -61,12 +61,13 @@ public class Bullet extends Entity  {
                     monsters.remove(monster);
                 }
                 deleteEntity(core);
-                break;
+                return;
             }
         }
 
         if (core.labyrinth.stages[0].stagePlan[Math.round(x)][Math.round(y)]== Stage.WALL){
             deleteEntity(core);
+            return;
         }
     }
 
