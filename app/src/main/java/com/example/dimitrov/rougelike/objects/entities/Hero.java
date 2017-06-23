@@ -9,6 +9,7 @@ import com.example.dimitrov.rougelike.core.Point;
 public class Hero extends Character {
     public Hero(int x, int y, int hp) {
         super(x, y, hp);
+        type = HERO;
         texture = "green";
         newPos = new PointF(x, y);
         viewRadius = (255 / fadeRate + 1.71f) * thickness;

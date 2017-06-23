@@ -16,9 +16,8 @@ import java.util.Map;
 
 public class Graphics extends Toucher {
 
-    private Map<String, Bitmap> bitmaps;
-    private ArrayList<GraphicsUser> objects;
-    private GraphicsUser overlay;
+    public Map<String, Bitmap> bitmaps;
+    public ArrayList<GraphicsUser> objects;
 
     float scaleBuff;
     int init = 0;
@@ -112,10 +111,9 @@ public class Graphics extends Toucher {
             proceed(objects.get(i), canvas);
         }
         proceed(hero, canvas);
-        proceed(score, canvas);
         if (fadeEnabled)
             labyrinth.postDraw(canvas, this);
-
+        proceed(score,canvas);
         scaleBuff = scale;
     }
 

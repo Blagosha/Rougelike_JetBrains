@@ -3,6 +3,7 @@ package com.example.dimitrov.rougelike.layouts;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -26,8 +27,6 @@ import java.util.ArrayList;
 import static com.example.dimitrov.rougelike.core.GraphicsUser.core;
 
 public class Game extends AppCompatActivity {
-    public ArrayList<Monster> monsters;
-    public ArrayList<Chest> chests;
     Thread thread;
 
     @Override
@@ -46,8 +45,6 @@ public class Game extends AppCompatActivity {
         core.hero = new Hero(p.x, p.y, 100); // creating hero 100 hp
 
         int cntMonstersSpawn = Room.random(2, core.labyrinth.stages[0].rooms.length);
-        monsters = new ArrayList<>();
-        chests = new ArrayList<>();
 
         int counter = 0;
         while (counter < cntMonstersSpawn) {
@@ -59,7 +56,6 @@ public class Game extends AppCompatActivity {
 
             p = core.labyrinth.stages[0].rooms[counter].getCenter();
             Monster monster = new Monster(p.x, p.y, 100);
-            monsters.add(monster);
             core.addObj(monster);
             counter++;
         } // spawning monsters
@@ -72,7 +68,6 @@ public class Game extends AppCompatActivity {
                     int chestGenerationFrequency = 100;
                     if (Room.random(0, chestGenerationFrequency) == 0) {
                         Chest chest = new Chest(i, j);
-                        chests.add(chest);
                         core.addObj(chest);
                     }
                 }
@@ -85,12 +80,15 @@ public class Game extends AppCompatActivity {
         core.addObj(Portal);// spawning Portal
 
         core.score = new Score();
-
-        button.setOnClickListener(new View.OnClickListener() {
+        core.fire = button;
+        button.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                Bullet bullet  = new Bullet(core.hero.x,core.hero.y,0,monsters);
-                core.addObj(bullet);
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_DOWN) {
+                    core.isShooting = true;
+                    core.fire.setVisibility(View.INVISIBLE);
+                }
+                return true;
             }
         });
 

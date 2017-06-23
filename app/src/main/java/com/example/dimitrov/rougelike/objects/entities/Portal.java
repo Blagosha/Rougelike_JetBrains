@@ -13,6 +13,7 @@ public class Portal extends Entity {
 
     public Portal(int x, int y) {
         super(x, y);
+        type = PORTAL;
         bottom = new Entity(x, y);
         bottom.texture = "bottompartofportal";
         bottom.x = this.x;

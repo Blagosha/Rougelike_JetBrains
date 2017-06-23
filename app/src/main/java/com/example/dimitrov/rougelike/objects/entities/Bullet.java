@@ -1,6 +1,8 @@
 package com.example.dimitrov.rougelike.objects.entities;
 
 import android.graphics.Canvas;
+import android.graphics.Point;
+import android.graphics.PointF;
 
 import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
@@ -10,14 +12,10 @@ import com.example.dimitrov.rougelike.objects.environment.Stage;
 
 import java.util.ArrayList;
 
-/**
- * Created by Санчес on 23.06.2017.
- */
 
-public class Bullet extends Entity  {
+public class Bullet extends Entity {
     private float speed = 0.004f;
-    private int direction;
-    private ArrayList<Monster> monsters;
+    public PointF target;
 
     @Override
     public void onDraw(Canvas canvas) {
@@ -26,51 +24,47 @@ public class Bullet extends Entity  {
     }
 
 
-    public Bullet(float x, float y, int direction, ArrayList<Monster>monsters) {
-        super((int)x, (int)y);
-        this.direction = direction;
-        this.monsters = monsters;
+    public Bullet(float x, float y, PointF target) {
+        super((int) x, (int) y);
+        this.target = target;
         texture = "bullet";
+        type = BULLET;
         onScaleChange();
     }
 
-    private void processMoving(double delta){
-        if (direction==0){
-            x-=speed*delta;
-        }
-        if (direction==1){
-            x+=speed*delta;
-        }
-        if (direction==2){
-            y-=speed*delta;
-        }
-        if (direction==3){
-            y+=speed*delta;
-        }
+    private void processMoving(double delta) {
+        x += speed * delta * Math.cos(Math.atan2(target.y, target.x));
+        y += speed * delta * Math.sin(Math.atan2(target.y, target.x));
+
     }
 
-    public void movement(Graphics core){
-        double currentTime =System.currentTimeMillis();
+    public void movement(Graphics core) {
+        double currentTime = System.currentTimeMillis();
         double delta = currentTime - lastTime;
         processMoving(delta);
 
-        for (Monster monster: monsters){
-            if (isInMonster(monster)){
-                monster.setHp(monster.getHp()-100);
+        for (int i = 0; i < core.objects.size(); i++) {
+            if (core.objects.get(i).type != MONSTER)
+                break;
+
+            Monster monster = (Monster) core.objects.get(i);
+
+            if (isInMonster(monster)) {
+                monster.setHp(monster.getHp() - 100);
                 deleteBullet(core);
             }
         }
 
-        if (core.labyrinth.stages[0].stagePlan[Math.round(x)][Math.round(y)]== Stage.WALL){
+        if (core.labyrinth.stages[0].stagePlan[Math.round(x)][Math.round(y)] == Stage.WALL) {
             deleteBullet(core);
         }
     }
 
-    private boolean isInMonster(Monster m){
-        return Math.hypot(x-m.x,y-m.y)<1;
+    private boolean isInMonster(Monster m) {
+        return Math.hypot(x - m.x, y - m.y) < 1;
     }
 
-    private void deleteBullet(Graphics core){
+    private void deleteBullet(Graphics core) {
         core.removeObj(this);
     }
 

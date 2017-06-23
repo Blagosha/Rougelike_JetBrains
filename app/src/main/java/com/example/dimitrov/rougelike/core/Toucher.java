@@ -6,18 +6,27 @@ import android.graphics.PointF;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.dimitrov.rougelike.R;
+import com.example.dimitrov.rougelike.objects.entities.Bullet;
 import com.example.dimitrov.rougelike.objects.entities.Hero;
 import com.example.dimitrov.rougelike.objects.environment.Labyrinth;
 
+import static com.example.dimitrov.rougelike.core.GraphicsUser.core;
+
 public class Toucher extends View {
 
-    public boolean fadeEnabled = true;
+    public final boolean fadeEnabled = true;
     public float cameraX = 0, cameraY = 0;
     public float scale = 200, minScale, maxScale;
     public static int sideSize;
     public Hero hero;
     public Labyrinth labyrinth;
+    public boolean isShooting = false;
+    public PointF scope;
+    public Button fire;
 
     public void resetCam() {
         scale = 200;
@@ -35,10 +44,15 @@ public class Toucher extends View {
                 if (event.getPointerCount() == 3) {
                     resetCam();
                 }
+                PointF pos = new PointF(event.getX() / scale + cameraX - .5f, event.getY() / scale + cameraY - .5f);
+                scope=new PointF(pos.x-hero.x,pos.y-hero.y);
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         break;
                     case MotionEvent.ACTION_MOVE:
+                        if(isShooting)
+                            break;
+
 
                         if (event.getEventTime() - event.getDownTime() < 200)
                             break;
@@ -81,11 +95,14 @@ public class Toucher extends View {
                         break;
                     case MotionEvent.ACTION_UP:
                         if (event.getPointerCount() == 1 && event.getEventTime() - event.getDownTime() < 200) {
-                            hero.newPos = new PointF(event.getX() / scale + cameraX - .5f, event.getY() / scale + cameraY - .5f);
-                            Log.d("Yeah",Float.toString(hero.newPos.x)+" "+Float.toString(hero.newPos.y));
-                            hero.isNew = true;
+                            if (isShooting) {
+                                Bullet bullet = new Bullet(core.hero.x, core.hero.y, scope);
+                                core.addObj(bullet);
+                                isShooting = false;
+                                fire.setVisibility(View.VISIBLE);
+                            } else
+                                hero.newPos = pos;
                         }
-
                 }
 
                 invalidate();
@@ -93,6 +110,7 @@ public class Toucher extends View {
             }
         });
     }
+
 
     public boolean isOnScreen(float x, float y) {
         x += .5f;

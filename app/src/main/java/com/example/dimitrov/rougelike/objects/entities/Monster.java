@@ -8,6 +8,7 @@ public class Monster extends Character {
 
     public Monster(int x, int y, int hp) {
         super(x, y, hp);
+        type = MONSTER;
         int monsterInd = Room.random(0, 3);
         texture = "triangle";
         hp = 300;

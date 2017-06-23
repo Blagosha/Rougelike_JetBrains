@@ -116,28 +116,28 @@ public class Character extends Entity {
                 return current;
             }
             Point addPoint = new Point(current.x - 1, current.y);
-            if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y)) {
+            if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y) && canGo(addPoint)) {
                 q.add(new Pair<Point, Integer>(addPoint, depth + 1));
                 map.put(addPoint, depth + 1);
                 used.add(addPoint);
             }
 
             addPoint = new Point(current.x + 1, current.y);
-            if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y)) {
+            if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y) && canGo(addPoint)) {
                 q.add(new Pair<>(addPoint, depth + 1));
                 map.put(addPoint, depth + 1);
                 used.add(addPoint);
             }
 
             addPoint = new Point(current.x, current.y - 1);
-            if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y)) {
+            if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y) && canGo(addPoint)) {
                 q.add(new Pair<>(addPoint, depth + 1));
                 map.put(addPoint, depth + 1);
                 used.add(addPoint);
             }
 
             addPoint = new Point(current.x, current.y + 1);
-            if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y)) {
+            if (!used.contains(addPoint) && core.labyrinth.stages[0].isNotWall(addPoint.x, addPoint.y) && canGo(addPoint)) {
                 q.add(new Pair<>(addPoint, depth + 1));
                 map.put(addPoint, depth + 1);
                 used.add(addPoint);
@@ -147,9 +147,15 @@ public class Character extends Entity {
         return from;
     }
 
+    boolean canGo(Point p)
+    {
+        return type!=HERO || core.labyrinth.stages[0].isExplored[p.x][p.y] || !core.fadeEnabled;
+    }
 
     @Override
     public void onDraw(Canvas canvas) {
+        if (hp <= 0)
+            core.removeObj(this);
         movement(core);
         super.onDraw(canvas);
     }
