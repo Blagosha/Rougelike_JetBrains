@@ -8,13 +8,12 @@
     tools:context="com.example.dimitrov.rougelike.layouts.Game">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@mipmap/firebutton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:id ="@+id/click"
-        android:text="FIRE!!!"
         />
 
 
