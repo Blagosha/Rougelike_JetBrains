@@ -4,6 +4,7 @@ import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
 import com.example.dimitrov.rougelike.objects.entities.Entity;
 import com.example.dimitrov.rougelike.objects.entities.Monster;
+import com.example.dimitrov.rougelike.objects.environment.Stage;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class Bullet extends Entity  {
         super(x, y);
         this.direction = direction;
         this.monsters = monsters;
+        texture = "bullet";
     }
 
     private void processMoving(double delta){
@@ -44,10 +46,23 @@ public class Bullet extends Entity  {
         double delta = currentTime - lastTime;
         processMoving(delta);
 
+        for (Monster monster: monsters){
+            if (isInMonster(monster)){
+                monster.setHp(monster.getHp()-100);
+                deleteBullet(core);
+            }
+        }
 
+        if (core.labyrinth.stages[0].stagePlan[Math.round(x)][Math.round(y)]== Stage.WALL){
+            deleteBullet(core);
+        }
     }
 
     private boolean isInMonster(Monster m){
         return Math.hypot(x-m.x,y-m.y)<1;
+    }
+
+    private void deleteBullet(Graphics core){
+        core.removeObj(this);
     }
 }
