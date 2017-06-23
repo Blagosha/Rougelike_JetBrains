@@ -9,5 +9,49 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/game_rules"
+        android:text="GAME RULES"
+        android:textSize="30dp"
+        android:layout_above="@+id/tv239"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You play for a Hero, exploring the mysterios Dungeon. While exploring you"
+        android:id="@+id/tv239"
+        android:layout_above="@+id/tv240"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="could meet chest full filled with gold! When you collect enougth money, somewhere"
+        android:id="@+id/tv240"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="open a Portal into parallel universe. To win the game you need to find this portal "
+        android:id="@+id/tv241"
+        android:layout_below="@+id/tv240"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="and enter it. During your unforgettable adventure you will challenge "
+        android:id="@+id/tv242"
+        android:layout_below="@+id/tv241"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="different obtacles like furios monsters. GOOD LUCK, MY HERO! :**"
+        android:id="@+id/tv243"
+        android:layout_below="@+id/tv242"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
