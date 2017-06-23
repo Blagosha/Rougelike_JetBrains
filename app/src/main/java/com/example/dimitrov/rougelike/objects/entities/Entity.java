@@ -25,7 +25,7 @@ public class Entity extends GraphicsUser {
     @Override
     public void onDraw(Canvas canvas) {
 
-        if (!core.isInSight(x, y) && core.fadeEnabled)
+        if (!(core.isVisible(x, y) && core.isOnScreen(x, y)) && core.fadeEnabled)
             return;
         if (isReversed)
             core.drawBitmap(canvas, rb, (int) ((x - core.cameraX) * core.scale), (int) ((y - core.cameraY) * core.scale), (int) core.scale, 255);

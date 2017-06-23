@@ -17,6 +17,6 @@ public class Score extends GraphicsUser {
         Paint p = new Paint();
         p.setColor(Color.WHITE);
         p.setTextSize(core.getHeight() / 10);
-        canvas.drawText("Score: " + Integer.toString(score), 0, 0, p);
+        //canvas.drawText("Score: " + Integer.toString(score), 500, 500, p);
     }
 }

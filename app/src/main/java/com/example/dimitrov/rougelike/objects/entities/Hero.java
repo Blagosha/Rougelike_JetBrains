@@ -12,7 +12,7 @@ public class Hero extends Character {
         texture = "green";
         newPos = new PointF(x, y);
         viewRadius = (255 / fadeRate + 1.71f) * thickness;
-        speed = 0.001f;
+        speed = 0.0015f;
     }
 
     public PointF newPos;
@@ -20,8 +20,8 @@ public class Hero extends Character {
 
     @Override
     public Point getTarget() {
-        if(!core.labyrinth.stages[0].isExplored[Math.round(newPos.x)][Math.round(newPos.y)]&&core.fadeEnabled)
-             return super.getTarget();
+        if (!core.labyrinth.stages[0].isExplored[Math.round(newPos.x)][Math.round(newPos.y)] && core.fadeEnabled)
+            return super.getTarget();
         return getNextStep(new Point((int) x, (int) y), new Point(Math.round(newPos.x), Math.round(newPos.y)));
     }
 

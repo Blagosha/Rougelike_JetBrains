@@ -104,14 +104,11 @@ public class Toucher extends View {
         return true;
     }
 
-    public boolean isInVision(float x, float y) {
+    public boolean isVisible(float x, float y) {
         x += .5f;
         y += .5f;
         return Math.hypot(hero.x - x, hero.y - y) <= hero.viewRadius;
     }
 
-    public boolean isInSight(float x, float y) {
-        return isOnScreen(x, y) && isInVision(x, y);
-    }
 
 }
