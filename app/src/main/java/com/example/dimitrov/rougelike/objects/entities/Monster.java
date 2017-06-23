@@ -1,6 +1,7 @@
 package com.example.dimitrov.rougelike.objects.entities;
 
 
+import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.Point;
 import com.example.dimitrov.rougelike.objects.environment.Room;
 
@@ -10,20 +11,30 @@ public class Monster extends Character {
         super(x, y, hp);
         int monsterInd = Room.random(0, 3);
         texture = "triangle";
-        hp = 300;
+       setHp(300);
         speed = 0.001f;
 
         if (monsterInd == 0) {
             texture = "greenzombie";
-            hp = 100;
+            setHp(100);
 
         } else if (monsterInd == 1) {
             texture = "red";
-            hp = 200;
+            setHp(200);
         }
     }
 
     int newPosition;
+
+    public void movement(Graphics core) {
+        if (getHp()<=0){
+            deleteEntity(core);
+        }
+
+        super.movement(core);
+    }
+
+
 
 
     Point onFar() {

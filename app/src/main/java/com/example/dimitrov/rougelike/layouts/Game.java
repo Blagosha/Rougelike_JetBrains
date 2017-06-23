@@ -89,7 +89,7 @@ public class Game extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bullet bullet  = new Bullet(core.hero.x,core.hero.y,0,monsters);
+                Bullet bullet  = new Bullet(core.hero.x,core.hero.y,2,monsters);
                 core.addObj(bullet);
             }
         });

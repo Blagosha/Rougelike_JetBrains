@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 
 public class Bullet extends Entity  {
-    private float speed = 0.004f;
+    private float speed = 0.002f;
     private int direction;
     private ArrayList<Monster> monsters;
 
@@ -57,12 +57,16 @@ public class Bullet extends Entity  {
         for (Monster monster: monsters){
             if (isInMonster(monster)){
                 monster.setHp(monster.getHp()-100);
-                deleteBullet(core);
+                if (monster.getHp()<=0){
+                    monsters.remove(monster);
+                }
+                deleteEntity(core);
+                break;
             }
         }
 
         if (core.labyrinth.stages[0].stagePlan[Math.round(x)][Math.round(y)]== Stage.WALL){
-            deleteBullet(core);
+            deleteEntity(core);
         }
     }
 
@@ -70,9 +74,6 @@ public class Bullet extends Entity  {
         return Math.hypot(x-m.x,y-m.y)<1;
     }
 
-    private void deleteBullet(Graphics core){
-        core.removeObj(this);
-    }
 
 
 }

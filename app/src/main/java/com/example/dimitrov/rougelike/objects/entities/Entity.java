@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 import com.example.dimitrov.rougelike.R;
+import com.example.dimitrov.rougelike.core.Graphics;
 import com.example.dimitrov.rougelike.core.GraphicsUser;
 
 
@@ -53,6 +54,10 @@ public class Entity extends GraphicsUser {
         core.addBitmap(R.mipmap.chest, "chest");
         core.addBitmap(R.mipmap.chestopen, "chestOpen");
         core.addBitmap(R.mipmap.bullet,"bullet");
+    }
+
+    public void deleteEntity(Graphics core){
+        core.removeObj(this);
     }
 
 
