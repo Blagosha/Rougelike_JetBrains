@@ -39,6 +39,8 @@ public class Toucher extends View {
         this.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                if(MainThread.gameResult != 0)
+                    return true;
                 int currIndex = (event.getActionIndex() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
                 int currId = event.getPointerId(currIndex);
                 if (event.getPointerCount() == 3) {

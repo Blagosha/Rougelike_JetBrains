@@ -26,12 +26,15 @@ public class Graphics extends Toucher {
     float scaleBuff;
     int init = 0;
     public Score score;
+    Bitmap w,l;
 
 
     public Graphics(Context context) {
         super(context);
         bitmaps = new HashMap<>();
         objects = new ArrayList<>();
+        w = BitmapFactory.decodeResource(getResources(), R.mipmap.youwon);
+        l = BitmapFactory.decodeResource(getResources(),R.mipmap.youaredead);
 
     }
 
@@ -57,7 +60,6 @@ public class Graphics extends Toucher {
 
     public void addBitmap(int res, String name) {
         if (!bitmaps.containsKey(name)) {
-            BitmapFactory.decodeResource(getResources(), res);
             bitmaps.put(name, resizeBitmap(BitmapFactory.decodeResource(getResources(), res), 300, 300));
         }
     }
@@ -123,13 +125,11 @@ public class Graphics extends Toucher {
         scaleBuff = scale;
 
         if (MainThread.gameResult != 0) {
-            addBitmap(R.mipmap.youaredead, "lose");
-            addBitmap(R.mipmap.youwon, "won");
             if (MainThread.gameResult == 1) {
-                drawBitmap(canvas, getBitmap("lose"), (getWidth() - getHeight()) / 2, 0, getHeight(), 255);
+                drawBitmap(canvas, l, (getWidth() - getHeight()) / 2, 0, getHeight(), 255);
             }
             if (MainThread.gameResult == 2) {
-                drawBitmap(canvas, getBitmap("won"), (getWidth() - getHeight()) / 2, 0, getHeight(), 255);
+                drawBitmap(canvas, w, (getWidth() - getHeight()) / 2, 0, getHeight(), 255);
             }
         }
 
