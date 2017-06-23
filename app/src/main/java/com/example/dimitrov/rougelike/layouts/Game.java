@@ -14,6 +14,7 @@ import com.example.dimitrov.rougelike.objects.environment.Labyrinth;
 import com.example.dimitrov.rougelike.objects.entities.Monster;
 import com.example.dimitrov.rougelike.objects.entities.Portal;
 import com.example.dimitrov.rougelike.objects.environment.Room;
+import com.example.dimitrov.rougelike.objects.overlay.Score;
 
 import java.util.ArrayList;
 

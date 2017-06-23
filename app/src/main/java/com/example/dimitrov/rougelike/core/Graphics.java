@@ -7,10 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.RectF;
-import android.util.Log;
 
-import com.example.dimitrov.rougelike.objects.Labyrinth;
+import com.example.dimitrov.rougelike.objects.overlay.Score;
 
 import java.util.ArrayList;
 import java.util.HashMap;
