@@ -14,13 +14,13 @@ import java.util.ArrayList;
 
 
 public class Bullet extends Entity {
-    private float speed = 0.004f;
+    private float speed = 0.002f;
     public PointF target;
 
     @Override
     public void onDraw(Canvas canvas) {
-        movement(core);
         super.onDraw(canvas);
+        movement(core);
     }
 
 
@@ -52,11 +52,16 @@ public class Bullet extends Entity {
             if (isInMonster(monster)) {
                 monster.setHp(monster.getHp() - 100);
                 deleteBullet(core);
+                return;
             }
         }
 
-        if (core.labyrinth.stages[0].stagePlan[Math.round(x)][Math.round(y)] == Stage.WALL) {
+        if(x<0||y<0||x>core.sideSize||y>core.sideSize)
             deleteBullet(core);
+        if (core.labyrinth.stages[0].stagePlan[Math.round(x)][Math.round(y)] == Stage.WALL ||
+                core.labyrinth.stages[0].stagePlan[Math.round(x)][Math.round(y)] == Stage.FOREST) {
+            deleteBullet(core);
+            return;
         }
     }
 

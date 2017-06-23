@@ -6,6 +6,7 @@ import android.util.Pair;
 
 import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.core.Graphics;
+import com.example.dimitrov.rougelike.core.MainThread;
 import com.example.dimitrov.rougelike.core.Point;
 
 import java.util.HashMap;
@@ -154,6 +155,8 @@ public class Character extends Entity {
 
     @Override
     public void onDraw(Canvas canvas) {
+        if (MainThread.gameResult == 0)
+            movement(core);
         if (hp <= 0)
             core.removeObj(this);
         movement(core);

@@ -8,11 +8,15 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.example.dimitrov.rougelike.R;
 import com.example.dimitrov.rougelike.objects.overlay.Score;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+
+import static com.example.dimitrov.rougelike.core.GraphicsUser.MONSTER;
 
 public class Graphics extends Toucher {
 
@@ -73,6 +77,8 @@ public class Graphics extends Toucher {
     }
 
     public void removeObj(GraphicsUser obj) {
+        if(obj.type == MONSTER)
+            score.score +=new Random().nextInt(5);
         objects.remove(obj);
     }
 
@@ -115,6 +121,18 @@ public class Graphics extends Toucher {
             labyrinth.postDraw(canvas, this);
         proceed(score,canvas);
         scaleBuff = scale;
+
+        if (MainThread.gameResult != 0) {
+            addBitmap(R.mipmap.youaredead, "lose");
+            addBitmap(R.mipmap.youwon, "won");
+            if (MainThread.gameResult == 1) {
+                drawBitmap(canvas, getBitmap("lose"), (getWidth() - getHeight()) / 2, 0, getHeight(), 255);
+            }
+            if (MainThread.gameResult == 2) {
+                drawBitmap(canvas, getBitmap("won"), (getWidth() - getHeight()) / 2, 0, getHeight(), 255);
+            }
+        }
+
     }
 
 }

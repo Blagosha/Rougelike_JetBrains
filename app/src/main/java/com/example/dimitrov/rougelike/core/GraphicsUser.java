@@ -4,11 +4,11 @@ package com.example.dimitrov.rougelike.core;
 import android.graphics.Canvas;
 
 public abstract class GraphicsUser {
-    public final int BULLET = 0;
-    public final int CHEST = 1;
-    public final int HERO = 2;
-    public final int MONSTER = 3;
-    public final int PORTAL = 4;
+    public static final int BULLET = 0;
+    public static final int CHEST = 1;
+    public static final int HERO = 2;
+    public static final int MONSTER = 3;
+    public static final int PORTAL = 4;
 
 
     public int type;

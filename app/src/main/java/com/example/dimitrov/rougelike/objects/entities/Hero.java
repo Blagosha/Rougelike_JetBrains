@@ -3,7 +3,9 @@ package com.example.dimitrov.rougelike.objects.entities;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.util.Log;
 
+import com.example.dimitrov.rougelike.core.MainThread;
 import com.example.dimitrov.rougelike.core.Point;
 
 public class Hero extends Character {
@@ -56,5 +58,13 @@ public class Hero extends Character {
         }
     }
 
+
+    public void dead(){
+        MainThread.gameResult =1;
+    }
+
+    public void win(){
+        MainThread.gameResult =2;
+    }
 
 }

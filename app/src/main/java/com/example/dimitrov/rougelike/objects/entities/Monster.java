@@ -30,6 +30,11 @@ public class Monster extends Character {
     public void movement(Graphics core) {
         if (getHp()<=0){
             deleteEntity(core);
+            return;
+        }
+
+        if (Math.hypot(core.hero.x - x, core.hero.y - y) < 0.5){
+            core.hero.dead();
         }
 
         super.movement(core);

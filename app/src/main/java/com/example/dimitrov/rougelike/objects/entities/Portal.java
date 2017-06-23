@@ -23,6 +23,9 @@ public class Portal extends Entity {
 
     @Override
     public void onDraw(Canvas canvas) {
+        if (heroPortalDistance(core.hero)<0.5){
+            core.hero.win();
+        }
         if (!(core.isVisible(x, y) && core.isOnScreen(x, y)) && core.fadeEnabled)
             return;
         Matrix m = new Matrix();
@@ -37,8 +40,10 @@ public class Portal extends Entity {
         m.postRotate(new Random().nextInt(360), n_x + b.getWidth() / 2, n_y + b.getHeight() / 2);
 
         canvas.drawBitmap(bottom.b, m, new Paint());
+    }
 
-
+    public double heroPortalDistance(Hero hero){
+        return Math.hypot(x-hero.x,y-hero.y);
     }
 
     @Override

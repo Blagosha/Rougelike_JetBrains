@@ -21,7 +21,7 @@ public class Score extends GraphicsUser {
         p.setTextSize(core.getHeight() / 10);
         Bitmap b = core.getBitmap("coin");
         core.drawBitmap(canvas,b,0,0,150,255);
-        canvas.drawText("-"+Integer.toString(score),150,p.getTextSize(), p);
+        canvas.drawText(Integer.toString(score),150,p.getTextSize(), p);
     }
 
     public void getBitmaps() {
