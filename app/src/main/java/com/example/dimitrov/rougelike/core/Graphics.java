@@ -18,6 +18,8 @@ public class Graphics extends Toucher {
 
     private Map<String, Bitmap> bitmaps;
     private ArrayList<GraphicsUser> objects;
+    private GraphicsUser overlay;
+
     float scaleBuff;
     int init = 0;
     public Score score;
