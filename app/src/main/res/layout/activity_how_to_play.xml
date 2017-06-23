@@ -34,7 +34,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="open a Portal into parallel universe. To win the game you need to find this portal "
+        android:text="opens Portal into parallel universe. To win the game you need to find this portal "
         android:id="@+id/tv241"
         android:layout_below="@+id/tv240"
         android:layout_centerHorizontal="true"/>
